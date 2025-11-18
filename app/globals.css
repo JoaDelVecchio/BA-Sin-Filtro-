@@ -90,9 +90,18 @@
   --sidebar-accent-foreground: #111216;
   --sidebar-border: rgba(0, 0, 0, 0.08);
   --sidebar-ring: rgba(0, 102, 204, 0.35);
-  --gradient-hero: linear-gradient(135deg, #f4f4f7 0%, #ffffff 60%, #eef1f6 100%);
+  --gradient-hero: linear-gradient(
+    135deg,
+    #f4f4f7 0%,
+    #ffffff 60%,
+    #eef1f6 100%
+  );
   --gradient-primary: linear-gradient(135deg, #0077ff, #66a6ff);
-  --gradient-soft: linear-gradient(160deg, rgba(17, 18, 22, 0.08), rgba(17, 18, 22, 0));
+  --gradient-soft: linear-gradient(
+    160deg,
+    rgba(17, 18, 22, 0.08),
+    rgba(17, 18, 22, 0)
+  );
   --motion-duration-fast: 140ms;
   --motion-duration-medium: 280ms;
   --motion-duration-slow: 520ms;
@@ -145,11 +154,19 @@
   --sidebar-accent-foreground: #f5f6f9;
   --sidebar-border: rgba(255, 255, 255, 0.08);
   --sidebar-ring: rgba(20, 115, 230, 0.35);
-  --gradient-hero: linear-gradient(135deg, #0f1322 0%, #10162b 35%, #05060c 100%);
+  --gradient-hero: linear-gradient(
+    135deg,
+    #0f1322 0%,
+    #10162b 35%,
+    #05060c 100%
+  );
   --gradient-primary: linear-gradient(135deg, #0d5bd4, #1b8bff);
-  --gradient-soft: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0));
+  --gradient-soft: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0)
+  );
 }
-
 
 @layer base {
   * {
@@ -243,7 +260,7 @@
   }
 
   .section-shell {
-    width: min(1100px, 100%);
+    width: min(95%, 100%);
     margin-inline: auto;
     padding-inline: clamp(1.5rem, 4vw, 3.5rem);
     padding-block: clamp(3rem, 8vw, 6rem);

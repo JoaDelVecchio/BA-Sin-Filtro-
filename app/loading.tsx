@@ -9,7 +9,7 @@ const Loading = () => {
           <Spinner />
         </ItemMedia>
         <ItemContent>
-          <ItemTitle className="line-clamp-1">Loading...</ItemTitle>
+          <ItemTitle className="line-clamp-1">Cargando contenido...</ItemTitle>
         </ItemContent>
       </Item>
     </div>

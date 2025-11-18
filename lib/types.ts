@@ -56,3 +56,11 @@ export type StoryCluster = {
 };
 
 export type PopularNewsTab = { id: string; title: string }[];
+
+export type GridArticle = {
+  id: string;
+  headline: string;
+  image: string;
+  bias: BiasBreakdown;
+  topic: string;
+};
