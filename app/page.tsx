@@ -21,6 +21,7 @@ export default async function Home() {
       image: TOP5_IMAGES[index % TOP5_IMAGES.length],
       bias: cluster.bias,
       topic: cluster.topic,
+      publishers: cluster.sources?.map((source) => source.source).slice(0, 3),
     })
   );
 

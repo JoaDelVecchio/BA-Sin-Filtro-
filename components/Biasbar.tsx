@@ -24,7 +24,12 @@ const Biasbar = ({ bias, size = "default" }: BiasbarProps) => {
 
   return (
     <div className="flex items-center gap-3">
-      <div className={cn("flex flex-1 overflow-hidden rounded-full bg-muted/40", heights)}>
+      <div
+        className={cn(
+          "flex flex-1 overflow-hidden rounded-full bg-muted/40",
+          heights
+        )}
+      >
         {biasSegments.map((segment) => {
           const value = bias[segment.key];
           return (

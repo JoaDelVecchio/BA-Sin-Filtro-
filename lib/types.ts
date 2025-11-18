@@ -63,4 +63,5 @@ export type GridArticle = {
   image: string;
   bias: BiasBreakdown;
   topic: string;
+  publishers?: string[];
 };
