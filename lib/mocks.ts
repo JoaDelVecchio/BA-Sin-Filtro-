@@ -38,7 +38,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
         title: "Nuevo aumento del subte en la Ciudad: cómo quedan las tarifas",
         description: "",
         url: "https://clarin.com/ciudad/subte-nuevo-aumento-tarifas",
-        image: null,
+        image: "https://example.com/images/ambito-inflacion.jpg",
         publishedAt: "2025-11-17T07:05:00Z",
         text: "La tarifa del subte pasará de $130 a $150 a partir del próximo mes, según informaron fuentes oficiales...",
       },
@@ -49,7 +49,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
         description:
           "El Gobierno porteño justificó la suba por el aumento de costos.",
         url: "https://pagina12.com.ar/economia/tarifazo-subte-porteno",
-        image: null,
+        image: "https://example.com/images/ambito-inflacion.jpg",
         publishedAt: "2025-11-17T07:20:00Z",
         text: "El nuevo aumento del subte se enmarca en una serie de incrementos que golpean el bolsillo de los usuarios...",
       },

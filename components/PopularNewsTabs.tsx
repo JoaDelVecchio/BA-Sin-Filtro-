@@ -60,36 +60,38 @@ const PopularNewsTabs = ({ popularNews }: PopularNewsTabsProps) => {
   }, [popularNews]);
 
   return (
-    <div className="w-full border-y border-border/60 bg-background/40">
-      <div className=" p-3" ref={containerRef}>
-        <ScrollArea
-          scrollbars={[]}
-          className="w-full whitespace-nowrap"
-          type="scroll"
-        >
-          <nav aria-label="Popular news topics" className="flex flex-col gap-3">
-            <div className="flex items-center gap-5 text-sm text-muted-foreground">
+    <section className="w-full border-y border-border/70 bg-background/60">
+      <div className="section-shell py-3" ref={containerRef}>
+        <ScrollArea scrollbars={[]} className="w-full whitespace-nowrap" type="scroll">
+          <nav
+            aria-label="Tópicos populares"
+            className="flex items-center gap-6 text-sm text-muted-foreground"
+          >
+            <span className="text-xs font-semibold uppercase tracking-[0.35em] text-muted-foreground/80">
+              Popular
+            </span>
+            <ul className="flex items-center gap-4">
               {popularNews.map(({ id, title }, index) => (
-                <div key={id} className="flex items-center gap-5">
+                <li key={id} className="flex items-center gap-4">
                   <Link
                     href={`/noticia/${id}`}
-                    className="rounded-full border border-border/60 px-4 py-1.5 text-sm font-medium transition-colors hover:border-foreground hover:text-foreground"
+                    className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
                   >
                     {title}
                   </Link>
                   {index < popularNews.length - 1 && (
                     <Separator
                       orientation="vertical"
-                      className="hidden h-6 w-px shrink-0 bg-border sm:block"
+                      className="hidden h-4 w-px shrink-0 bg-border sm:block"
                     />
                   )}
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </nav>
         </ScrollArea>
       </div>
-    </div>
+    </section>
   );
 };
 

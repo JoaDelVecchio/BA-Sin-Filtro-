@@ -18,10 +18,7 @@ export default function Error({
         <h1 className="text-display text-3xl">
           Tuvimos un problema al cargar esta vista.
         </h1>
-        <p className="text-subtle">
-          {error.message ??
-            "Intenta nuevamente o contáctanos si el problema persiste."}
-        </p>
+
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
           <Button className="btn-primary" onClick={() => reset()}>
             Intentar de nuevo
