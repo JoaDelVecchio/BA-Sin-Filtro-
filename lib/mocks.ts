@@ -1,4 +1,4 @@
-import { StoryCluster } from "./types";
+import { PopularNewsTab, StoryCluster } from "./types";
 
 export const MOCK_CLUSTERS: StoryCluster[] = [
   // 1) Transporte & Movilidad – buen candidato para Top Story
@@ -279,5 +279,20 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       },
     ],
     tags: ["Tarifas", "Luz", "AMBA", "Servicios"],
+  },
+];
+
+export const MOCK_POPULAR_NEWS: PopularNewsTab = [
+  { id: "norma", title: "Nueva norma para alquileres temporarios" },
+  { id: "milei", title: "Milei en Rosario: mensajes a los gobernadores" },
+  {
+    id: "laboral",
+    title: "Reforma laboral: qué cambia para los monotributistas",
+  },
+  { id: "normas", title: "Nueva norma para alquileres temporarios" },
+  { id: "mileis", title: "Milei en Rosario: mensajes a los gobernadores" },
+  {
+    id: "laborals",
+    title: "Reforma laboral: qué cambia para los monotributistas",
   },
 ];

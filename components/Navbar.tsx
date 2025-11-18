@@ -104,7 +104,7 @@ const Navbar = () => {
       <div className="flex items-center justify-center">
         <div className="flex items-center justify-center">
           <Image
-            src="/BALogo-White.png"
+            src="/BALogo.png"
             alt="BA Sin Filtro"
             width={80}
             height={80}
@@ -112,7 +112,7 @@ const Navbar = () => {
             priority
           />
           <Image
-            src="/BALogo.png"
+            src="/BALogo-White.png"
             alt="BA Sin Filtro"
             width={80}
             height={80}

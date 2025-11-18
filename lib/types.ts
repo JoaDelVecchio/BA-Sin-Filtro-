@@ -54,3 +54,5 @@ export type StoryCluster = {
   // ---- Optional extras ----
   tags?: string[]; // subtopics or key entities (e.g. "Inflación", "SUBTE")
 };
+
+export type PopularNewsTab = { id: string; title: string }[];
