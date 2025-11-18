@@ -73,7 +73,7 @@ const PopularNewsTabs = ({ popularNews }: PopularNewsTabsProps) => {
                 <div key={id} className="flex items-center gap-5">
                   <Link
                     href={`/noticia/${id}`}
-                    className="rounded-full border border-border/70 px-5 py-2 font-medium transition-colors hover:border-foreground hover:text-foreground"
+                    className="rounded-full border border-border/60 px-4 py-1.5 text-sm font-medium transition-colors hover:border-foreground hover:text-foreground"
                   >
                     {title}
                   </Link>
