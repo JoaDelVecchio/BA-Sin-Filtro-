@@ -1,9 +1,12 @@
-import { ThemeToggle } from "@/components/Theme-toogle";
+import Header from "@/components/Header";
+import Top5Grid from "@/components/Top5Grid";
 
 export default async function Home() {
   return (
-    <div className="min-h-screen min-w-screen ">
-      Hello World <ThemeToggle />
+    <div className="min-h-screen ">
+      <Header />
+      {/* <Top5Grid /> */}
+      {/* ARTICLES */}
     </div>
   );
 }
