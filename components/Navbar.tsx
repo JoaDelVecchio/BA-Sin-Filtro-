@@ -102,13 +102,24 @@ const Navbar = () => {
         </div>
       </div>
       <div className="flex items-center justify-center">
-        <Image
-          src="/BALogo.png"
-          alt="BA Sin Filtro"
-          width={80}
-          height={80}
-          priority
-        />
+        <div className="flex items-center justify-center">
+          <Image
+            src="/BALogo-White.png"
+            alt="BA Sin Filtro"
+            width={80}
+            height={80}
+            className="dark:hidden"
+            priority
+          />
+          <Image
+            src="/BALogo.png"
+            alt="BA Sin Filtro"
+            width={80}
+            height={80}
+            className="hidden dark:block"
+            priority
+          />
+        </div>
       </div>
       <div className="flex flex-1 items-center justify-end gap-2">
         <SignedIn>
