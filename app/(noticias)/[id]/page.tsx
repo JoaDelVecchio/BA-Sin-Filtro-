@@ -23,11 +23,15 @@ const ArticleRoute = async ({ params }: ArticlePageProps) => {
     );
   }
 
-  const related = articles
-    .filter(
-      (item) => item.id !== article.id && item.topic === article.topic
-    )
-    .slice(0, 6);
+  let related = articles.filter(
+    (item) => item.id !== article.id && item.topic === article.topic
+  );
+
+  if (!related.length) {
+    related = articles.filter((item) => item.id !== article.id);
+  }
+
+  related = related.slice(0, 6);
 
   return <ArticlePage article={article} related={related} />;
 };
