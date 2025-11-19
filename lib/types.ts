@@ -73,6 +73,7 @@ export type GridArticle = {
   body?: string;
   bullets?: string[];
   tags?: string[];
+  sources?: Article[];
 };
 
 export type ArticleDetails = GridArticle & {

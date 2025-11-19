@@ -129,9 +129,9 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
           <PublisherBadges publishers={article.publishers} />
           <Biasbar bias={article.bias} />
         </div>
-        {article.primarySourceUrl && (
+        {article.id && (
           <Link
-            href={article.primarySourceUrl}
+            href={article.id}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary/60 px-5 py-2 text-sm font-medium text-primary transition hover:bg-primary/5"

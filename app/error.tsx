@@ -10,7 +10,7 @@ export default function Error({
   reset: () => void;
 }) {
   return (
-    <section className="section-shell flex w-full h-full min-h-[60vh] flex-col items-center justify-center text-center">
+    <section className="section-shell flex w-full h-full min-h-max flex-col items-center justify-center text-center">
       <div className="glass-panel max-w-md space-y-4 p-8 text-base">
         <p className="text-muted-foreground text-sm uppercase tracking-[0.4em]">
           Algo salió mal

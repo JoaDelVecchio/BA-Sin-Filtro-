@@ -44,4 +44,5 @@ export const mapClusterToGridArticle = (
   body: cluster.body,
   bullets: cluster.bullets,
   tags: cluster.tags ?? [],
+  sources: cluster.sources,
 });
