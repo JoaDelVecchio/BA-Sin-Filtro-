@@ -1,7 +1,4 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-import { GridArticle } from "@/lib/types";
-import { MOCK_CLUSTERS } from "@/lib/mocks";
+import { GridArticle, StoryCluster } from "@/lib/types";
 
 const ARTICLE_IMAGES = [
   "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80",
@@ -12,19 +9,15 @@ const ARTICLE_IMAGES = [
   "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80",
 ];
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
 export const mapClusterToGridArticle = (
-  cluster: (typeof MOCK_CLUSTERS)[number],
+  cluster: StoryCluster,
   index: number
 ): GridArticle => ({
   id: cluster.id,
   headline: cluster.headline,
   image: (() => {
     const fallback =
-      ARTICLE_IMAGES[index % ARTICLE_IMAGES.length] ??
+      ARTICLE_IMAGES[index % ARTICLE_IMAGES.length] ||
       "/top5-placeholder.jpg";
     if (!cluster.image) return fallback;
     if (cluster.image.includes("example.com")) {

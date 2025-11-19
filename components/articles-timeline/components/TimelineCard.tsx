@@ -1,19 +1,11 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { useMemo, useState } from "react";
 import Biasbar from "@/components/Biasbar";
 import PublisherBadges from "@/components/PublisherBadges";
 import { GridArticle } from "@/lib/types";
 
 const FALLBACK_IMAGE = "/top5-placeholder.jpg";
-
-type ArticlesTimelineProps = {
-  articles: GridArticle[];
-  popularArticles?: GridArticle[];
-};
 
 const formatTimeAgo = (dateString: string) => {
   const now = new Date();
@@ -29,54 +21,6 @@ const formatTimeAgo = (dateString: string) => {
     return `Hace ${diffHours} ${diffHours === 1 ? "hora" : "horas"}`;
   const diffDays = Math.floor(diffHours / 24);
   return `Hace ${diffDays} ${diffDays === 1 ? "día" : "días"}`;
-};
-
-const ArticlesTimeline = ({
-  articles,
-  popularArticles,
-}: ArticlesTimelineProps) => {
-  if (!articles?.length) {
-    return null;
-  }
-
-  const [view, setView] = useState<"latest" | "popular">("latest");
-  const fallbackPopular = useMemo(
-    () =>
-      [...articles].sort(
-        (a, b) => (b.publishers?.length ?? 0) - (a.publishers?.length ?? 0)
-      ),
-    [articles]
-  );
-  const availablePopular = popularArticles?.length
-    ? popularArticles
-    : fallbackPopular;
-  const displayedArticles = view === "latest" ? articles : availablePopular;
-
-  return (
-    <section className="section-shell mt-4 pb-12 pt-6">
-      <div className="flex w-full max-w-[52rem] flex-col space-y-8 rounded-3xl border border-border/60 bg-card p-8 shadow-[0_18px_60px_rgba(0,0,0,0.06)] dark:border-white/8 dark:bg-card dark:shadow-[0_32px_90px_rgba(0,0,0,0.85)]">
-        <div className="flex justify-center">
-          <div className="inline-flex rounded-full border border-border/60 bg-card px-1 py-1 dark:border-white/10 dark:bg-card/90">
-            <ToggleButton
-              active={view === "latest"}
-              onClick={() => setView("latest")}
-            >
-              Últimas
-            </ToggleButton>
-            <ToggleButton
-              active={view === "popular"}
-              onClick={() => setView("popular")}
-            >
-              Populares
-            </ToggleButton>
-          </div>
-        </div>
-        {displayedArticles.map((article) => (
-          <TimelineCard key={article.id} article={article} />
-        ))}
-      </div>
-    </section>
-  );
 };
 
 const TimelineCard = ({ article }: { article: GridArticle }) => {
@@ -129,41 +73,17 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
           <PublisherBadges publishers={article.publishers} />
           <Biasbar bias={article.bias} />
         </div>
-        {article.id && (
-          <Link
-            href={`/${article.id}`}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary/60 px-5 py-2 text-sm font-medium text-primary transition hover:bg-primary/5"
-          >
-            <span>Leer en profundidad</span>
-            <span>~4 min</span>
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        )}
+        <Link
+          href={`/${article.id}`}
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary/60 px-5 py-2 text-sm font-medium text-primary transition hover:bg-primary/5"
+        >
+          <span>Leer en profundidad</span>
+          <span>~4 min</span>
+          <ArrowRight className="h-4 w-4" />
+        </Link>
       </div>
     </article>
   );
 };
 
-const ToggleButton = ({
-  active,
-  children,
-  onClick,
-}: {
-  active: boolean;
-  children: React.ReactNode;
-  onClick: () => void;
-}) => (
-  <button
-    type="button"
-    onClick={onClick}
-    className={`rounded-full px-4 py-1.5 text-sm font-semibold transition ${
-      active
-        ? "bg-primary text-primary-foreground shadow-sm"
-        : "text-muted-foreground/70"
-    }`}
-  >
-    {children}
-  </button>
-);
-
-export default ArticlesTimeline;
+export default TimelineCard;
