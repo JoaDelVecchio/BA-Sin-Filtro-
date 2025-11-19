@@ -60,9 +60,13 @@ const PopularNewsTabs = ({ popularNews }: PopularNewsTabsProps) => {
   }, [popularNews]);
 
   return (
-    <section className="w-full border-y border-border/70 bg-background/60">
-      <div className="section-shell py-2" ref={containerRef}>
-        <ScrollArea scrollbars={[]} className="w-full whitespace-nowrap" type="scroll">
+    <section className="w-full border-y border-border/70 bg-card shadow-[inset_0_-1px_0_rgba(0,0,0,0.04)] dark:border-white/8 dark:bg-card dark:shadow-[inset_0_-1px_0_rgba(0,0,0,0.4)]">
+      <div className="section-shell py-3" ref={containerRef}>
+        <ScrollArea
+          scrollbars={[]}
+          className="w-full whitespace-nowrap"
+          type="scroll"
+        >
           <nav
             aria-label="Tópicos populares"
             className="flex items-center gap-6 text-sm text-muted-foreground"
@@ -75,7 +79,7 @@ const PopularNewsTabs = ({ popularNews }: PopularNewsTabsProps) => {
                 <li key={id} className="flex items-center gap-4">
                   <Link
                     href={`/noticia/${id}`}
-                    className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
+                    className="text-sm font-semibold text-foreground/85 transition-colors hover:text-foreground"
                   >
                     {title}
                   </Link>

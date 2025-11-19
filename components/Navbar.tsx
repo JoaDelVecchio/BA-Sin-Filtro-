@@ -42,7 +42,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="glass-panel flex min-w-full flex-wrap items-center gap-6 rounded-2xl border border-border/60 px-5 py-4">
+    <nav className="flex min-w-full flex-wrap items-center gap-6 rounded-2xl border border-border/70 bg-card px-5 py-4 shadow-[0_15px_40px_rgba(0,0,0,0.08)] dark:border-white/10 dark:bg-card dark:shadow-[0_25px_65px_rgba(0,0,0,0.6)]">
       <div className="flex flex-1 items-center gap-3">
         <DropdownMenu>
           <DropdownMenuTrigger className="rounded-full border border-border px-4 py-2 text-sm font-medium text-foreground transition hover:border-primary/50">
