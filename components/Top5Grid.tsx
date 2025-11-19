@@ -15,7 +15,7 @@ const Top5Grid = ({ top5 }: Top5GridProps) => {
 
   return (
     <section className="section-shell mt-4 py-6">
-      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.65fr)_minmax(280px,1fr)]">
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,1fr)]">
         <HeroArticle article={hero} />
         <aside className="flex flex-col gap-2">
           <ol className="flex flex-col gap-2">

@@ -129,14 +129,9 @@ const ArticlePage = ({ article, related }: ArticlePageProps) => {
               <DropdownMenuContent align="center" className="min-w-[250px]">
                 {article.sources.map((source) => (
                   <DropdownMenuItem key={source.id} asChild>
-                    <Link
-                      href={source.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full text-sm"
-                    >
-                      {source.source}
-                    </Link>
+                  <Link href={source.url} className="w-full text-sm">
+                    {source.source}
+                  </Link>
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
