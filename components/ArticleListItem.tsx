@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import Biasbar from "@/components/Biasbar";
-
 import { GridArticle } from "@/lib/types";
 
 const FALLBACK_IMAGE = "/top5-placeholder.jpg";
@@ -17,25 +16,28 @@ const ArticleListItem = ({ position, article }: ArticleListItemProps) => {
   return (
     <Link
       href={`/noticia/${article.id}`}
-      className="block border-t border-border/60 first:border-t-0"
+      className="group flex items-center gap-3 rounded-2xl px-2 py-2 transition-colors hover:bg-muted/30"
     >
-      <div className="flex items-center gap-5 py-4">
-        <div className="relative h-30 w-48 shrink-0 overflow-hidden rounded-xl bg-muted/40">
-          <Image
-            src={image}
-            alt={article.headline}
-            width={230}
-            height={170}
-            className="h-full w-full object-cover"
-          />
-        </div>
-        <div className="flex flex-1 flex-col gap-2">
-          <span className="text-base font-semibold text-muted-foreground">
+      <div className="relative h-24 w-40 shrink-0 overflow-hidden rounded-2xl bg-muted/60 shadow-sm lg:h-26 lg:w-42">
+        <Image
+          src={image}
+          alt={article.headline}
+          fill
+          sizes="(min-width: 1024px) 18vw, 50vw"
+          className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+          priority={position <= 3}
+        />
+      </div>
+      <div className="flex flex-1 flex-col gap-2">
+        <div className="flex items-start gap-3">
+          <span className="pt-1 text-lg font-semibold text-muted-foreground">
             {position}.
           </span>
-          <p className="text-base font-medium leading-snug text-foreground">
+          <p className="flex-1 text-base font-semibold leading-snug text-foreground">
             {article.headline}
           </p>
+        </div>
+        <div className="pl-8">
           <Biasbar bias={article.bias} size="compact" />
         </div>
       </div>

@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 
 const Header = () => {
   return (
-    <header className="sticky -top-14 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
+    <header className="  z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div className="section-shell flex flex-col gap-3 py-3">
         <HeaderBanner />
         <Navbar />

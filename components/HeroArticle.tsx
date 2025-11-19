@@ -15,23 +15,23 @@ const HeroArticle = ({ article, position = 1 }: HeroArticleProps) => {
   const image = article.image ?? FALLBACK_IMAGE;
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-3xl bg-gradient-to-b from-card to-background shadow-xl transition-shadow duration-300 hover:shadow-2xl">
-      <div className="space-y-6 p-8">
+    <article className="group flex flex-col overflow-hidden rounded-[32px] border border-border/70 bg-card shadow-[0_24px_60px_rgba(15,15,15,0.08)] transition-shadow duration-300 hover:shadow-[0_32px_80px_rgba(15,15,15,0.12)]">
+      <div className="space-y-5 p-8 lg:p-10">
         <div className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-muted-foreground">
+          <p className="text-[0.7rem] font-semibold uppercase tracking-[0.35em] text-muted-foreground/80">
             Top 5 del día
           </p>
-          <div className="h-px w-12 bg-border" />
+          <div className="h-px w-14 bg-border" />
         </div>
         <Link href={`/noticia/${article.id}`} className="block">
-          <h2 className="text-[2.5rem] font-semibold leading-tight text-foreground transition-colors hover:text-foreground/90">
+          <h2 className="text-[2.35rem] font-semibold leading-tight text-foreground text-balance transition-colors hover:text-foreground/90">
             {position}. {article.headline}
           </h2>
         </Link>
         <PublisherBadges publishers={article.publishers} />
         <Biasbar bias={article.bias} />
       </div>
-      <div className="relative h-[420px] w-full overflow-hidden transition-transform duration-500 group-hover:scale-[1.02]">
+      <div className="relative h-[360px] w-full overflow-hidden transition-transform duration-500 group-hover:scale-[1.01]">
         <Image
           src={image}
           alt={article.headline}

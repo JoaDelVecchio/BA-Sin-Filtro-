@@ -14,11 +14,11 @@ const Top5Grid = ({ top5 }: Top5GridProps) => {
   const [hero, ...rest] = top5;
 
   return (
-    <section className="section-shell py-4 mt-4">
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1.6fr)_minmax(320px,1fr)]">
+    <section className="section-shell mt-4 py-6">
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.65fr)_minmax(280px,1fr)]">
         <HeroArticle article={hero} />
-        <aside className="flex flex-col">
-          <ol className="flex flex-col">
+        <aside className="flex flex-col gap-2">
+          <ol className="flex flex-col gap-2">
             {rest.map((article, index) => (
               <li key={article.id}>
                 <ArticleListItem position={index + 2} article={article} />

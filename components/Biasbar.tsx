@@ -13,8 +13,9 @@ const biasSegments = [
 ] as const;
 
 const Biasbar = ({ bias, size = "default" }: BiasbarProps) => {
-  const heights = size === "compact" ? "h-1.5" : "h-2";
-  const textSize = size === "compact" ? "text-[0.65rem]" : "text-xs";
+  const isCompact = size === "compact";
+  const heights = isCompact ? "h-1.5" : "h-2";
+  const textSize = isCompact ? "text-[0.65rem]" : "text-xs";
   const dominant = biasSegments
     .map((segment) => ({
       ...segment,
@@ -23,7 +24,12 @@ const Biasbar = ({ bias, size = "default" }: BiasbarProps) => {
     .sort((a, b) => b.value - a.value)[0];
 
   return (
-    <div className="flex items-center gap-3">
+    <div
+      className={cn(
+        "flex items-center",
+        isCompact ? "gap-2 text-[0.65rem]" : "gap-3"
+      )}
+    >
       <div
         className={cn(
           "flex flex-1 overflow-hidden rounded-full bg-muted/40",
@@ -41,13 +47,20 @@ const Biasbar = ({ bias, size = "default" }: BiasbarProps) => {
           );
         })}
       </div>
-      <div className="text-[0.7rem] text-muted-foreground whitespace-nowrap">
-        {dominant.value}%{" "}
-        {dominant.key === "center"
-          ? "Cobertura neutral"
-          : `Cobertura de ${dominant.label.toLowerCase()}`}
-        • {Math.max(Math.round(dominant.value / 5), 1)} fuentes
-      </div>
+      {!isCompact && (
+        <div
+          className={cn(
+            "text-muted-foreground whitespace-nowrap",
+            textSize
+          )}
+        >
+          {dominant.value}%{" "}
+          {dominant.key === "center"
+            ? "Cobertura neutral"
+            : `Cobertura de ${dominant.label.toLowerCase()}`}
+          • {Math.max(Math.round(dominant.value / 5), 1)} fuentes
+        </div>
+      )}
     </div>
   );
 };
