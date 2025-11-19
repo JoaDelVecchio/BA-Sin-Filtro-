@@ -15,7 +15,7 @@ const HeroArticle = ({ article, position = 1 }: HeroArticleProps) => {
   const image = article.image ?? FALLBACK_IMAGE;
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-[32px] border border-border/70 bg-card shadow-[0_24px_60px_rgba(15,15,15,0.08)] transition-shadow duration-300 hover:shadow-[0_32px_80px_rgba(15,15,15,0.12)]">
+    <article className="group flex flex-col overflow-hidden rounded-[32px] border border-border/70 bg-card shadow-[0_24px_60px_rgba(15,15,15,0.08)] transition-shadow duration-300 hover:shadow-[0_32px_80px_rgba(15,15,15,0.12)] dark:border-white/5 dark:bg-[#16182b] dark:shadow-[0_25px_70px_rgba(0,0,0,0.7)] dark:hover:shadow-[0_30px_90px_rgba(0,0,0,0.8)]">
       <div className="space-y-5 p-8 lg:p-10">
         <div className="space-y-2">
           <p className="text-[0.7rem] font-semibold uppercase tracking-[0.35em] text-muted-foreground/80">

@@ -16,9 +16,9 @@ const ArticleListItem = ({ position, article }: ArticleListItemProps) => {
   return (
     <Link
       href={`/noticia/${article.id}`}
-      className="group flex items-center gap-3 rounded-2xl px-2 py-2 transition-colors hover:bg-muted/30"
+      className="group flex items-center gap-3 rounded-2xl px-2 py-2 transition-colors hover:bg-muted/30 dark:hover:bg-white/5"
     >
-      <div className="relative h-24 w-40 shrink-0 overflow-hidden rounded-2xl bg-muted/60 shadow-sm lg:h-26 lg:w-42">
+      <div className="relative h-24 w-40 shrink-0 overflow-hidden rounded-2xl bg-muted/60 shadow-sm transition-shadow duration-300 group-hover:shadow-md dark:bg-white/10 dark:shadow-[0_18px_30px_rgba(2,4,12,0.65)] lg:h-26 lg:w-42">
         <Image
           src={image}
           alt={article.headline}
