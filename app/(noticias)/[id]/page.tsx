@@ -23,7 +23,13 @@ const ArticleRoute = async ({ params }: ArticlePageProps) => {
     );
   }
 
-  return <ArticlePage article={article} />;
+  const related = articles
+    .filter(
+      (item) => item.id !== article.id && item.topic === article.topic
+    )
+    .slice(0, 6);
+
+  return <ArticlePage article={article} related={related} />;
 };
 
 export default ArticleRoute;

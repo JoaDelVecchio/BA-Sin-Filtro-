@@ -20,6 +20,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { MAIN_TOPICS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const Navbar = () => {
   const [activeTopic, setActiveTopic] = useState<string | null>(null);
@@ -103,22 +104,24 @@ const Navbar = () => {
       </div>
       <div className="flex items-center justify-center">
         <div className="flex items-center justify-center">
-          <Image
-            src="/BALogo.png"
-            alt="BA Sin Filtro"
-            width={80}
-            height={80}
-            className="dark:hidden"
-            priority
-          />
-          <Image
-            src="/BALogo-White.png"
-            alt="BA Sin Filtro"
-            width={80}
-            height={80}
-            className="hidden dark:block"
-            priority
-          />
+          <Link href={"/"}>
+            <Image
+              src="/BALogo.png"
+              alt="BA Sin Filtro"
+              width={80}
+              height={80}
+              className="dark:hidden"
+              priority
+            />
+            <Image
+              src="/BALogo-White.png"
+              alt="BA Sin Filtro"
+              width={80}
+              height={80}
+              className="hidden dark:block"
+              priority
+            />
+          </Link>
         </div>
       </div>
       <div className="flex flex-1 items-center justify-end gap-2">
