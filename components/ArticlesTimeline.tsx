@@ -53,10 +53,10 @@ const ArticlesTimeline = ({
   const displayedArticles = view === "latest" ? articles : availablePopular;
 
   return (
-    <section className="section-shell mt-4   pb-12 pt-6 ">
-      <div className=" flex w-full max-w-3xl rounded-md border border-border/60  p-8 flex-col space-y-8">
+    <section className="section-shell mt-4 pb-12 pt-6">
+      <div className="flex w-full max-w-4xl flex-col space-y-8 rounded-3xl border border-border/60 bg-background/95 p-8 shadow-[0_18px_60px_rgba(0,0,0,0.06)] dark:border-white/8 dark:bg-[#05060c] dark:shadow-[0_32px_90px_rgba(0,0,0,0.85)]">
         <div className="flex justify-center">
-          <div className="inline-flex rounded-full border border-border/60 bg-background/80 p-1">
+          <div className="inline-flex rounded-full border border-border/60 bg-background/80 p-1 dark:border-white/10 dark:bg-white/5">
             <ToggleButton
               active={view === "latest"}
               onClick={() => setView("latest")}
@@ -84,7 +84,7 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
   const timeAgo = formatTimeAgo(article.createdAt);
 
   return (
-    <article className="flex flex-col gap-6 rounded-[32px] border border-border/60 bg-card/95 p-7 shadow-sm transition-shadow hover:shadow-lg">
+    <article className="flex flex-col gap-6 rounded-[32px] border border-border/60 bg-card/95 p-7 shadow-sm transition-shadow hover:shadow-lg dark:border-white/8 dark:bg-[#0b0e18]/95 dark:shadow-[0_25px_80px_rgba(0,0,0,0.65)] dark:hover:shadow-[0_32px_110px_rgba(0,0,0,0.75)]">
       <div className="flex flex-col gap-1 text-xs uppercase tracking-[0.35em] text-muted-foreground/80">
         <span>{timeAgo}</span>
       </div>
@@ -94,7 +94,7 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
         </h3>
       </Link>
       <div className="space-y-2">
-        <div className="overflow-hidden rounded-2xl border border-border/60">
+        <div className="overflow-hidden rounded-2xl border border-border/60 dark:border-white/10">
           <Image
             src={image}
             alt={article.headline}
@@ -114,7 +114,7 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
         </p>
       )}
       {article.whyItMatters && (
-        <div className="rounded-2xl border border-border/70 bg-background/65 p-4">
+        <div className="rounded-2xl border border-border/70 bg-background/65 p-4 dark:border-white/10 dark:bg-white/5">
           <p className="text-sm font-semibold text-foreground">
             ¿Por qué importa?
           </p>
