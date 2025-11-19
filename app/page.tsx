@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import PopularNewsTabs from "@/components/PopularNewsTabs";
 import Top5Grid from "@/components/Top5Grid";
+import ArticlesTimeline from "@/components/ArticlesTimeline";
 import { MOCK_CLUSTERS, MOCK_POPULAR_NEWS } from "@/lib/mocks";
 import { GridArticle } from "@/lib/types";
 
@@ -13,24 +14,34 @@ const TOP5_IMAGES = [
   "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80",
 ];
 
+const mapClusterToGridArticle = (
+  cluster: (typeof MOCK_CLUSTERS)[number],
+  index: number
+): GridArticle => ({
+  id: cluster.id,
+  headline: cluster.headline,
+  image: TOP5_IMAGES[index % TOP5_IMAGES.length],
+  bias: cluster.bias,
+  topic: cluster.topic,
+  publishers: cluster.sources?.map((source) => source.source).slice(0, 3),
+  createdAt: cluster.createdAt,
+  summary: cluster.summary,
+  caption: cluster.subtitle,
+  whyItMatters: cluster.bullets?.[0],
+  primarySourceUrl: cluster.sources?.[0]?.url,
+});
+
 export default async function Home() {
-  const top5: GridArticle[] = MOCK_CLUSTERS.slice(0, 5).map(
-    (cluster, index) => ({
-      id: cluster.id,
-      headline: cluster.headline,
-      image: TOP5_IMAGES[index % TOP5_IMAGES.length],
-      bias: cluster.bias,
-      topic: cluster.topic,
-      publishers: cluster.sources?.map((source) => source.source).slice(0, 3),
-    })
-  );
+  const mappedArticles = MOCK_CLUSTERS.map(mapClusterToGridArticle);
+  const top5 = mappedArticles.slice(0, 5);
+  const timelineArticles = mappedArticles.slice(5);
 
   return (
     <div className="min-h-screen ">
       <Header />
       <PopularNewsTabs popularNews={MOCK_POPULAR_NEWS} />
       <Top5Grid top5={top5} />
-      {/* ARTICLES */}
+      <ArticlesTimeline articles={timelineArticles} />
     </div>
   );
 }

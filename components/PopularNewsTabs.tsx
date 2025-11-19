@@ -61,7 +61,7 @@ const PopularNewsTabs = ({ popularNews }: PopularNewsTabsProps) => {
 
   return (
     <section className="w-full border-y border-border/70 bg-background/60">
-      <div className="section-shell py-2.5" ref={containerRef}>
+      <div className="section-shell py-2" ref={containerRef}>
         <ScrollArea scrollbars={[]} className="w-full whitespace-nowrap" type="scroll">
           <nav
             aria-label="Tópicos populares"

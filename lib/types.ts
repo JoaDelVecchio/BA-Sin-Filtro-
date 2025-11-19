@@ -64,4 +64,9 @@ export type GridArticle = {
   bias: BiasBreakdown;
   topic: string;
   publishers?: string[];
+  createdAt: string;
+  summary?: string;
+  caption?: string;
+  whyItMatters?: string;
+  primarySourceUrl?: string;
 };
