@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useMemo, useState } from "react";
 import Biasbar from "@/components/Biasbar";
 import PublisherBadges from "@/components/PublisherBadges";
 import { GridArticle } from "@/lib/types";
@@ -9,6 +12,7 @@ const FALLBACK_IMAGE = "/top5-placeholder.jpg";
 
 type ArticlesTimelineProps = {
   articles: GridArticle[];
+  popularArticles?: GridArticle[];
 };
 
 const formatTimeAgo = (dateString: string) => {
@@ -27,15 +31,47 @@ const formatTimeAgo = (dateString: string) => {
   return `Hace ${diffDays} ${diffDays === 1 ? "día" : "días"}`;
 };
 
-const ArticlesTimeline = ({ articles }: ArticlesTimelineProps) => {
+const ArticlesTimeline = ({
+  articles,
+  popularArticles,
+}: ArticlesTimelineProps) => {
   if (!articles?.length) {
     return null;
   }
 
+  const [view, setView] = useState<"latest" | "popular">("latest");
+  const fallbackPopular = useMemo(
+    () =>
+      [...articles].sort(
+        (a, b) => (b.publishers?.length ?? 0) - (a.publishers?.length ?? 0)
+      ),
+    [articles]
+  );
+  const availablePopular = popularArticles?.length
+    ? popularArticles
+    : fallbackPopular;
+  const displayedArticles = view === "latest" ? articles : availablePopular;
+
   return (
-    <section className="section-shell pb-12 pt-6">
-      <div className=" flex w-full max-w-[48rem] flex-col space-y-8">
-        {articles.map((article) => (
+    <section className="section-shell mt-4   pb-12 pt-6 ">
+      <div className=" flex w-full max-w-3xl rounded-md border border-border/60  p-8 flex-col space-y-8">
+        <div className="flex justify-center">
+          <div className="inline-flex rounded-full border border-border/60 bg-background/80 p-1">
+            <ToggleButton
+              active={view === "latest"}
+              onClick={() => setView("latest")}
+            >
+              Últimas
+            </ToggleButton>
+            <ToggleButton
+              active={view === "popular"}
+              onClick={() => setView("popular")}
+            >
+              Populares
+            </ToggleButton>
+          </div>
+        </div>
+        {displayedArticles.map((article) => (
           <TimelineCard key={article.id} article={article} />
         ))}
       </div>
@@ -51,7 +87,6 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
     <article className="flex flex-col gap-6 rounded-[32px] border border-border/60 bg-card/95 p-7 shadow-sm transition-shadow hover:shadow-lg">
       <div className="flex flex-col gap-1 text-xs uppercase tracking-[0.35em] text-muted-foreground/80">
         <span>{timeAgo}</span>
-        <span className="text-muted-foreground/70">{article.topic}</span>
       </div>
       <Link href={`/noticia/${article.id}`} className="block">
         <h3 className="text-[2.5rem] font-semibold leading-tight text-foreground transition-colors hover:text-foreground/90">
@@ -94,9 +129,9 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
           <PublisherBadges publishers={article.publishers} />
           <Biasbar bias={article.bias} />
         </div>
-        {article.id && (
+        {article.primarySourceUrl && (
           <Link
-            href={article.id}
+            href={article.primarySourceUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary/60 px-5 py-2 text-sm font-medium text-primary transition hover:bg-primary/5"
@@ -110,5 +145,27 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
     </article>
   );
 };
+
+const ToggleButton = ({
+  active,
+  children,
+  onClick,
+}: {
+  active: boolean;
+  children: React.ReactNode;
+  onClick: () => void;
+}) => (
+  <button
+    type="button"
+    onClick={onClick}
+    className={`rounded-full px-4 py-1.5 text-sm font-semibold transition ${
+      active
+        ? "bg-primary text-primary-foreground shadow-sm"
+        : "text-muted-foreground/70"
+    }`}
+  >
+    {children}
+  </button>
+);
 
 export default ArticlesTimeline;

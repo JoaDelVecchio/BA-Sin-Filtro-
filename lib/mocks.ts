@@ -438,16 +438,10 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
 ];
 
 export const MOCK_POPULAR_NEWS: PopularNewsTab = [
-  { id: "norma", title: "Nueva norma para alquileres temporarios" },
-  { id: "milei", title: "Milei en Rosario: mensajes a los gobernadores" },
-  {
-    id: "laboral",
-    title: "Reforma laboral: qué cambia para los monotributistas",
-  },
-  { id: "normas", title: "Nueva norma para alquileres temporarios" },
-  { id: "mileis", title: "Milei en Rosario: mensajes a los gobernadores" },
-  {
-    id: "laborals",
-    title: "Reforma laboral: qué cambia para los monotributistas",
-  },
+  { id: "cluster_subte_dic_2025", title: "El SUBTE aumentará 15% desde diciembre" },
+  { id: "cluster_inflacion_oct_2025", title: "La inflación de octubre fue 8,1%" },
+  { id: "cluster_gba_basura", title: "Municipios del GBA refuerzan limpieza tras temporal" },
+  { id: "cluster_salud_mental_guardias", title: "Guardias porteñas suman equipos de salud mental" },
+  { id: "cluster_cultura_plazas_verano", title: "Plazas porteñas tendrán agenda cultural" },
+  { id: "cluster_transporte_bicisendas_sur", title: "Extienden bicisendas norte-sur" },
 ];
