@@ -23,7 +23,7 @@ const HeroArticle = ({ article, position = 1 }: HeroArticleProps) => {
           </p>
           <div className="h-px w-14 bg-border" />
         </div>
-        <Link href={`/noticia/${article.id}`} className="block">
+        <Link href={`/${article.id}`} className="block">
           <h2 className="text-[2.35rem] font-semibold leading-tight text-foreground text-balance transition-colors hover:text-foreground/90">
             {position}. {article.headline}
           </h2>

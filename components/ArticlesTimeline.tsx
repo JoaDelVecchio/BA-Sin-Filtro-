@@ -88,7 +88,7 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
       <div className="flex flex-col gap-1 text-xs uppercase tracking-[0.35em] text-muted-foreground/80">
         <span>{timeAgo}</span>
       </div>
-      <Link href={`/noticia/${article.id}`} className="block">
+      <Link href={`/${article.id}`} className="block">
         <h3 className="text-[2.5rem] font-semibold leading-tight text-foreground transition-colors hover:text-foreground/90">
           {article.headline}
         </h3>

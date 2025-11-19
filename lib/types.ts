@@ -69,4 +69,15 @@ export type GridArticle = {
   caption?: string;
   whyItMatters?: string;
   primarySourceUrl?: string;
+  subtitle?: string;
+  body?: string;
+  bullets?: string[];
+  tags?: string[];
+};
+
+export type ArticleDetails = GridArticle & {
+  subtitle: string;
+  body: string;
+  bullets: string[];
+  tags: string[];
 };
