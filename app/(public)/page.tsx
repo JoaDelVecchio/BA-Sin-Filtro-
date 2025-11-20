@@ -18,7 +18,9 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen ">
-      <PopularNewsTabs popularNews={MOCK_POPULAR_NEWS} />
+      <div className="hidden md:block">
+        <PopularNewsTabs popularNews={MOCK_POPULAR_NEWS} />
+      </div>
       <Top5Grid top5={top5} title="Top 5 del dia" />
       <ArticlesTimeline
         articles={timelineArticles}

@@ -1,15 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import HeaderBanner from "./HeaderBanner";
 import Navbar from "./Navbar";
+import HeaderBanner from "./HeaderBanner";
 import { cn } from "@/lib/utils";
 
 const Header = () => (
   <>
     <header className="border-b border-border/50 bg-background/95">
       <div className="section-shell flex flex-col gap-2 py-2">
-        <HeaderBanner />
+        <div className="hidden md:block">
+          <HeaderBanner />
+        </div>
         <Navbar />
       </div>
     </header>

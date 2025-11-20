@@ -21,7 +21,7 @@ const TimelineSection = ({
         variant === "tag" ? "mx-auto" : ""
       } w-full max-w-[52rem]`}
     >
-      <div className="rounded-2xl border border-border/60 bg-card/90 p-8 shadow-sm dark:border-white/10 dark:bg-card">
+      <div className="space-y-8 p-0 md:rounded-2xl md:border md:border-border/60 md:bg-card/90 md:p-8 md:shadow-sm dark:md:border-white/10 dark:md:bg-card">
         {variant === "default" ? (
           <div className="flex justify-center">
             <div className="inline-flex gap-1 rounded-full bg-muted/20 p-1">
@@ -40,7 +40,7 @@ const TimelineSection = ({
             </span>
           </div>
         )}
-        <div className="mt-8">
+        <div>
           {articles.map((article) => (
             <TimelineCard key={article.id} article={article} />
           ))}

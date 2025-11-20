@@ -18,6 +18,7 @@ const Top5Grid = ({ top5, label }: Top5GridProps) => {
     <section className="section-shell mt-4 py-6">
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,1fr)]">
         <HeroArticle article={hero} label={label} />
+        <div className="my-4 h-px bg-border/70 lg:hidden" />
         <aside className="flex flex-col gap-2">
           <ol className="flex flex-col gap-2">
             {rest.map((article, index) => (
