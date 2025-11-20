@@ -28,12 +28,12 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
   const timeAgo = formatTimeAgo(article.createdAt);
 
   return (
-    <article className="relative flex flex-col gap-6 py-12 first:pt-0 last:pb-0 before:absolute before:left-0 before:right-0 before:top-0 before:h-px before:bg-border/80 before:content-[''] before:pointer-events-none first:before:hidden after:absolute after:left-0 after:right-0 after:top-2 after:h-px after:bg-border/40 after:content-[''] after:pointer-events-none first:after:hidden">
-      <div className="flex flex-col gap-1 text-xs uppercase tracking-[0.35em] text-muted-foreground/80">
+    <article className="relative flex flex-col gap-5 py-8 first:pt-0 last:pb-0 before:pointer-events-none before:absolute before:left-0 before:right-0 before:top-0 before:h-px before:bg-border/70 before:content-[''] after:pointer-events-none after:absolute after:left-0 after:right-0 after:top-2 after:h-px after:bg-border/40 after:content-[''] first:before:hidden first:after:hidden md:gap-6 md:py-12">
+      <div className="flex flex-col gap-1 text-[0.65rem] uppercase tracking-[0.35em] text-muted-foreground/80 md:text-xs">
         <span>{timeAgo}</span>
       </div>
       <Link href={`/${article.id}`} className="block">
-        <h3 className="text-[2.5rem] font-semibold leading-tight text-foreground transition-colors hover:text-foreground/90">
+        <h3 className="text-[1.75rem] font-semibold leading-tight text-foreground transition-colors hover:text-foreground/90 sm:text-[2rem] md:text-[2.5rem]">
           {article.headline}
         </h3>
       </Link>
@@ -44,21 +44,23 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
             alt={article.headline}
             width={520}
             height={400}
-            className="h-[400px] w-full object-cover"
+            className="h-56 w-full object-cover sm:h-72 md:h-[360px]"
           />
         </div>
         {article.caption && (
-          <p className="text-xs text-muted-foreground/80">{article.caption}</p>
+          <p className="text-[0.65rem] text-muted-foreground/80 sm:text-xs">
+            {article.caption}
+          </p>
         )}
       </div>
 
       {article.summary && (
-        <p className="text-base leading-relaxed text-muted-foreground">
+        <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
           {article.summary}
         </p>
       )}
       {article.whyItMatters && (
-        <div className="rounded-xl bg-muted/20 p-4">
+        <div className="rounded-lg bg-muted/20 p-3 sm:rounded-xl sm:p-4">
           <p className="text-sm font-semibold text-foreground">
             ¿Por qué importa?
           </p>
@@ -75,7 +77,7 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
         </div>
         <Link
           href={`/${article.id}`}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary/60 px-5 py-3 text-sm font-medium text-primary transition hover:bg-primary/5"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary/60 px-4 py-2.5 text-sm font-medium text-primary transition hover:bg-primary/5 sm:px-5 sm:py-3 sm:text-base"
         >
           <span>Leer en profundidad</span>
           <span>~4 min</span>
