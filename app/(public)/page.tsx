@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import PopularNewsTabs from "@/components/PopularNewsTabs";
 import Top5Grid from "@/components/top5/Top5Grid";
 import ArticlesTimeline from "@/components/articles-timeline";
@@ -20,7 +19,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen ">
       <PopularNewsTabs popularNews={MOCK_POPULAR_NEWS} />
-      <Top5Grid top5={top5} />
+      <Top5Grid top5={top5} title="Top 5 del dia" />
       <ArticlesTimeline
         articles={timelineArticles}
         popularArticles={popularTimeline.length ? popularTimeline : undefined}

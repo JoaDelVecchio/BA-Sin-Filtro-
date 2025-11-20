@@ -3,12 +3,13 @@
 import { Button } from "@/components/ui/button";
 
 export default function Error({
-  error,
+  error: _error,
   reset,
 }: {
   error: Error;
   reset: () => void;
 }) {
+  void _error;
   return (
     <section className="section-shell flex w-full h-full min-h-max flex-col items-center justify-center text-center">
       <div className="glass-panel max-w-md space-y-4 p-8 text-base">

@@ -33,9 +33,9 @@ export const mapClusterToGridArticle = (
   caption: cluster.subtitle,
   whyItMatters: cluster.bullets?.[0],
   primarySourceUrl: cluster.sources?.[0]?.url,
-  subtitle: cluster.subtitle,
-  body: cluster.body,
-  bullets: cluster.bullets,
+  subtitle: cluster.subtitle ?? "",
+  body: cluster.body ?? "",
+  bullets: cluster.bullets ?? [],
   tags: cluster.tags ?? [],
   sources: cluster.sources,
 });

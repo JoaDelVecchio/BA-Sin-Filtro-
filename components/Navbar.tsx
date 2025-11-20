@@ -21,8 +21,10 @@ import { Input } from "./ui/input";
 import { MAIN_TOPICS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
   const [activeTopic, setActiveTopic] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -53,7 +55,10 @@ const Navbar = () => {
             {MAIN_TOPICS.map((topic) => (
               <DropdownMenuItem
                 key={topic}
-                onSelect={() => setActiveTopic(topic)}
+                onSelect={() => {
+                  setActiveTopic(topic);
+                  router.push(`/tema/${encodeURIComponent(topic)}`);
+                }}
                 className="flex items-center justify-between gap-2"
               >
                 {topic}

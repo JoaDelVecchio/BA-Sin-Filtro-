@@ -9,9 +9,14 @@ const FALLBACK_IMAGE = "/top5-placeholder.jpg";
 type HeroArticleProps = {
   article: GridArticle;
   position?: number;
+  label?: string;
 };
 
-const HeroArticle = ({ article, position = 1 }: HeroArticleProps) => {
+const HeroArticle = ({
+  article,
+  position = 1,
+  label = "Top 5 del día",
+}: HeroArticleProps) => {
   const image = article.image ?? FALLBACK_IMAGE;
 
   return (
@@ -19,7 +24,7 @@ const HeroArticle = ({ article, position = 1 }: HeroArticleProps) => {
       <div className="space-y-5 p-8 lg:p-10">
         <div className="space-y-2">
           <p className="text-[0.7rem] font-semibold uppercase tracking-[0.35em] text-muted-foreground/80">
-            Top 5 del día
+            {label}
           </p>
           <div className="h-px w-14 bg-border" />
         </div>

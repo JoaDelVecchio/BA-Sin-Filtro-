@@ -4,9 +4,10 @@ import { GridArticle } from "@/lib/types";
 
 type Top5GridProps = {
   top5: GridArticle[];
+  label?: string;
 };
 
-const Top5Grid = ({ top5 }: Top5GridProps) => {
+const Top5Grid = ({ top5, label }: Top5GridProps) => {
   if (!top5?.length) {
     return null;
   }
@@ -16,7 +17,7 @@ const Top5Grid = ({ top5 }: Top5GridProps) => {
   return (
     <section className="section-shell mt-4 py-6">
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,1fr)]">
-        <HeroArticle article={hero} />
+        <HeroArticle article={hero} label={label} />
         <aside className="flex flex-col gap-2">
           <ol className="flex flex-col gap-2">
             {rest.map((article, index) => (
