@@ -1,9 +1,10 @@
 export const MAIN_TOPICS = [
-  "Economía & Precios",
-  "Transporte & Movilidad",
-  "Seguridad",
+  "CABA",
   "Gobierno de la Ciudad",
-  "Provincia de Buenos Aires",
+  "Transporte & Movilidad",
+  "Economía & Precios",
+  "Seguridad",
   "Servicios & Tarifas",
   "Obras & Urbanismo",
+  "Provincia de Buenos Aires",
 ];

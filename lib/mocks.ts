@@ -163,7 +163,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
     ],
     body: "El Gobierno de la Ciudad de Buenos Aires anunció la creación de un nuevo parque lineal en la zona sur, que se desarrollará sobre antiguos terrenos ferroviarios entre Barracas y Parque Patricios. El proyecto contempla la incorporación de bicisendas, senderos peatonales, áreas de juego y mobiliario urbano, con el objetivo de ampliar la superficie de espacios verdes accesibles para los vecinos. Desde el Ejecutivo porteño destacan que la iniciativa apunta a equilibrar la oferta de espacios públicos en relación con el norte de la Ciudad. Vecinos y organizaciones barriales reconocen el impacto positivo de sumar verde, pero señalan la necesidad de garantizar mantenimiento, iluminación y seguridad en la zona, así como una mayor participación en el diseño final.",
     image: "https://example.com/images/parque-lineal-sur.jpg",
-    topic: "Gobierno de la Ciudad",
+    topic: "CABA",
     bias: { left: 30, center: 55, right: 15 },
     sources: [
       {

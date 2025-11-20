@@ -8,6 +8,7 @@ import {
 } from "@clerk/nextjs";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Menu, Search, X } from "lucide-react";
 import {
   DropdownMenu,
@@ -194,10 +195,10 @@ const Navbar = () => {
           <SignedOut>
             <div className="flex gap-2">
               <SignInButton>
-                <Button variant="ghost">Sign In</Button>
+                <Button variant="ghost">Iniciar sesión</Button>
               </SignInButton>
               <SignUpButton>
-                <Button className="btn-primary">Sign Up</Button>
+                <Button className="btn-primary">Registrarse</Button>
               </SignUpButton>
             </div>
           </SignedOut>
@@ -252,11 +253,27 @@ const MobileMenu = ({
   activeTopic,
   onTopicSelect,
 }: MobileMenuProps) => {
-  if (!open) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted || !open) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [open, mounted]);
+
+  if (!mounted || !open) {
     return null;
   }
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-50 md:hidden">
       <div
         className="absolute inset-0 bg-foreground/40 backdrop-blur-sm"
@@ -334,7 +351,8 @@ const MobileMenu = ({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
