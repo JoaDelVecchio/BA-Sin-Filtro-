@@ -20,7 +20,7 @@ const HeroArticle = ({
   const image = article.image ?? FALLBACK_IMAGE;
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-[32px] border border-border/70 bg-card shadow-[0_24px_60px_rgba(15,15,15,0.08)] transition-shadow duration-300 hover:shadow-[0_32px_80px_rgba(15,15,15,0.12)] dark:border-white/8 dark:bg-card dark:shadow-[0_28px_80px_rgba(0,0,0,0.78)] dark:hover:shadow-[0_36px_105px_rgba(0,0,0,0.85)]">
+    <article className="group flex flex-col overflow-hidden rounded-[24px] border border-border/70 bg-card shadow-[0_24px_60px_rgba(15,15,15,0.08)] transition-shadow duration-300 hover:shadow-[0_32px_80px_rgba(15,15,15,0.12)] dark:border-white/8 dark:bg-card dark:shadow-[0_28px_80px_rgba(0,0,0,0.78)] dark:hover:shadow-[0_36px_105px_rgba(0,0,0,0.85)]">
       <div className="space-y-5 p-8 lg:p-10">
         <div className="space-y-2">
           <p className="text-[0.7rem] font-semibold uppercase tracking-[0.35em] text-muted-foreground/80">

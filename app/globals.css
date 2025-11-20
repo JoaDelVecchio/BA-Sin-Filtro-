@@ -44,7 +44,7 @@
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 0.6rem;
   --radius-pill: 9999px;
   --background: #fbfbfd;
   --background-elevated: #ffffff;

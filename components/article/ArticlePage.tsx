@@ -58,7 +58,7 @@ const ArticlePage = ({ article, related }: ArticlePageProps) => {
         </div>
 
         <div className="space-y-4">
-          <div className="overflow-hidden rounded-3xl">
+          <div className="overflow-hidden rounded-2xl">
             <Image
               src={article.image || "/top5-placeholder.jpg"}
               alt={article.headline}
@@ -161,7 +161,7 @@ const ArticlePage = ({ article, related }: ArticlePageProps) => {
                     href={`/${item.id}`}
                     className="flex items-center gap-8 border-t border-border/70 pt-8 transition hover:border-primary/40"
                   >
-                    <div className="relative h-[140px] w-[240px] overflow-hidden rounded-2xl shadow-sm">
+                    <div className="relative h-[140px] w-[240px] overflow-hidden rounded-xl shadow-sm">
                       <Image
                         src={item.image || "/top5-placeholder.jpg"}
                         alt={item.headline}
@@ -220,7 +220,7 @@ const ArticleSection = ({
     className={
       flush
         ? "space-y-3"
-        : "space-y-3 rounded-[28px] border border-border/60 bg-card/80 p-6"
+        : "space-y-3 rounded-2xl border border-border/60 bg-card/80 p-6"
     }
   >
     <p className="text-sm font-semibold uppercase tracking-[0.35em] text-muted-foreground/80">

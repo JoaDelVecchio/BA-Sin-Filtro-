@@ -28,7 +28,7 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
   const timeAgo = formatTimeAgo(article.createdAt);
 
   return (
-    <article className="flex flex-col gap-6 rounded-[32px] border border-border/60 bg-card p-7 shadow-sm transition-shadow hover:shadow-lg dark:border-white/8 dark:bg-card dark:shadow-[0_25px_80px_rgba(0,0,0,0.65)] dark:hover:shadow-[0_32px_110px_rgba(0,0,0,0.75)]">
+    <article className="relative flex flex-col gap-6 py-12 first:pt-0 last:pb-0 before:absolute before:left-0 before:right-0 before:top-0 before:h-px before:bg-border/80 before:content-[''] before:pointer-events-none first:before:hidden after:absolute after:left-0 after:right-0 after:top-2 after:h-px after:bg-border/40 after:content-[''] after:pointer-events-none first:after:hidden">
       <div className="flex flex-col gap-1 text-xs uppercase tracking-[0.35em] text-muted-foreground/80">
         <span>{timeAgo}</span>
       </div>
@@ -38,13 +38,13 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
         </h3>
       </Link>
       <div className="space-y-2">
-        <div className="overflow-hidden rounded-2xl border border-border/60 dark:border-white/10">
+        <div className="overflow-hidden rounded-2xl">
           <Image
             src={image}
             alt={article.headline}
             width={520}
-            height={360}
-            className="h-[360px] w-full object-cover"
+            height={400}
+            className="h-[400px] w-full object-cover"
           />
         </div>
         {article.caption && (
@@ -58,7 +58,7 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
         </p>
       )}
       {article.whyItMatters && (
-        <div className="rounded-2xl border border-border/70 bg-card/80 p-4 dark:border-white/10 dark:bg-card/80">
+        <div className="rounded-xl bg-muted/20 p-4">
           <p className="text-sm font-semibold text-foreground">
             ¿Por qué importa?
           </p>
@@ -75,7 +75,7 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
         </div>
         <Link
           href={`/${article.id}`}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary/60 px-5 py-2 text-sm font-medium text-primary transition hover:bg-primary/5"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary/60 px-5 py-3 text-sm font-medium text-primary transition hover:bg-primary/5"
         >
           <span>Leer en profundidad</span>
           <span>~4 min</span>
