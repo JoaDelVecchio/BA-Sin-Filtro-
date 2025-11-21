@@ -20,6 +20,7 @@ import { ThemeToggle } from "./Theme-toogle";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { MAIN_TOPICS, type MainTopic } from "@/lib/constants";
+import { getPopularTopicContent } from "@/lib/popular-topic-content";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -28,7 +29,6 @@ import { Separator } from "./ui/separator";
 const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const [activeTopic, setActiveTopic] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -56,17 +56,6 @@ const Navbar = () => {
     }
   }, [isSearchOpen, isDesktop]);
 
-  useEffect(() => {
-    if (!pathname) return;
-    if (pathname.startsWith("/tema/")) {
-      const [, slug] = pathname.split("/tema/");
-      const decodedTopic = slug ? decodeURIComponent(slug) : null;
-      setActiveTopic(decodedTopic);
-    } else {
-      setActiveTopic(null);
-    }
-  }, [pathname]);
-
   const toggleSearch = () => setIsSearchOpen((prev) => !prev);
   const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
 
@@ -77,10 +66,30 @@ const Navbar = () => {
   };
 
   const handleTopicSelect = (topic: string) => {
-    setActiveTopic(topic);
     router.push(`/tema/${encodeURIComponent(topic)}`);
     setIsMobileMenuOpen(false);
   };
+
+  const activeTopic = (() => {
+    if (!pathname || !pathname.startsWith("/tema/")) return null;
+    const [, slug] = pathname.split("/tema/");
+    if (!slug) return null;
+    const decoded = decodeURIComponent(slug);
+    const popular =
+      getPopularTopicContent(decoded) ??
+      getPopularTopicContent(decoded.toLowerCase());
+    if (popular) {
+      return popular.title;
+    }
+    const match = MAIN_TOPICS.find((topic) => {
+      const lowered = decoded.toLowerCase();
+      return (
+        topic.code.toLowerCase() === lowered ||
+        topic.label.toLowerCase() === lowered
+      );
+    });
+    return match?.label ?? decoded.replaceAll("-", " ");
+  })();
 
   return (
     <nav className="relative w-full py-2">
@@ -253,23 +262,19 @@ const MobileMenu = ({
   activeTopic,
   onTopicSelect,
 }: MobileMenuProps) => {
-  const [mounted, setMounted] = useState(false);
+  const portalTarget =
+    typeof window !== "undefined" ? document.body : null;
 
   useEffect(() => {
-    setMounted(true);
-    return () => setMounted(false);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted || !open) return;
+    if (!portalTarget || !open) return;
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = originalOverflow;
     };
-  }, [open, mounted]);
+  }, [open, portalTarget]);
 
-  if (!mounted || !open) {
+  if (!portalTarget || !open) {
     return null;
   }
 
@@ -352,7 +357,7 @@ const MobileMenu = ({
         </div>
       </div>
     </div>,
-    document.body
+    portalTarget
   );
 };
 

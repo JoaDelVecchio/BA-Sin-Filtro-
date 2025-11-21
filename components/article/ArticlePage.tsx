@@ -5,6 +5,7 @@ import Link from "next/link";
 import Biasbar from "@/components/Biasbar";
 import PublisherBadges from "@/components/PublisherBadges";
 import ShareBar from "@/components/article/ShareBar";
+import RelatedReadingList from "@/components/article/RelatedReading";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -139,65 +140,7 @@ const ArticlePage = ({ article, related }: ArticlePageProps) => {
           </div>
         )}
 
-        {related.length > 0 && (
-          <section className="space-y-8 pt-12">
-            <div className="text-center">
-              <div className="text-xs uppercase tracking-[0.35em] text-muted-foreground/60">
-                Explorar
-              </div>
-              <h2 className="mt-1 text-2xl font-semibold text-foreground">
-                Qué leer después
-              </h2>
-            </div>
-            <div className="space-y-10">
-              {related.map((item) => {
-                const relatedReadingTime = Math.max(
-                  1,
-                  Math.round((item.summary?.split(" ").length ?? 80) / 200)
-                );
-                return (
-                  <Link
-                    key={item.id}
-                    href={`/${item.id}`}
-                    className="flex items-center gap-8 border-t border-border/70 pt-8 transition hover:border-primary/40"
-                  >
-                    <div className="relative h-[140px] w-[240px] overflow-hidden rounded-xl shadow-sm">
-                      <Image
-                        src={item.image || "/top5-placeholder.jpg"}
-                        alt={item.headline}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="flex flex-1 flex-col gap-3 text-left">
-                      <div className="flex items-center gap-3 text-[0.5rem] text-muted-foreground">
-                        <span className="rounded-full border border-border/60 px-3 py-1 font-semibold uppercase tracking-[0.25em]">
-                          {item.topic}
-                        </span>
-                        <span className="uppercase tracking-[0.35em]">
-                          {new Date(item.createdAt).toLocaleDateString(
-                            "es-AR",
-                            {
-                              month: "short",
-                              day: "numeric",
-                              year: "numeric",
-                            }
-                          )}
-                        </span>
-                      </div>
-                      <p className="text-[1.7rem] font-semibold leading-snug text-foreground">
-                        {item.headline}
-                      </p>
-                      <span className="text-lg font-semibold text-primary">
-                        Profundizar ({relatedReadingTime} min) →
-                      </span>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </section>
-        )}
+        {related.length > 0 && <RelatedReadingList items={related} />}
       </div>
     </article>
   );

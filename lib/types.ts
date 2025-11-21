@@ -63,6 +63,61 @@ export type PopularNewsTabItem = {
 
 export type PopularNewsTab = PopularNewsTabItem[];
 
+export type TopicTrend = "up" | "down" | "stable";
+
+export type TopicQuickFact = {
+  label: string;
+  value: string;
+  helper?: string;
+  trend?: TopicTrend;
+  tone?: "positive" | "negative" | "neutral";
+};
+
+export type TopicNeed = {
+  title: string;
+  detail: string;
+};
+
+export type TopicWatchItem = {
+  label: string;
+  description: string;
+  impact: string;
+};
+
+export type TopicBrief = {
+  title: string;
+  description: string;
+};
+
+export type TopicPlaybook = {
+  title: string;
+  audience: string;
+  description: string;
+};
+
+export type TopicQuestion = {
+  question: string;
+  answer: string;
+};
+
+export type PopularTopicPageContent = PopularNewsTabItem & {
+  slug: string;
+  heroKicker: string;
+  heroDescription: string;
+  heroUpdatedAt: string;
+  heroInsight: string;
+  narrative: TopicBrief[];
+  audienceNeeds: TopicNeed[];
+  watchlist: TopicWatchItem[];
+  quickFacts: TopicQuickFact[];
+  actionCard: TopicBrief & {
+    actionLabel?: string;
+    actionHref?: string;
+  };
+  playbooks: TopicPlaybook[];
+  qas: TopicQuestion[];
+};
+
 export type GridArticle = {
   id: string;
   headline: string;
