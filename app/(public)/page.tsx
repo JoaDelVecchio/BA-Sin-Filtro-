@@ -9,12 +9,21 @@ export default async function Home() {
   const mappedArticles = MOCK_CLUSTERS.map(mapClusterToGridArticle);
   const top5 = mappedArticles.slice(0, 5);
   const timelineArticles = mappedArticles.slice(5);
-  const articlesById = new Map(
-    mappedArticles.map((article) => [article.id, article])
-  );
-  const popularTimeline = MOCK_POPULAR_NEWS.map((news) =>
-    articlesById.get(news.id)
-  ).filter(Boolean) as GridArticle[];
+
+  const usedArticles = new Set<string>();
+  const popularTimeline = MOCK_POPULAR_NEWS.map(({ targetTopic }) => {
+    const match = mappedArticles.find(
+      (article) =>
+        article.topic === targetTopic && !usedArticles.has(article.id)
+    );
+
+    if (match) {
+      usedArticles.add(match.id);
+      return match;
+    }
+
+    return null;
+  }).filter((article): article is GridArticle => Boolean(article));
 
   return (
     <div className="min-h-screen ">
