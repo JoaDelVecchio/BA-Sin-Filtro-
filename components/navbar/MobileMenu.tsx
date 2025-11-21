@@ -21,7 +21,7 @@ type MobileMenuProps = {
   onClose: () => void;
   topics: MainTopic[];
   activeTopic: string | null;
-  onTopicSelect: (topic: string) => void;
+  onTopicSelect: (topic: MainTopic) => void;
 };
 
 const MobileMenu = ({
@@ -106,7 +106,7 @@ const MobileMenu = ({
                 <li key={topic.code}>
                   <button
                     type="button"
-                    onClick={() => onTopicSelect(topic.label)}
+                    onClick={() => onTopicSelect(topic)}
                     className={cn(
                       "flex w-full items-center justify-between rounded-xl border px-4 py-2 text-left text-sm font-medium transition",
                       activeTopic === topic.label

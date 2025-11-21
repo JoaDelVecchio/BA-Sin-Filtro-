@@ -27,6 +27,7 @@ export const mapClusterToGridArticle = (
   })(),
   bias: cluster.bias,
   topic: cluster.topic,
+  region: cluster.region,
   publishers: cluster.sources?.map((source) => source.source).slice(0, 3),
   createdAt: cluster.createdAt,
   summary: cluster.summary,

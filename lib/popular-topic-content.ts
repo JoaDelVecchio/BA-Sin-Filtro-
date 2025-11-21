@@ -936,6 +936,139 @@ export const POPULAR_TOPIC_PAGES: Record<
       },
     ],
   },
+  keyword_nuevas_medidas: {
+    id: "keyword_nuevas_medidas",
+    slug: "keyword_nuevas_medidas",
+    title: "Nuevas Medidas",
+    targetTopic: "Política y Gobierno",
+    heroKicker: "Boletín oficial",
+    heroDescription:
+      "Seguimos decretos, resoluciones y disposiciones express que cambian reglas para comercios, impuestos y servicios en el AMBA.",
+    heroUpdatedAt: "Actualizado 17 de noviembre · 12:10",
+    heroInsight:
+      "El Ejecutivo acelera decisiones administrativas para cerrar el año: mientras Economía define el ajuste 2026, la Jefatura publica resoluciones que impactan en subsidios, transporte y trámites digitales.",
+    narrative: [
+      {
+        title: "Decretos clave",
+        description:
+          "Se oficializó la segmentación fina de subsidios y se prorrogó la emergencia ferroviaria.",
+      },
+      {
+        title: "Resoluciones express",
+        description:
+          "Nuevas reglas del BOPREAL y el pago escalonado a proveedores salieron en menos de 72 horas.",
+      },
+      {
+        title: "Deja-vu legislativo",
+        description:
+          "Se prepara un paquete de DNUs para reorganizar ministerios si el Congreso no trata la ley ómnibus 2.0.",
+      },
+    ],
+    audienceNeeds: [
+      {
+        title: "¿Cuándo entran en vigencia las medidas?",
+        detail:
+          "Explicamos los plazos de cada decreto y desde cuándo impactan tarifas, percepciones o nuevos trámites digitales.",
+      },
+      {
+        title: "¿A quién afecta cada cambio?",
+        detail:
+          "Segmentamos por hogares, PyMEs y gobiernos locales para que puedas anticipar si el beneficio o recorte te alcanza.",
+      },
+      {
+        title: "¿Dónde se publica la letra chica?",
+        detail:
+          "Curamos enlaces al Boletín Oficial y guías rápidas para interpretar anexos y cuadros tarifarios.",
+      },
+    ],
+    watchlist: [
+      {
+        label: "Reforma administrativa",
+        description:
+          "Se viene un decreto que fusiona secretarías y traslada programas sociales a Desarrollo Humano.",
+        impact: "Estructura estatal",
+      },
+      {
+        label: "Segmentación SUBE",
+        description:
+          "Transportes definirá en los próximos días cómo validar ingresos para conservar subsidios.",
+        impact: "Tarifas urbanas",
+      },
+      {
+        label: "Digitalización de multas",
+        description:
+          "AUSA y Vialidad coordinan la implementación de tickets digitales también en rutas bonaerenses.",
+        impact: "Contribuyentes",
+      },
+    ],
+    quickFacts: [
+      {
+        label: "Decretos publicados",
+        value: "6",
+        helper: "últimos 10 días",
+        trend: "up",
+        tone: "neutral",
+      },
+      {
+        label: "Resoluciones en consulta",
+        value: "12",
+        helper: "Ministerios clave",
+        trend: "stable",
+        tone: "neutral",
+      },
+      {
+        label: "Medidas suspendidas",
+        value: "2",
+        helper: "por cautelares",
+        trend: "down",
+        tone: "positive",
+      },
+    ],
+    actionCard: {
+      title: "Próxima definición",
+      description:
+        "Casa Rosada definirá esta semana qué medidas ingresan al paquete de DNUs y cuáles esperan al Congreso.",
+      actionLabel: "Revisar agenda legislativa",
+      actionHref: "https://www.boletinoficial.gob.ar/seccion/primera",
+    },
+    playbooks: [
+      {
+        title: "Lectura rápida",
+        audience: "Analistas",
+        description:
+          "Usá alertas del Boletín Oficial y filtros por organismo para detectar cambios sin esperar a la conferencia.",
+      },
+      {
+        title: "Acción inmediata",
+        audience: "PyMEs",
+        description:
+          "Anotá fechas de vigencia y adaptá precios o contratos antes de que la competencia se ajuste.",
+      },
+      {
+        title: "Narrativa ciudadana",
+        audience: "Medios barriales",
+        description:
+          "Traducí el lenguaje jurídico con ejemplos cotidianos y checklists para trámites.",
+      },
+    ],
+    qas: [
+      {
+        question: "¿Cómo sé si una medida ya está vigente?",
+        answer:
+          "Siempre revisá la fecha de publicación y el artículo final de entrada en vigencia; algunos decretos rigen al día siguiente y otros tras reglamentación.",
+      },
+      {
+        question: "¿Puedo impugnar una resolución?",
+        answer:
+          "Sí. Organizaciones pueden presentar recursos administrativos en 10 días hábiles y luego ir a la Justicia con cautelares.",
+      },
+      {
+        question: "¿Cambios por comunicado tienen validez?",
+        answer:
+          "No hasta que la norma se publique. Seguimos cada anuncio para confirmar si se convierte en decreto o resolución efectiva.",
+      },
+    ],
+  },
   keyword_transporte_publico: {
     id: "keyword_transporte_publico",
     slug: "keyword_transporte_publico",

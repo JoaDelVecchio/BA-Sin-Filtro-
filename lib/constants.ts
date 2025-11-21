@@ -2,6 +2,7 @@ export type MainTopic = {
   code: string;
   label: string;
   description: string;
+  slug?: string;
 };
 
 export const MAIN_TOPICS: MainTopic[] = [
@@ -46,5 +47,19 @@ export const MAIN_TOPICS: MainTopic[] = [
     label: "Educación",
     description:
       "Escuelas, universidades, paritarias docentes y reformas del sistema educativo.",
+  },
+  {
+    code: "CABA_CITY",
+    label: "CABA",
+    description:
+      "Obras, servicios y decisiones del Gobierno porteño que afectan a los 15 comunas.",
+    slug: "keyword_caba",
+  },
+  {
+    code: "BUENOS_AIRES_PBA",
+    label: "Buenos Aires (PBA)",
+    description:
+      "Medidas provinciales, intendencias y vida cotidiana en el conurbano y el interior bonaerense.",
+    slug: "keyword_buenos_aires_pba",
   },
 ];

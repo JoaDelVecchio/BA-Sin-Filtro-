@@ -48,6 +48,7 @@ export type StoryCluster = {
 
   // ---- Metadata ----
   topic: Topic; // the AMBA category
+  region?: "CABA" | "PBA";
   bias: BiasBreakdown; // L/C/R percentages
   sources: Article[]; // original articles used
 
@@ -124,6 +125,7 @@ export type GridArticle = {
   image: string;
   bias: BiasBreakdown;
   topic: string;
+  region?: "CABA" | "PBA";
   publishers?: string[];
   createdAt: string;
   summary?: string;

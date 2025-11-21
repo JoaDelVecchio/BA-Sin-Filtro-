@@ -56,6 +56,14 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
     body: "El Gobierno de la Ciudad de Buenos Aires anunció un aumento del 15% en la tarifa del subte a partir del 10 de diciembre. Según las autoridades porteñas, la medida busca actualizar los ingresos del servicio frente a mayores costos operativos, especialmente en energía y salarios. El incremento se aplicará en todas las líneas y afectará a más de tres millones de pasajeros diarios que utilizan la red. Organizaciones de usuarios criticaron el impacto acumulado de los aumentos en el contexto inflacionario, mientras que desde Nación se mantiene la presión para reducir los subsidios destinados al transporte en el AMBA.",
     image: mockImage("transport"),
     topic: "Política y Gobierno",
+    region: "CABA",
+    region: "PBA",
+    region: "CABA",
+    region: "CABA",
+    region: "PBA",
+    region: "CABA",
+    region: "CABA",
+    region: "CABA",
     bias: { left: 28, center: 50, right: 22 },
     sources: [
       {
@@ -112,6 +120,9 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
     body: "El INDEC dio a conocer que la inflación de octubre fue del 8,1%, lo que implica una leve desaceleración respecto al mes anterior, aunque se mantiene en niveles muy elevados. De esta manera, el índice de precios al consumidor acumula un 176% en lo que va del año. Los alimentos y bebidas volvieron a ubicarse por encima del promedio, afectando especialmente a los hogares de menores ingresos en el Área Metropolitana de Buenos Aires. Los ajustes en tarifas de servicios regulados, como luz y gas, también presionaron el indicador. Especialistas advierten que, sin un cambio consistente en la política económica, la baja en la inflación será gradual y no se reflejará rápidamente en la calle. En el AMBA, los alquileres, el transporte y los servicios básicos siguen liderando las preocupaciones cotidianas de los vecinos.",
     image: mockImage("security"),
     topic: "Economía",
+    region: "CABA",
+    region: "PBA",
+    region: "PBA",
     bias: { left: 35, center: 45, right: 20 },
     sources: [
       {
@@ -247,6 +258,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
     body: "Los principales gremios docentes de la provincia de Buenos Aires convocaron a un paro de 48 horas para la próxima semana, luego de rechazar la última propuesta salarial del Gobierno encabezado por el gobernador bonaerense. Los sindicatos reclaman una recomposición que supere la inflación acumulada y advierten sobre el deterioro de los salarios frente al aumento del costo de vida. Desde la administración provincial sostienen que la oferta presentada es la máxima posible en el marco de la situación fiscal actual. La medida de fuerza afectará a miles de escuelas en el conurbano y en el interior de la provincia, generando preocupación entre las familias por la continuidad del ciclo lectivo. Tras el paro, las partes volverían a reunirse en una nueva mesa paritaria.",
     image: mockImage("education"),
     topic: "Educación",
+    region: "PBA",
     bias: { left: 40, center: 45, right: 15 },
     sources: [
       {
@@ -368,6 +380,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
     body: "",
     image: mockImage("technology"),
     topic: "Ciencia",
+    region: "CABA",
     bias: { left: 25, center: 55, right: 20 },
     sources: [
       {
@@ -401,6 +414,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
     body: "",
     image: mockImage("health"),
     topic: "Salud",
+    region: "CABA",
     bias: { left: 40, center: 45, right: 15 },
     sources: [
       {
@@ -561,6 +575,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
     body: "",
     image: mockImage("finance"),
     topic: "Negocios",
+    region: "PBA",
     bias: { left: 30, center: 50, right: 20 },
     sources: [
       {
@@ -593,6 +608,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
     body: "",
     image: mockImage("autopistas"),
     topic: "Tecnología",
+    region: "CABA",
     bias: { left: 22, center: 58, right: 20 },
     sources: [
       {
@@ -655,33 +671,13 @@ export const MOCK_POPULAR_NEWS: PopularNewsTab = [
     targetTopic: "Economía",
   },
   {
-    id: "keyword_tarifas_servicios",
-    title: "Tarifas y Servicios",
-    targetTopic: "Economía",
-  },
-  {
-    id: "keyword_inseguridad",
-    title: "Inseguridad",
-    targetTopic: "Política y Gobierno",
-  },
-  {
-    id: "keyword_caba",
-    title: "CABA",
-    targetTopic: "Política y Gobierno",
-  },
-  {
-    id: "keyword_buenos_aires_pba",
-    title: "Buenos Aires (PBA)",
-    targetTopic: "Política y Gobierno",
-  },
-  {
     id: "keyword_javier_milei",
     title: "Javier Milei",
     targetTopic: "Política y Gobierno",
   },
   {
-    id: "keyword_transporte_publico",
-    title: "Transporte Público",
+    id: "keyword_nuevas_medidas",
+    title: "Nuevas Medidas",
     targetTopic: "Política y Gobierno",
   },
 ];

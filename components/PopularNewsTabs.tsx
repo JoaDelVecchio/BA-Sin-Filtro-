@@ -78,7 +78,7 @@ const PopularNewsTabs = ({ popularNews }: PopularNewsTabsProps) => {
               {popularNews.map(({ id, title }, index) => (
                 <li key={id} className="flex items-center gap-4">
                   <Link
-                    href={`/tema/${encodeURIComponent(id)}`}
+                    href={`/mas-buscados/${encodeURIComponent(id)}`}
                     className="text-sm font-semibold text-foreground/85 transition-colors hover:text-foreground"
                   >
                     {title}

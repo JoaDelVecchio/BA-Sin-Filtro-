@@ -17,7 +17,7 @@ import {
 import { ThemeToggle } from "@/components/Theme-toogle";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MAIN_TOPICS } from "@/lib/constants";
+import { MAIN_TOPICS, type MainTopic } from "@/lib/constants";
 import { getPopularTopicContent } from "@/lib/popular-topic-content";
 import { cn } from "@/lib/utils";
 import { usePathname, useRouter } from "next/navigation";
@@ -63,8 +63,9 @@ const Navbar = () => {
     }
   };
 
-  const handleTopicSelect = (topic: string) => {
-    router.push(`/tema/${encodeURIComponent(topic)}`);
+  const handleTopicSelect = (topic: MainTopic) => {
+    const slug = topic.slug ?? topic.label;
+    router.push(`/tema/${encodeURIComponent(slug)}`);
     setIsMobileMenuOpen(false);
   };
 
@@ -143,7 +144,7 @@ const Navbar = () => {
               {MAIN_TOPICS.map((topic) => (
                 <DropdownMenuItem
                   key={topic.code}
-                  onSelect={() => handleTopicSelect(topic.label)}
+                  onSelect={() => handleTopicSelect(topic)}
                   className="flex items-center justify-between gap-2"
                 >
                   {topic.label}

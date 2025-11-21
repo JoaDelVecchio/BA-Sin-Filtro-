@@ -30,7 +30,7 @@ export default async function Home() {
       <div className="hidden md:block">
         <PopularNewsTabs popularNews={MOCK_POPULAR_NEWS} />
       </div>
-      <Top5Grid top5={top5} title="Top 5 del dia" />
+      <Top5Grid top5={top5} label="Top 5 del día" />
       <ArticlesTimeline
         articles={timelineArticles}
         popularArticles={popularTimeline.length ? popularTimeline : undefined}
