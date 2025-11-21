@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Navbar from "./Navbar";
+import Navbar from "@/components/navbar";
 import HeaderBanner from "./HeaderBanner";
 import { cn } from "@/lib/utils";
 

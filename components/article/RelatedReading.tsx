@@ -67,22 +67,11 @@ const RelatedReadingList = ({
                   <span className="uppercase tracking-[0.35em]">
                     {publishedLabel}
                   </span>
-                  {item.publishers?.[0] && (
-                    <>
-                      <span>•</span>
-                      <span className="text-xs uppercase tracking-[0.3em]">
-                        {item.publishers[0]}
-                      </span>
-                    </>
-                  )}
                 </div>
                 <p className="text-[1.7rem] font-semibold leading-snug text-foreground">
                   {item.headline}
                 </p>
-                {item.summary && (
-                  <p className="text-base text-muted-foreground">{item.summary}</p>
-                )}
-                <span className="text-sm font-semibold text-primary">
+                <span className="text-lg font-semibold text-primary">
                   Profundizar ({readingTime} min) →
                 </span>
               </div>

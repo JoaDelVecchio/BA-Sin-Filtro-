@@ -6,6 +6,7 @@ import Biasbar from "@/components/Biasbar";
 import PublisherBadges from "@/components/PublisherBadges";
 import ShareBar from "@/components/article/ShareBar";
 import RelatedReadingList from "@/components/article/RelatedReading";
+import SectionLabel from "@/components/ui/section-label";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -166,9 +167,7 @@ const ArticleSection = ({
         : "space-y-3 rounded-2xl border border-border/60 bg-card/80 p-6"
     }
   >
-    <p className="text-sm font-semibold uppercase tracking-[0.35em] text-muted-foreground/80">
-      {title}
-    </p>
+    <SectionLabel className="text-muted-foreground/80">{title}</SectionLabel>
     {text && (
       <p className="text-base leading-relaxed text-foreground">{text}</p>
     )}

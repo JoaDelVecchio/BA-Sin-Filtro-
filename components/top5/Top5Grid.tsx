@@ -1,5 +1,5 @@
-import HeroArticle from "@/components/top5/HeroArticle";
-import ArticleListItem from "@/components/top5/ArticleListItem";
+import HeroArticle from "@/components/top5/components/HeroArticle";
+import ArticleListItem from "@/components/top5/components/ArticleListItem";
 import { GridArticle } from "@/lib/types";
 
 type Top5GridProps = {

@@ -12,6 +12,8 @@ import {
 import { getPopularTopicContent } from "@/lib/popular-topic-content";
 import { MAIN_TOPICS } from "@/lib/constants";
 import RelatedReadingList from "@/components/article/RelatedReading";
+import SectionLabel from "@/components/ui/section-label";
+import { MetaPill } from "@/components/ui/meta-pill";
 
 type TopicPageProps = {
   params: { topic: string };
@@ -77,9 +79,7 @@ const TopicPage = async ({ params }: TopicPageProps) => {
     return (
       <section className="section-shell py-20">
         <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 text-center text-muted-foreground">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em]">
-            Tema
-          </p>
+          <SectionLabel className="text-muted-foreground">Tema</SectionLabel>
           <h1 className="text-4xl font-semibold text-foreground">
             {topicLabel}
           </h1>
@@ -124,9 +124,9 @@ const TopicPage = async ({ params }: TopicPageProps) => {
         key={`${fact.label}-${fact.value}`}
         className="rounded-2xl border border-border/70 bg-card/90 p-4 shadow-[0_20px_60px_rgba(10,10,10,0.05)] backdrop-blur-sm dark:border-white/10 dark:bg-card/80"
       >
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground/80">
+        <SectionLabel className="text-muted-foreground/80">
           {fact.label}
-        </p>
+        </SectionLabel>
         <div className="mt-3 flex items-baseline gap-2">
           <p className="text-3xl font-semibold text-foreground">{fact.value}</p>
           {Icon && trendLabel && (
@@ -176,9 +176,9 @@ const TopicPage = async ({ params }: TopicPageProps) => {
               </div>
             )}
             <div className="rounded-2xl border border-border/70 bg-card/80 p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground/80">
+              <SectionLabel className="text-muted-foreground/80">
                 Lo que importa
-              </p>
+              </SectionLabel>
               <p className="mt-2 text-lg font-medium text-foreground">{content.heroInsight}</p>
             </div>
             <div className="grid gap-4 md:grid-cols-3">
@@ -187,9 +187,9 @@ const TopicPage = async ({ params }: TopicPageProps) => {
                   key={item.title}
                   className="rounded-2xl border border-border/70 bg-card/80 p-5"
                 >
-                  <p className="text-sm font-semibold uppercase tracking-[0.25em] text-muted-foreground/70">
+                  <SectionLabel className="text-sm tracking-[0.25em] text-muted-foreground/70">
                     {item.title}
-                  </p>
+                  </SectionLabel>
                   <p className="mt-2 text-base text-foreground/90">{item.description}</p>
                 </article>
               ))}
@@ -197,9 +197,7 @@ const TopicPage = async ({ params }: TopicPageProps) => {
           </header>
         ) : (
           <header className="space-y-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-muted-foreground/70">
-              Tema
-            </p>
+            <SectionLabel>Tema</SectionLabel>
             <h1 className="text-4xl font-semibold text-foreground">{topicLabel}</h1>
             <p className="text-base text-muted-foreground">
               Seguimos las novedades más relevantes para este tópico. Pronto sumaremos más
@@ -208,26 +206,22 @@ const TopicPage = async ({ params }: TopicPageProps) => {
           </header>
         )}
 
-      {content?.audienceNeeds?.length ? (
-        <section className="section-shell pt-0">
-          <div className="rounded-[32px] border border-border/70 bg-card/95 p-8 shadow-[0_30px_80px_rgba(0,0,0,0.08)] dark:border-white/10 dark:bg-card/90">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground/70">
-              Lo que la gente prioriza
-            </p>
+        {content?.audienceNeeds?.length ? (
+          <section className="rounded-2xl border border-border/70 bg-card/80 p-6">
+            <SectionLabel>Lo que la gente prioriza</SectionLabel>
             <div className="mt-5 grid gap-4 md:grid-cols-3">
               {content.audienceNeeds.map((need) => (
                 <article
                   key={need.title}
-                  className="rounded-2xl border border-border/70 bg-background/60 p-4 dark:border-white/10 dark:bg-background/20"
+                  className="rounded-2xl border border-border/70 bg-background/60 p-4"
                 >
                   <h3 className="text-lg font-semibold text-foreground">{need.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{need.detail}</p>
                 </article>
               ))}
             </div>
-          </div>
-        </section>
-      ) : null}
+          </section>
+        ) : null}
 
         {content && (
           <section className="space-y-6 rounded-2xl border border-border/70 bg-card/80 p-6">
@@ -236,9 +230,7 @@ const TopicPage = async ({ params }: TopicPageProps) => {
                 {quickFacts.map(quickFactCard)}
               </div>
               <div className="rounded-2xl border border-border/60 bg-background/60 p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground/70">
-                  {content.actionCard.title}
-                </p>
+                <SectionLabel>{content.actionCard.title}</SectionLabel>
                 <p className="mt-3 text-base text-foreground">{content.actionCard.description}</p>
                 {content.actionCard.actionLabel && content.actionCard.actionHref && (
                   <Link
@@ -259,37 +251,35 @@ const TopicPage = async ({ params }: TopicPageProps) => {
         {content && (
           <section className="grid gap-6 rounded-2xl border border-border/70 bg-card/80 p-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground/70">
-                Lo que vigilamos
-              </p>
+              <SectionLabel>Lo que vigilamos</SectionLabel>
               <div className="mt-4 grid gap-4">
                 {content.watchlist.map((item) => (
                   <div
                     key={item.label}
                     className="rounded-xl border border-border/60 bg-background/60 p-4"
                   >
-                    <p className="text-sm font-semibold text-foreground">{item.label}</p>
+                    <SectionLabel className="text-sm tracking-[0.25em] text-foreground">
+                      {item.label}
+                    </SectionLabel>
                     <p className="mt-2 text-sm text-muted-foreground">{item.description}</p>
-                    <p className="mt-3 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground/70">
+                    <SectionLabel className="mt-3 text-muted-foreground/70">
                       Impacto: {item.impact}
-                    </p>
+                    </SectionLabel>
                   </div>
                 ))}
               </div>
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground/70">
-                Playbooks accionables
-              </p>
+              <SectionLabel>Playbooks accionables</SectionLabel>
               <div className="mt-4 space-y-4">
                 {content.playbooks.map((playbook) => (
                   <article
                     key={playbook.title}
                     className="rounded-xl border border-border/60 bg-background/60 p-4"
                   >
-                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.4em] text-muted-foreground/70">
+                    <SectionLabel className="text-[0.65rem] tracking-[0.4em] text-muted-foreground/70">
                       {playbook.audience}
-                    </p>
+                    </SectionLabel>
                     <h3 className="mt-2 text-lg font-semibold text-foreground">
                       {playbook.title}
                     </h3>
@@ -304,9 +294,7 @@ const TopicPage = async ({ params }: TopicPageProps) => {
         {spotlightArticle && (
           <section className="grid gap-6 rounded-2xl border border-border/70 bg-card/80 p-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
             <div className="space-y-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground/70">
-                En foco
-              </p>
+              <SectionLabel>En foco</SectionLabel>
               <h3 className="text-3xl font-semibold leading-tight text-foreground">
                 {spotlightArticle.headline}
               </h3>
@@ -318,23 +306,15 @@ const TopicPage = async ({ params }: TopicPageProps) => {
               {spotlightArticle.tags && spotlightArticle.tags.length > 0 ? (
                 <div className="flex flex-wrap gap-2">
                   {spotlightArticle.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-border/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground/80"
-                    >
-                      {tag}
-                    </span>
+                    <MetaPill key={tag}>{tag}</MetaPill>
                   ))}
                 </div>
               ) : (
                 <div className="flex flex-wrap gap-2 text-sm text-muted-foreground/80">
                   {spotlightArticle.publishers?.map((publisher) => (
-                    <span
-                      key={publisher}
-                      className="rounded-full border border-border/60 px-3 py-1 text-xs font-medium"
-                    >
+                    <MetaPill key={publisher} size="sm" className="text-xs tracking-[0.2em]">
                       {publisher}
-                    </span>
+                    </MetaPill>
                   ))}
                 </div>
               )}
@@ -356,9 +336,9 @@ const TopicPage = async ({ params }: TopicPageProps) => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 rounded-2xl border border-white/30 bg-white/80 p-4 text-sm text-foreground shadow-lg backdrop-blur dark:border-white/10 dark:bg-background/70">
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground/80">
+                <SectionLabel className="text-muted-foreground/80">
                   Dato rápido
-                </p>
+                </SectionLabel>
                 <p className="mt-2 text-base text-foreground">
                   {spotlightArticle.whyItMatters ??
                     spotlightArticle.caption ??
@@ -379,9 +359,7 @@ const TopicPage = async ({ params }: TopicPageProps) => {
 
         {content && (
           <section className="rounded-2xl border border-border/70 bg-card/80 p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground/70">
-              Preguntas clave
-            </p>
+            <SectionLabel>Preguntas clave</SectionLabel>
             <div className="mt-6 grid gap-6 md:grid-cols-2">
               {content.qas.map((qa) => (
                 <div
