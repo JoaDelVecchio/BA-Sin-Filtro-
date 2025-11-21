@@ -8,11 +8,13 @@ import { cn } from "@/lib/utils";
 const Header = () => (
   <>
     <header className="border-b border-border/50 bg-background/95">
-      <div className="section-shell flex flex-col gap-2 py-2">
-        <div className="hidden md:block">
+      <div className="flex flex-col gap-2">
+        <div className="hidden md:block md:pb-1">
           <HeaderBanner />
         </div>
-        <Navbar />
+        <div className="section-shell py-3">
+          <Navbar />
+        </div>
       </div>
     </header>
     <FloatingNavbar />

@@ -26,13 +26,13 @@ export type BiasBreakdown = {
 };
 
 export type Topic =
-  | "Economía & Precios"
-  | "Transporte & Movilidad"
-  | "Seguridad"
-  | "Gobierno de la Ciudad"
-  | "Provincia de Buenos Aires"
-  | "Servicios & Tarifas"
-  | "Obras & Urbanismo";
+  | "Política y Gobierno"
+  | "Economía"
+  | "Salud"
+  | "Negocios"
+  | "Tecnología"
+  | "Ciencia"
+  | "Educación";
 
 export type StoryCluster = {
   id: string; // unique ID for this cluster
@@ -55,7 +55,13 @@ export type StoryCluster = {
   tags?: string[]; // subtopics or key entities (e.g. "Inflación", "SUBTE")
 };
 
-export type PopularNewsTab = { id: string; title: string }[];
+export type PopularNewsTabItem = {
+  id: string;
+  title: string;
+  targetTopic: Topic;
+};
+
+export type PopularNewsTab = PopularNewsTabItem[];
 
 export type GridArticle = {
   id: string;

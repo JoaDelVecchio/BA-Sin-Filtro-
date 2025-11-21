@@ -1,5 +1,42 @@
 import { PopularNewsTab, StoryCluster } from "./types";
 
+const MOCK_IMAGE_LIBRARY = {
+  transport:
+    "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1600&q=80",
+  inflation:
+    "https://images.unsplash.com/photo-1512198867158-0c3032ee5245?auto=format&fit=crop&w=1600&q=80",
+  security:
+    "https://images.unsplash.com/photo-1497493292307-31c376b6e479?auto=format&fit=crop&w=1600&q=80",
+  city: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1600&q=80",
+  education:
+    "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80",
+  energy:
+    "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1600&q=80",
+  cleanup:
+    "https://images.unsplash.com/photo-1528323273322-d81458248d40?auto=format&fit=crop&w=1600&q=80",
+  technology:
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80",
+  health:
+    "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=1600&q=80",
+  culture:
+    "https://images.unsplash.com/photo-1472143478010-817e1205394c?auto=format&fit=crop&w=1600&q=80",
+  bikes:
+    "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1600&q=80",
+  cameras:
+    "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=1600&q=80",
+  water:
+    "https://images.unsplash.com/photo-1502303756762-a189e2ba47d6?auto=format&fit=crop&w=1600&q=80",
+  finance:
+    "https://images.unsplash.com/photo-1454165205744-3b78555e5572?auto=format&fit=crop&w=1600&q=80",
+  autopistas:
+    "https://images.unsplash.com/photo-1500534310685-96cb597b548f?auto=format&fit=crop&w=1600&q=80",
+  park: "https://images.unsplash.com/photo-1472145246862-b24cf25c12d1?auto=format&fit=crop&w=1600&q=80",
+} as const;
+
+type MockImageKey = keyof typeof MOCK_IMAGE_LIBRARY;
+
+const mockImage = (key: MockImageKey) => MOCK_IMAGE_LIBRARY[key];
+
 export const MOCK_CLUSTERS: StoryCluster[] = [
   // 1) Transporte & Movilidad – buen candidato para Top Story
   {
@@ -17,8 +54,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       "Desde Nación presionan para reducir los subsidios al transporte en el AMBA.",
     ],
     body: "El Gobierno de la Ciudad de Buenos Aires anunció un aumento del 15% en la tarifa del subte a partir del 10 de diciembre. Según las autoridades porteñas, la medida busca actualizar los ingresos del servicio frente a mayores costos operativos, especialmente en energía y salarios. El incremento se aplicará en todas las líneas y afectará a más de tres millones de pasajeros diarios que utilizan la red. Organizaciones de usuarios criticaron el impacto acumulado de los aumentos en el contexto inflacionario, mientras que desde Nación se mantiene la presión para reducir los subsidios destinados al transporte en el AMBA.",
-    image: "https://example.com/images/subte-aumento.jpg",
-    topic: "Transporte & Movilidad",
+    image: mockImage("transport"),
+    topic: "Política y Gobierno",
     bias: { left: 28, center: 50, right: 22 },
     sources: [
       {
@@ -28,7 +65,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
         description:
           "El Gobierno porteño justificó la suba por el aumento de costos.",
         url: "https://lanacion.com.ar/politica/subte-aumento-diciembre",
-        image: "https://example.com/images/ln-subte.jpg",
+        image: null,
         publishedAt: "2025-11-17T06:40:00Z",
         text: "El Gobierno de la Ciudad confirmó un aumento del 15% en la tarifa del subte desde el 10 de diciembre...",
       },
@@ -38,7 +75,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
         title: "Nuevo aumento del subte en la Ciudad: cómo quedan las tarifas",
         description: "",
         url: "https://clarin.com/ciudad/subte-nuevo-aumento-tarifas",
-        image: "https://example.com/images/ambito-inflacion.jpg",
+        image: null,
         publishedAt: "2025-11-17T07:05:00Z",
         text: "La tarifa del subte pasará de $130 a $150 a partir del próximo mes, según informaron fuentes oficiales...",
       },
@@ -49,7 +86,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
         description:
           "El Gobierno porteño justificó la suba por el aumento de costos.",
         url: "https://pagina12.com.ar/economia/tarifazo-subte-porteno",
-        image: "https://example.com/images/ambito-inflacion.jpg",
+        image: null,
         publishedAt: "2025-11-17T07:20:00Z",
         text: "El nuevo aumento del subte se enmarca en una serie de incrementos que golpean el bolsillo de los usuarios...",
       },
@@ -73,8 +110,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       "En el AMBA, los alquileres y el transporte siguen siendo los rubros más sensibles.",
     ],
     body: "El INDEC dio a conocer que la inflación de octubre fue del 8,1%, lo que implica una leve desaceleración respecto al mes anterior, aunque se mantiene en niveles muy elevados. De esta manera, el índice de precios al consumidor acumula un 176% en lo que va del año. Los alimentos y bebidas volvieron a ubicarse por encima del promedio, afectando especialmente a los hogares de menores ingresos en el Área Metropolitana de Buenos Aires. Los ajustes en tarifas de servicios regulados, como luz y gas, también presionaron el indicador. Especialistas advierten que, sin un cambio consistente en la política económica, la baja en la inflación será gradual y no se reflejará rápidamente en la calle. En el AMBA, los alquileres, el transporte y los servicios básicos siguen liderando las preocupaciones cotidianas de los vecinos.",
-    image: "https://example.com/images/supermercado-inflacion.jpg",
-    topic: "Economía & Precios",
+    image: mockImage("security"),
+    topic: "Economía",
     bias: { left: 35, center: 45, right: 20 },
     sources: [
       {
@@ -83,7 +120,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
         title: "La inflación de octubre fue 8,1% y suma 176% en el año",
         description: "El INDEC confirmó una leve desaceleración del índice.",
         url: "https://ambito.com/economia/inflacion-octubre",
-        image: "https://example.com/images/ambito-inflacion.jpg",
+        image: null,
         publishedAt: "2025-11-16T21:00:00Z",
         text: "El INDEC informó que la inflación de octubre se ubicó en el 8,1%, acumulando 176% en los primeros diez meses del año...",
       },
@@ -117,8 +154,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       "El Gobierno porteño promete operativos focalizados y coordinación con fiscalías.",
     ],
     body: "Vecinos y comerciantes de Palermo reportaron un aumento de robos y arrebatos durante la noche en las últimas semanas, sobre todo en las zonas de mayor concentración de bares y restaurantes. De acuerdo con datos oficiales y relevamientos vecinales, los hechos se incrementan los fines de semana y suelen involucrar a motochorros o grupos que aprovechan la salida de locales gastronómicos. Los reclamos apuntan a la necesidad de una mayor presencia policial a pie y patrulleros tanto en calles internas como en avenidas principales. Desde el Gobierno de la Ciudad señalan que se reforzarán los operativos en los corredores nocturnos del barrio y se trabajará en conjunto con las fiscalías para agilizar las denuncias.",
-    image: "https://example.com/images/palermo-noche.jpg",
-    topic: "Seguridad",
+    image: mockImage("security"),
+    topic: "Política y Gobierno",
     bias: { left: 25, center: 50, right: 25 },
     sources: [
       {
@@ -128,7 +165,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
           "Preocupación en Palermo por aumento de robos a la salida de bares",
         description: "Vecinos piden más presencia policial.",
         url: "https://tn.com.ar/sociedad/robos-palermo-noches",
-        image: "https://example.com/images/tn-palermo.jpg",
+        image: null,
         publishedAt: "2025-11-16T23:30:00Z",
         text: "En las últimas semanas se registró un aumento de robos en la zona de bares de Palermo, según denunciaron vecinos...",
       },
@@ -162,8 +199,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       "Organizaciones barriales cuestionan el proceso de consulta previa.",
     ],
     body: "El Gobierno de la Ciudad de Buenos Aires anunció la creación de un nuevo parque lineal en la zona sur, que se desarrollará sobre antiguos terrenos ferroviarios entre Barracas y Parque Patricios. El proyecto contempla la incorporación de bicisendas, senderos peatonales, áreas de juego y mobiliario urbano, con el objetivo de ampliar la superficie de espacios verdes accesibles para los vecinos. Desde el Ejecutivo porteño destacan que la iniciativa apunta a equilibrar la oferta de espacios públicos en relación con el norte de la Ciudad. Vecinos y organizaciones barriales reconocen el impacto positivo de sumar verde, pero señalan la necesidad de garantizar mantenimiento, iluminación y seguridad en la zona, así como una mayor participación en el diseño final.",
-    image: "https://example.com/images/parque-lineal-sur.jpg",
-    topic: "CABA",
+    image: mockImage("city"),
+    topic: "Política y Gobierno",
     bias: { left: 30, center: 55, right: 15 },
     sources: [
       {
@@ -172,7 +209,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
         title: "La Ciudad proyecta un nuevo parque lineal en la zona sur",
         description: "El Gobierno porteño busca sumar espacios verdes.",
         url: "https://lanacion.com.ar/ciudad/parque-lineal-zona-sur",
-        image: "https://example.com/images/ln-parque.jpg",
+        image: null,
         publishedAt: "2025-11-16T15:10:00Z",
         text: "La administración porteña anunció la construcción de un parque lineal en la zona sur, sobre terrenos ferroviarios en desuso...",
       },
@@ -208,8 +245,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       "Habrá una nueva reunión paritaria luego del paro.",
     ],
     body: "Los principales gremios docentes de la provincia de Buenos Aires convocaron a un paro de 48 horas para la próxima semana, luego de rechazar la última propuesta salarial del Gobierno encabezado por el gobernador bonaerense. Los sindicatos reclaman una recomposición que supere la inflación acumulada y advierten sobre el deterioro de los salarios frente al aumento del costo de vida. Desde la administración provincial sostienen que la oferta presentada es la máxima posible en el marco de la situación fiscal actual. La medida de fuerza afectará a miles de escuelas en el conurbano y en el interior de la provincia, generando preocupación entre las familias por la continuidad del ciclo lectivo. Tras el paro, las partes volverían a reunirse en una nueva mesa paritaria.",
-    image: "https://example.com/images/docentes-paro-pba.jpg",
-    topic: "Provincia de Buenos Aires",
+    image: mockImage("education"),
+    topic: "Educación",
     bias: { left: 40, center: 45, right: 15 },
     sources: [
       {
@@ -253,8 +290,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       "El Gobierno argumenta que el ajuste es necesario para sostener el sistema energético.",
     ],
     body: "El organismo regulador de la energía informó una actualización de hasta el 12% en las tarifas eléctricas para usuarios residenciales del Área Metropolitana de Buenos Aires a partir de enero. La suba se aplicará de manera escalonada durante el primer trimestre del año y variará según el nivel de consumo y la categoría de subsidios que reciba cada hogar. Los usuarios con consumos más altos y menores niveles de subsidio serán los más afectados por el incremento. Asociaciones de consumidores cuestionaron la magnitud de la suba y advirtieron sobre la falta de previsibilidad para planificar gastos en un contexto de alta inflación. Desde el Gobierno sostienen que la actualización es necesaria para garantizar la sostenibilidad del sistema energético y reducir el peso de los subsidios en las cuentas públicas.",
-    image: "https://example.com/images/medidor-luz.jpg",
-    topic: "Servicios & Tarifas",
+    image: mockImage("energy"),
+    topic: "Economía",
     bias: { left: 32, center: 48, right: 20 },
     sources: [
       {
@@ -283,8 +320,10 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
   {
     id: "cluster_gba_basura",
     createdAt: "2025-11-17T08:00:00Z",
-    headline: "Municipios del GBA refuerzan recolección de basura post temporal",
-    subtitle: "Los intendentes coordinan operativos especiales tras el temporal del fin de semana.",
+    headline:
+      "Municipios del GBA refuerzan recolección de basura post temporal",
+    subtitle:
+      "Los intendentes coordinan operativos especiales tras el temporal del fin de semana.",
     summary:
       "Tras las lluvias y ráfagas de viento en el AMBA, varios municipios desplegaron operativos especiales para retirar ramas y residuos, trabajando con cooperativas barriales para normalizar el servicio antes del próximo fin de semana.",
     bullets: [
@@ -294,14 +333,15 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       "Habrá puntos verdes móviles para residuos voluminosos.",
     ],
     body: "",
-    image: "https://example.com/images/gba-basura.jpg",
-    topic: "Gobierno de la Ciudad",
+    image: mockImage("cleanup"),
+    topic: "Política y Gobierno",
     bias: { left: 32, center: 48, right: 20 },
     sources: [
       {
         id: "infobae_gba_basura",
         source: "Infobae",
-        title: "Temporal en el AMBA: cómo trabajan los municipios para limpiar las calles",
+        title:
+          "Temporal en el AMBA: cómo trabajan los municipios para limpiar las calles",
         description: "",
         url: "https://infobae.com/sociedad/temporal-operativos-gba",
         image: null,
@@ -315,7 +355,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
     id: "cluster_learn_ai",
     createdAt: "2025-11-17T08:15:00Z",
     headline: "La Ciudad abre un centro para capacitar en IA aplicada a PYMES",
-    subtitle: "El nuevo centro busca acompañar a emprendedores y empresas tecnológicas.",
+    subtitle:
+      "El nuevo centro busca acompañar a emprendedores y empresas tecnológicas.",
     summary:
       "La Ciudad inauguró un espacio de formación en inteligencia artificial aplicada a negocios y servicios públicos, con talleres gratuitos para PYMES de comercio electrónico, logística y turismo.",
     bullets: [
@@ -325,14 +366,15 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       "Funcionará en el Distrito Tecnológico de Parque Patricios.",
     ],
     body: "",
-    image: "https://example.com/images/centro-ia.jpg",
-    topic: "Gobierno de la Ciudad",
+    image: mockImage("technology"),
+    topic: "Ciencia",
     bias: { left: 25, center: 55, right: 20 },
     sources: [
       {
         id: "lanacion_centro_ia",
         source: "La Nación",
-        title: "La Ciudad lanza un centro de inteligencia artificial para PYMES",
+        title:
+          "La Ciudad lanza un centro de inteligencia artificial para PYMES",
         description: "",
         url: "https://lanacion.com.ar/tecnologia/centro-ia-pymes-caba",
         image: null,
@@ -346,7 +388,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
     id: "cluster_salud_mental_guardias",
     createdAt: "2025-11-17T08:30:00Z",
     headline: "Refuerzan equipos de salud mental en guardias porteñas",
-    subtitle: "Buscan mejorar la atención durante crisis y situaciones de violencia urbana.",
+    subtitle:
+      "Buscan mejorar la atención durante crisis y situaciones de violencia urbana.",
     summary:
       "La Ciudad incorporará psicólogos y psiquiatras en las guardias de hospitales generales para brindar contención ante episodios de pánico, violencia y consumo problemático. El plan se implementará de manera gradual hasta marzo.",
     bullets: [
@@ -356,8 +399,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       "Organizaciones sociales celebran la medida y piden prevención.",
     ],
     body: "",
-    image: "https://example.com/images/salud-mental-guardia.jpg",
-    topic: "Servicios & Tarifas",
+    image: mockImage("health"),
+    topic: "Salud",
     bias: { left: 40, center: 45, right: 15 },
     sources: [
       {
@@ -387,8 +430,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       "Las actividades requerirán reserva previa online.",
     ],
     body: "",
-    image: "https://example.com/images/plaza-cultural.jpg",
-    topic: "Gobierno de la Ciudad",
+    image: mockImage("culture"),
+    topic: "Política y Gobierno",
     bias: { left: 30, center: 50, right: 20 },
     sources: [
       {
@@ -408,7 +451,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
     id: "cluster_transporte_bicisendas_sur",
     createdAt: "2025-11-17T09:00:00Z",
     headline: "Extienden bicisendas en el corredor norte-sur de la Ciudad",
-    subtitle: "La obra conectará Chacarita con Constitución y sumará 10 km de red.",
+    subtitle:
+      "La obra conectará Chacarita con Constitución y sumará 10 km de red.",
     summary:
       "Comenzó la construcción de una bicisenda que unirá Chacarita con Constitución, mejorando el corredor norte-sur y conectando con 20 estaciones Ecobici. Estará lista en marzo.",
     bullets: [
@@ -418,8 +462,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       "Los vecinos podrán seguir el avance en una web pública.",
     ],
     body: "",
-    image: "https://example.com/images/bicisenda.jpg",
-    topic: "Transporte & Movilidad",
+    image: mockImage("bikes"),
+    topic: "Política y Gobierno",
     bias: { left: 25, center: 55, right: 20 },
     sources: [
       {
@@ -439,7 +483,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
     id: "cluster_seguridad_camaras",
     createdAt: "2025-11-17T09:15:00Z",
     headline: "La Ciudad suma 2.000 cámaras con IA para monitorear accesos",
-    subtitle: "El plan incluye analítica para detectar autos con pedido de captura.",
+    subtitle:
+      "El plan incluye analítica para detectar autos con pedido de captura.",
     summary:
       "Se incorporarán 2.000 cámaras con reconocimiento de matrículas en accesos a la Ciudad y corredores críticos del GBA. Las imágenes se integrarán al Centro de Monitoreo Urbano.",
     bullets: [
@@ -449,8 +494,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       "Opositores piden auditoría independiente.",
     ],
     body: "",
-    image: "https://example.com/images/camaras-seguridad.jpg",
-    topic: "Seguridad",
+    image: mockImage("cameras"),
+    topic: "Política y Gobierno",
     bias: { left: 28, center: 50, right: 22 },
     sources: [
       {
@@ -469,8 +514,10 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
   {
     id: "cluster_servicios_agua_norte",
     createdAt: "2025-11-17T09:30:00Z",
-    headline: "AySA reemplaza cañerías en Núñez y Belgrano para mejorar presión",
-    subtitle: "Las obras demandarán cortes programados pero prometen mejoras para 80 mil vecinos.",
+    headline:
+      "AySA reemplaza cañerías en Núñez y Belgrano para mejorar presión",
+    subtitle:
+      "Las obras demandarán cortes programados pero prometen mejoras para 80 mil vecinos.",
     summary:
       "AySA inició un plan de renovación de cañerías en Núñez y Belgrano para mejorar la presión del agua en verano. Los trabajos se coordinarán con cortes nocturnos y provisión de camiones cisterna.",
     bullets: [
@@ -480,8 +527,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       "Comerciantes piden cronograma detallado.",
     ],
     body: "",
-    image: "https://example.com/images/aysa-obra.jpg",
-    topic: "Servicios & Tarifas",
+    image: mockImage("water"),
+    topic: "Economía",
     bias: { left: 35, center: 45, right: 20 },
     sources: [
       {
@@ -501,7 +548,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
     id: "cluster_economia_creditos_verdes",
     createdAt: "2025-11-17T09:45:00Z",
     headline: "Lanzan créditos verdes para pymes del AMBA",
-    subtitle: "Los préstamos financiarán eficiencia energética y paneles solares.",
+    subtitle:
+      "Los préstamos financiarán eficiencia energética y paneles solares.",
     summary:
       "El Banco Ciudad presentó una línea de créditos verdes para pymes del AMBA que busquen instalar paneles solares o renovar equipos eficientes. Tendrán tasa subsidiada y asesoría técnica.",
     bullets: [
@@ -511,8 +559,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       "Industriales piden ampliar cupo para logística.",
     ],
     body: "",
-    image: "https://example.com/images/creditos-verdes.jpg",
-    topic: "Economía & Precios",
+    image: mockImage("finance"),
+    topic: "Negocios",
     bias: { left: 30, center: 50, right: 20 },
     sources: [
       {
@@ -531,7 +579,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
   {
     id: "cluster_transito_autopistas_digital",
     createdAt: "2025-11-17T10:00:00Z",
-    headline: "Las autopistas porteñas suman tickets digitales para infracciones",
+    headline:
+      "Las autopistas porteñas suman tickets digitales para infracciones",
     subtitle: "Permitirá consultar online las multas y pagarlas con descuento.",
     summary:
       "AUSA lanzó un sistema de tickets digitales para infracciones en autopistas Illia, 25 de Mayo y Perito Moreno. Los usuarios recibirán notificaciones por mail y tendrán 10 días para pagar con descuento.",
@@ -542,8 +591,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       "Usuarios piden simplificar el proceso de descargo.",
     ],
     body: "",
-    image: "https://example.com/images/autopista-control.jpg",
-    topic: "Transporte & Movilidad",
+    image: mockImage("autopistas"),
+    topic: "Tecnología",
     bias: { left: 22, center: 58, right: 20 },
     sources: [
       {
@@ -562,8 +611,10 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
   {
     id: "cluster_obras_parque_costanera",
     createdAt: "2025-11-17T10:15:00Z",
-    headline: "Avanzan obras del Parque de la Costanera Sur con nuevos miradores",
-    subtitle: "El proyecto recupera sectores junto al río con senderos y puntos gastronómicos.",
+    headline:
+      "Avanzan obras del Parque de la Costanera Sur con nuevos miradores",
+    subtitle:
+      "El proyecto recupera sectores junto al río con senderos y puntos gastronómicos.",
     summary:
       "El Gobierno porteño informó que las obras del Parque de la Costanera Sur alcanzaron el 60% de avance, con la construcción de miradores, senderos y áreas de descanso. El parque abrirá por etapas desde abril.",
     bullets: [
@@ -573,8 +624,8 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       "Organizaciones ambientales piden un plan de mantenimiento.",
     ],
     body: "",
-    image: "https://example.com/images/parque-costanera.jpg",
-    topic: "Obras & Urbanismo",
+    image: mockImage("park"),
+    topic: "Política y Gobierno",
     bias: { left: 30, center: 55, right: 15 },
     sources: [
       {
@@ -593,10 +644,44 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
 ];
 
 export const MOCK_POPULAR_NEWS: PopularNewsTab = [
-  { id: "cluster_subte_dic_2025", title: "El SUBTE aumentará 15% desde diciembre" },
-  { id: "cluster_inflacion_oct_2025", title: "La inflación de octubre fue 8,1%" },
-  { id: "cluster_gba_basura", title: "Municipios del GBA refuerzan limpieza tras temporal" },
-  { id: "cluster_salud_mental_guardias", title: "Guardias porteñas suman equipos de salud mental" },
-  { id: "cluster_cultura_plazas_verano", title: "Plazas porteñas tendrán agenda cultural" },
-  { id: "cluster_transporte_bicisendas_sur", title: "Extienden bicisendas norte-sur" },
+  {
+    id: "keyword_precios_inflacion",
+    title: "Precios e Inflación",
+    targetTopic: "Economía",
+  },
+  {
+    id: "keyword_dolar_hoy",
+    title: "Dólar Hoy",
+    targetTopic: "Economía",
+  },
+  {
+    id: "keyword_tarifas_servicios",
+    title: "Tarifas y Servicios",
+    targetTopic: "Economía",
+  },
+  {
+    id: "keyword_inseguridad",
+    title: "Inseguridad",
+    targetTopic: "Política y Gobierno",
+  },
+  {
+    id: "keyword_caba",
+    title: "CABA",
+    targetTopic: "Política y Gobierno",
+  },
+  {
+    id: "keyword_buenos_aires_pba",
+    title: "Buenos Aires (PBA)",
+    targetTopic: "Política y Gobierno",
+  },
+  {
+    id: "keyword_javier_milei",
+    title: "Javier Milei",
+    targetTopic: "Política y Gobierno",
+  },
+  {
+    id: "keyword_transporte_publico",
+    title: "Transporte Público",
+    targetTopic: "Política y Gobierno",
+  },
 ];

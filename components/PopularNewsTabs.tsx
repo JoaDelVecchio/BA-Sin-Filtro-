@@ -68,17 +68,17 @@ const PopularNewsTabs = ({ popularNews }: PopularNewsTabsProps) => {
           type="scroll"
         >
           <nav
-            aria-label="Tópicos populares"
+            aria-label="Tópicos de alta frecuencia"
             className="flex items-center gap-6 text-sm text-muted-foreground"
           >
             <span className="text-xs font-semibold uppercase tracking-[0.35em] text-muted-foreground/80">
-              Popular
+              Más Buscados
             </span>
             <ul className="flex items-center gap-4">
-              {popularNews.map(({ id, title }, index) => (
+              {popularNews.map(({ id, title, targetTopic }, index) => (
                 <li key={id} className="flex items-center gap-4">
                   <Link
-                    href={`/${id}`}
+                    href={`/tema/${encodeURIComponent(targetTopic)}`}
                     className="text-sm font-semibold text-foreground/85 transition-colors hover:text-foreground"
                   >
                     {title}

@@ -19,7 +19,7 @@ import {
 import { ThemeToggle } from "./Theme-toogle";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { MAIN_TOPICS } from "@/lib/constants";
+import { MAIN_TOPICS, type MainTopic } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -135,12 +135,12 @@ const Navbar = () => {
             <DropdownMenuContent align="start" className="min-w-[220px]">
               {MAIN_TOPICS.map((topic) => (
                 <DropdownMenuItem
-                  key={topic}
-                  onSelect={() => handleTopicSelect(topic)}
+                  key={topic.code}
+                  onSelect={() => handleTopicSelect(topic.label)}
                   className="flex items-center justify-between gap-2"
                 >
-                  {topic}
-                  {activeTopic === topic && (
+                  {topic.label}
+                  {activeTopic === topic.label && (
                     <span className="text-xs font-semibold text-primary">•</span>
                   )}
                 </DropdownMenuItem>
@@ -241,7 +241,7 @@ const Logo = () => (
 type MobileMenuProps = {
   open: boolean;
   onClose: () => void;
-  topics: string[];
+  topics: MainTopic[];
   activeTopic: string | null;
   onTopicSelect: (topic: string) => void;
 };
@@ -329,19 +329,19 @@ const MobileMenu = ({
             </p>
             <ul className="flex flex-col gap-2">
               {topics.map((topic) => (
-                <li key={topic}>
+                <li key={topic.code}>
                   <button
                     type="button"
-                    onClick={() => onTopicSelect(topic)}
+                    onClick={() => onTopicSelect(topic.label)}
                     className={cn(
                       "flex w-full items-center justify-between rounded-xl border px-4 py-2 text-left text-sm font-medium transition",
-                      activeTopic === topic
+                      activeTopic === topic.label
                         ? "border-primary/40 bg-primary/5 text-primary"
                         : "border-border/60 text-foreground hover:border-primary/50"
                     )}
                   >
-                    {topic}
-                    {activeTopic === topic && (
+                    {topic.label}
+                    {activeTopic === topic.label && (
                       <span className="text-base text-primary">•</span>
                     )}
                   </button>

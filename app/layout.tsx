@@ -17,6 +17,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "BA SIN FILTRO",
   description: "Noticias de buenos aires y CABA sin filtro ni sesgos.",
+  icons: {
+    icon: [
+      { url: "/BALogo.png", rel: "icon", type: "image/png" },
+      { url: "/BALogo.png", rel: "shortcut icon", type: "image/png" },
+    ],
+    apple: [{ url: "/BALogo.png", sizes: "180x180" }],
+  },
 };
 
 export default function RootLayout({
