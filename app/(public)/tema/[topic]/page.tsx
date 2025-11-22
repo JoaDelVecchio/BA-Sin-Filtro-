@@ -2,9 +2,9 @@ import Top5Grid from "@/components/top5/Top5Grid";
 import ArticlesTimeline from "@/components/articles-timeline";
 import RelatedReadingList from "@/components/article/RelatedReading";
 import SectionLabel from "@/components/ui/section-label";
-import { MOCK_CLUSTERS } from "@/lib/mocks";
 import { mapClusterToGridArticle } from "@/lib/utils";
 import { MAIN_TOPICS } from "@/lib/constants";
+import { getStoryClusters } from "@/lib/story-clusters";
 
 const REGION_TOPICS = [
   { slug: "keyword_caba", label: "CABA", region: "CABA" as const },
@@ -45,7 +45,8 @@ const TopicPage = async ({ params }: TopicPageProps) => {
   const { topic } = await params;
   const { topicLabel, region } = normalizeTopic(topic);
 
-  const articles = MOCK_CLUSTERS.map(mapClusterToGridArticle);
+  const clusters = await getStoryClusters();
+  const articles = clusters.map(mapClusterToGridArticle);
   const filtered = region
     ? articles.filter(
         (article) => article.region?.toLowerCase() === region.toLowerCase()

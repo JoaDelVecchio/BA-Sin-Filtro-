@@ -1,0 +1,136 @@
+import crypto from "node:crypto";
+
+import OpenAI from "openai";
+
+import {
+  Article,
+  ArticleAxiomBlock,
+  FeedArticle,
+  StoryCluster,
+} from "@/lib/types";
+
+import { buildStoryClusterPrompt } from "./build-prompt";
+import { STORY_CLUSTER_RESPONSE_SCHEMA } from "./schema";
+
+type AiCluster = {
+  id: string;
+  topic: StoryCluster["topic"];
+  region?: "CABA" | "PBA";
+  headline: string;
+  subtitle: string;
+  lede: string;
+  tags?: string[];
+  sourceArticleIds: string[];
+  axiomBlocks: Array<{
+    type: ArticleAxiomBlock["type"];
+    title: string;
+    body: string;
+    bullets?: string[];
+  }>;
+};
+
+type AiResponse = {
+  clusters: AiCluster[];
+};
+
+const DEFAULT_BIAS = { left: 33, center: 34, right: 33 } as const;
+
+export async function generateStoryClustersFromArticles(
+  articles: FeedArticle[],
+): Promise<StoryCluster[]> {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    throw new Error("OPENAI_API_KEY is not set");
+  }
+
+  const { messages, promptArticles } = buildStoryClusterPrompt(articles);
+  const articleMap = new Map(
+    promptArticles.map(({ payload, original }) => [payload.id, original]),
+  );
+
+  const client = new OpenAI({ apiKey });
+  const response = await client.responses.parse({
+    model: process.env.OPENAI_MODEL ?? "o4-mini",
+    input: messages,
+    temperature: 0.4,
+    max_output_tokens: 2048,
+    response_format: {
+      type: "json_schema",
+      json_schema: STORY_CLUSTER_RESPONSE_SCHEMA,
+    },
+  });
+
+  const parsedEntry = response.output
+    ?.flatMap((item) => item.content ?? [])
+    .find((content) => "parsed" in content) as { parsed: AiResponse } | undefined;
+
+  const aiClusters = parsedEntry?.parsed?.clusters ?? [];
+  const now = new Date().toISOString();
+
+  return aiClusters
+    .map((cluster) => transformCluster(cluster, articleMap, now))
+    .filter((cluster): cluster is StoryCluster => Boolean(cluster));
+}
+
+function transformCluster(
+  cluster: AiCluster,
+  articleMap: Map<string, FeedArticle>,
+  createdAt: string,
+): StoryCluster | null {
+  const sourceArticles = cluster.sourceArticleIds
+    .map((id) => articleMap.get(id))
+    .filter((article): article is FeedArticle => Boolean(article));
+
+  if (!sourceArticles.length) {
+    return null;
+  }
+
+  const articleRecords = sourceArticles.map((article, index) =>
+    toArticleRecord(article, index),
+  );
+
+  const image = sourceArticles.find((article) => article.image)?.image ?? null;
+  const inferredRegion = cluster.region ?? sourceArticles[0]?.region;
+
+  return {
+    id: cluster.id,
+    createdAt,
+    headline: cluster.headline,
+    subtitle: cluster.subtitle,
+    lede: cluster.lede,
+    axiomBlocks: cluster.axiomBlocks.map(mapAxiom),
+    image,
+    topic: cluster.topic,
+    region: inferredRegion,
+    bias: DEFAULT_BIAS,
+    sources: articleRecords,
+    tags: cluster.tags,
+  };
+}
+
+function mapAxiom(block: AiCluster["axiomBlocks"][number]): ArticleAxiomBlock {
+  return {
+    type: block.type,
+    title: block.title,
+    text: block.body,
+    bullets: block.bullets?.length ? block.bullets : undefined,
+  };
+}
+
+function toArticleRecord(article: FeedArticle, index: number): Article {
+  return {
+    id: articleHash(article, index),
+    source: article.source,
+    title: article.title ?? "Sin título",
+    description: article.description,
+    url: article.url ?? "",
+    image: article.image,
+    publishedAt: article.publishedAt ?? new Date().toISOString(),
+    text: article.contentText ?? article.contentHTML ?? "",
+  };
+}
+
+function articleHash(article: FeedArticle, index: number) {
+  const basis = article.url ?? `${article.source}-${article.title ?? index}`;
+  return crypto.createHash("sha1").update(`${index}-${basis}`).digest("hex");
+}

@@ -1,9 +1,9 @@
 import Top5Grid from "@/components/top5/Top5Grid";
 import ArticlesTimeline from "@/components/articles-timeline";
-import { MOCK_CLUSTERS } from "@/lib/mocks";
 import { mapClusterToGridArticle } from "@/lib/utils";
 import { GridArticle, TopicQuickFact } from "@/lib/types";
 import { getPopularTopicContent } from "@/lib/popular-topic-content";
+import { getStoryClusters } from "@/lib/story-clusters";
 import RelatedReadingList from "@/components/article/RelatedReading";
 import TopicHero from "@/components/topic/TopicHero";
 import TopicAudienceNeeds from "@/components/topic/TopicAudienceNeeds";
@@ -33,7 +33,8 @@ const PopularTopicPage = async ({ params }: PopularTopicPageProps) => {
     );
   }
 
-  const articles = MOCK_CLUSTERS.map(mapClusterToGridArticle);
+  const clusters = await getStoryClusters();
+  const articles = clusters.map(mapClusterToGridArticle);
   const filtered = articles.filter(
     (article) =>
       article.topic.toLowerCase() === content.targetTopic.toLowerCase()

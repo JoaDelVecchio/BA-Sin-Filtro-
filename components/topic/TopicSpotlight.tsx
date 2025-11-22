@@ -25,7 +25,7 @@ const TopicSpotlight = ({ article, fallbackImage }: TopicSpotlightProps) => {
           {article.headline}
         </h3>
         <p className="text-base text-muted-foreground">
-          {article.summary ??
+          {article.lede ??
             article.whyItMatters ??
             "Seleccionamos esta cobertura para entender el pulso detrás del tema."}
         </p>

@@ -1,8 +1,7 @@
 import { PopularTopicPageContent } from "@/lib/types";
 
-export const POPULAR_TOPIC_PAGES: Record<
-  string,
-  PopularTopicPageContent
+export const POPULAR_TOPIC_PAGES: Readonly<
+  Record<string, PopularTopicPageContent>
 > = {
   keyword_precios_inflacion: {
     id: "keyword_precios_inflacion",

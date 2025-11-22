@@ -28,17 +28,17 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
   const timeAgo = formatTimeAgo(article.createdAt);
 
   return (
-    <article className="relative flex flex-col gap-5 py-8 first:pt-0 last:pb-0 before:pointer-events-none before:absolute before:left-0 before:right-0 before:top-0 before:h-px before:bg-border/70 before:content-[''] after:pointer-events-none after:absolute after:left-0 after:right-0 after:top-2 after:h-px after:bg-border/40 after:content-[''] first:before:hidden first:after:hidden md:gap-6 md:py-12">
+    <article className="relative mx-auto flex w-full max-w-3xl flex-col gap-6 py-8 first:pt-0 last:pb-0 before:pointer-events-none before:absolute before:left-0 before:right-0 before:top-0 before:h-px before:bg-border/70 before:content-[''] after:pointer-events-none after:absolute after:left-0 after:right-0 after:top-2 after:h-px after:bg-border/40 after:content-[''] first:before:hidden first:after:hidden md:py-12">
       <div className="flex flex-col gap-1 text-[0.65rem] uppercase tracking-[0.35em] text-muted-foreground/80 md:text-xs">
         <span>{timeAgo}</span>
       </div>
       <Link href={`/${article.id}`} className="block">
-        <h3 className="text-[1.75rem] font-semibold leading-tight text-foreground transition-colors hover:text-foreground/90 sm:text-[2rem] md:text-[2.5rem]">
+        <h3 className="text-[2rem] font-semibold leading-tight text-foreground transition-colors hover:text-foreground/90 sm:text-[2.35rem] md:text-[2.7rem]">
           {article.headline}
         </h3>
       </Link>
       <div className="space-y-2">
-        <div className="overflow-hidden rounded-2xl">
+        <div className="overflow-hidden rounded-[28px] border border-border/60 bg-muted/30 shadow-sm">
           <Image
             src={image}
             alt={article.headline}
@@ -54,20 +54,18 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
         )}
       </div>
 
-      {article.summary && (
-        <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-          {article.summary}
+      {article.lede && (
+        <p className="text-base leading-relaxed text-muted-foreground/90 sm:text-lg">
+          {article.lede}
         </p>
       )}
       {article.whyItMatters && (
-        <div className="rounded-lg bg-muted/20 p-3 sm:rounded-xl sm:p-4">
-          <p className="text-sm font-semibold text-foreground">
-            ¿Por qué importa?
-          </p>
-          <p className="text-sm text-muted-foreground">
-            {article.whyItMatters}
-          </p>
-        </div>
+        <p className="text-base leading-relaxed text-foreground/90 sm:text-lg">
+          <span className="text-[0.75rem] font-semibold uppercase tracking-[0.35em] text-muted-foreground/80">
+            Por qué importa
+          </span>
+          : {article.whyItMatters}
+        </p>
       )}
 
       <div className="flex flex-col gap-4">

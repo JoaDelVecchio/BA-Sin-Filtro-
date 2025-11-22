@@ -1,13 +1,14 @@
 import ArticlePage from "@/components/article/ArticlePage";
-import { MOCK_CLUSTERS } from "@/lib/mocks";
 import { mapClusterToGridArticle } from "@/lib/utils";
+import { getStoryClusters } from "@/lib/story-clusters";
 
 type ArticlePageProps = {
   params: { id: string };
 };
 
 const ArticleRoute = async ({ params }: ArticlePageProps) => {
-  const articles = MOCK_CLUSTERS.map((cluster, index) =>
+  const clusters = await getStoryClusters();
+  const articles = clusters.map((cluster, index) =>
     mapClusterToGridArticle(cluster, index)
   );
 

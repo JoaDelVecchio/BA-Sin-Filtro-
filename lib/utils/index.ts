@@ -1,2 +1,5 @@
 export { cn } from "./cn";
-export { mapClusterToGridArticle } from "./articles";
+export {
+  calculateArticleWordCount,
+  mapClusterToGridArticle,
+} from "./articles";

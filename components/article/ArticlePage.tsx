@@ -6,14 +6,42 @@ import Biasbar from "@/components/Biasbar";
 import PublisherBadges from "@/components/PublisherBadges";
 import ShareBar from "@/components/article/ShareBar";
 import RelatedReadingList from "@/components/article/RelatedReading";
-import SectionLabel from "@/components/ui/section-label";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ArticleDetails, GridArticle } from "@/lib/types";
+import { calculateArticleWordCount } from "@/lib/utils";
+import {
+  ArticleAxiomBlock,
+  ArticleAxiomType,
+  ArticleDetails,
+  GridArticle,
+} from "@/lib/types";
+
+const AXIOM_LABELS: Record<ArticleAxiomType, string> = {
+  "whats-new": "Qué hay de nuevo",
+  "why-it-matters": "Por qué importa",
+  "big-picture": "El panorama",
+  "by-the-numbers": "Por los números",
+  "how-it-works": "Cómo funciona",
+  "between-the-lines": "Entre líneas",
+  "yes-but": "Sí, pero",
+  "what-to-watch": "Qué mirar",
+  "whats-next": "Qué sigue",
+  "bottom-line": "En síntesis",
+  "go-deeper": "Para profundizar",
+  "driving-the-news": "Qué pasó",
+  "state-of-play": "Estado de situación",
+  "zoom-in": "Zoom in",
+  "zoom-out": "Zoom out",
+  "what-theyre-saying": "Qué dicen",
+  "threat-level": "Nivel de riesgo",
+  "reality-check": "Reality check",
+  "the-other-side": "La otra campana",
+  "the-intrigue": "La intriga",
+};
 
 type ArticlePageProps = {
   article: ArticleDetails;
@@ -21,33 +49,25 @@ type ArticlePageProps = {
 };
 
 const ArticlePage = ({ article, related }: ArticlePageProps) => {
-  const readingTime = Math.max(
-    4,
-    Math.round((article.body?.split(" ").length ?? 400) / 200)
-  );
+  const wordCount = calculateArticleWordCount(article);
+  const readingTime = Math.max(4, Math.round(wordCount / 200) || 4);
   const formattedDate = new Date(article.createdAt).toLocaleString("es-AR", {
     dateStyle: "long",
     timeStyle: "short",
   });
 
-  const paragraphs =
-    article.body
-      ?.split("\n")
-      .map((paragraph) => paragraph.trim())
-      .filter(Boolean) ?? [];
-
   return (
     <article className="section-shell mt-6 pb-16">
-      <div className="mx-auto flex w-full max-w-4xl flex-col space-y-8">
-        <div className="flex flex-col gap-6">
-          <div className="text-xs uppercase tracking-[0.35em] text-muted-foreground/70">
+      <div className="mx-auto flex w-full max-w-3xl flex-col space-y-10">
+        <div className="flex flex-col gap-5">
+          <div className="text-[0.6rem] uppercase tracking-[0.4em] text-muted-foreground/80">
             <span>{formattedDate}</span>
           </div>
-          <h1 className="text-[2.85rem] font-semibold leading-tight text-foreground text-balance">
+          <h1 className="text-[2.4rem] font-semibold leading-tight text-foreground text-balance sm:text-[2.8rem] md:text-[3rem]">
             {article.headline}
           </h1>
           {article.subtitle && (
-            <p className="text-lg text-muted-foreground text-balance">
+            <p className="text-xl leading-relaxed text-muted-foreground/90 text-balance">
               {article.subtitle}
             </p>
           )}
@@ -77,47 +97,18 @@ const ArticlePage = ({ article, related }: ArticlePageProps) => {
           )}
         </div>
 
-        {article.summary && (
-          <ArticleSection title="Lo esencial" text={article.summary} />
+        {article.lede && (
+          <p className="text-lg leading-relaxed text-foreground/95 text-balance sm:text-xl sm:leading-[1.85]">
+            {article.lede}
+          </p>
         )}
 
-        {article.whyItMatters && (
-          <ArticleSection title="Por qué importa" text={article.whyItMatters} />
-        )}
-
-        {article.bullets && article.bullets.length > 0 && (
-          <ArticleSection title="Puntos clave">
-            <ul className="space-y-3 text-base text-muted-foreground">
-              {article.bullets.map((bullet) => (
-                <li key={bullet} className="flex gap-3 text-balance">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary" />
-                  <p>{bullet}</p>
-                </li>
-              ))}
-            </ul>
-          </ArticleSection>
-        )}
-
-        {paragraphs.length > 0 && (
-          <ArticleSection title="En detalle">
-            <div className="space-y-6 text-lg leading-relaxed text-foreground">
-              {paragraphs.map((paragraph, index) => {
-                const segments = paragraph.split(/(?<=\.)\s+/);
-                const lead = segments[0];
-                const rest = segments.slice(1).join(" ");
-                return (
-                  <p key={`${paragraph}-${index}`} className="text-balance">
-                    <span className="font-semibold text-foreground">
-                      {lead}
-                    </span>
-                    {rest && (
-                      <span className="text-muted-foreground"> {rest}</span>
-                    )}
-                  </p>
-                );
-              })}
-            </div>
-          </ArticleSection>
+        {article.axiomBlocks.length > 0 && (
+          <div className="flex flex-col gap-6">
+            {article.axiomBlocks.map((block, index) => (
+              <AxiomEntry key={`${block.type}-${index}`} block={block} />
+            ))}
+          </div>
         )}
 
         <Biasbar bias={article.bias} />
@@ -131,9 +122,9 @@ const ArticlePage = ({ article, related }: ArticlePageProps) => {
               <DropdownMenuContent align="center" className="min-w-[250px]">
                 {article.sources.map((source) => (
                   <DropdownMenuItem key={source.id} asChild>
-                  <Link href={source.url} className="w-full text-sm">
-                    {source.source}
-                  </Link>
+                    <Link href={source.url} className="w-full text-sm">
+                      {source.source}
+                    </Link>
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
@@ -147,32 +138,30 @@ const ArticlePage = ({ article, related }: ArticlePageProps) => {
   );
 };
 
-type ArticleSectionProps = {
-  title: string;
-  text?: string;
-  children?: React.ReactNode;
-  flush?: boolean;
-};
+const getAxiomLabel = (block: ArticleAxiomBlock) =>
+  block.title ?? AXIOM_LABELS[block.type] ?? block.type;
 
-const ArticleSection = ({
-  title,
-  text,
-  children,
-  flush,
-}: ArticleSectionProps) => (
-  <section
-    className={
-      flush
-        ? "space-y-3"
-        : "space-y-3 rounded-2xl border border-border/60 bg-card/80 p-6"
-    }
-  >
-    <SectionLabel className="text-muted-foreground/80">{title}</SectionLabel>
-    {text && (
-      <p className="text-base leading-relaxed text-foreground">{text}</p>
-    )}
-    {children}
-  </section>
-);
+const AxiomEntry = ({ block }: { block: ArticleAxiomBlock }) => {
+  const label = getAxiomLabel(block);
+
+  return (
+    <section className="space-y-3">
+      <p className="text-base leading-relaxed text-foreground sm:text-lg">
+        <span className="font-semibold text-foreground">{label}</span>
+        <span className="text-muted-foreground">: {block.text}</span>
+      </p>
+      {block.bullets && block.bullets.length > 0 && (
+        <ul className="space-y-2 text-base leading-relaxed text-muted-foreground">
+          {block.bullets.map((bullet) => (
+            <li key={bullet} className="flex gap-3 text-balance">
+              <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary/80" />
+              <p>{bullet}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+};
 
 export default ArticlePage;

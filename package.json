@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/nextjs": "^6.35.1",
     "@clerk/themes": "^2.4.36",
+    "@mozilla/readability": "^0.6.0",
     "@radix-ui/react-dropdown-menu": "^2.1.16",
     "@radix-ui/react-scroll-area": "^1.2.10",
     "@radix-ui/react-separator": "^1.1.8",
@@ -18,11 +19,15 @@
     "button": "^1.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "jsdom": "^22.1.0",
     "lucide-react": "^0.554.0",
     "next": "16.0.3",
     "next-themes": "^0.4.6",
+    "openai": "^6.9.1",
+    "p-limit": "^7.2.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "rss-parser": "^3.13.0",
     "shadcn": "^3.5.0",
     "tailwind-merge": "^3.4.0"
   },

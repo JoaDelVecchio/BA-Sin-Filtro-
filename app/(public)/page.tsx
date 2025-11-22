@@ -1,12 +1,14 @@
 import PopularNewsTabs from "@/components/PopularNewsTabs";
 import Top5Grid from "@/components/top5/Top5Grid";
 import ArticlesTimeline from "@/components/articles-timeline";
-import { MOCK_CLUSTERS, MOCK_POPULAR_NEWS } from "@/lib/mocks";
+import { MOCK_POPULAR_NEWS } from "@/lib/mocks";
+import { getStoryClusters } from "@/lib/story-clusters";
 import { mapClusterToGridArticle } from "@/lib/utils";
 import { GridArticle } from "@/lib/types";
 
 export default async function Home() {
-  const mappedArticles = MOCK_CLUSTERS.map(mapClusterToGridArticle);
+  const clusters = await getStoryClusters();
+  const mappedArticles = clusters.map(mapClusterToGridArticle);
   const top5 = mappedArticles.slice(0, 5);
   const timelineArticles = mappedArticles.slice(5);
 
