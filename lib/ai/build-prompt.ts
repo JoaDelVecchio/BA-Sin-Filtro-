@@ -47,7 +47,7 @@ const AXIOM_RULES = `Axiom rules:
 - Use "what-to-watch" or "whats-next" for future milestones.
 - Only use "the-other-side", "reality-check", "bottom-line" or "go-deeper" when meaningful new info exists.
 - Never repeat an axiom type within the same cluster.
-- Each axiom body is 2-4 sentences; optional 0-7 bullets.`;
+- Each axiom body is 3-5 sentences; optional 0-9 bullets.`;
 
 export function buildStoryClusterPrompt(
   articles: FeedArticle[]
@@ -92,14 +92,15 @@ IMPORTANT: Para cada cluster, **analiza cuidadosamente el contenido** y asigna e
 El topic debe reflejar el TEMA PRINCIPAL del cluster, no solo la ubicación geográfica.
 Si una nota trata sobre economía EN CABA, el topic es "Economía" y region es "CABA".
 Si una nota trata sobre decisiones del gobierno DE CABA, el topic es "CABA".
+No confíes en el campo "topic" provisto por cada nota: puede ser incorrecto. Asigna el topic evaluando el contenido real.
 
 Genera 20 clusters (no menos, máximo permitido por el esquema) cubriendo diversos topics y ángulos. Ajusta el detalle para no pasarte de largo: sé conciso y usa solo lo esencial de cada nota.
 Cada cluster debe centrarse en un ángulo claro y citar 1-3 ids de notas relevantes en "sourceArticleIds".
 
 Requisitos:
-- Headline breve y subtitulo de contexto.
-- Lede en 2-4 oraciones con contexto y datos clave.
-- 3 a 9 axioms siguiendo las reglas, cada uno con cuerpo detallado (2-4 oraciones) y bullets cuando aporten detalle (lista vacía si no hay).
+- Headline breve y subtitulo de contexto (2-3 oraciones).
+- Lede en 3-5 oraciones con contexto, datos y consecuencias.
+- 3 a 10 axioms siguiendo las reglas, cada uno con cuerpo detallado (3-5 oraciones) y bullets cuando aporten detalle (lista vacía si no hay).
 - Incluye siempre region (usa null si no aplica) y tags (lista vacía si no hay entidades).
 - region solo CABA o PBA cuando el foco geográfico sea claro.
 - Todo debe estar en español.

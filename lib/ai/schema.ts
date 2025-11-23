@@ -47,8 +47,8 @@ export const STORY_CLUSTER_RESPONSE_SCHEMA = {
             topic: { type: "string", enum: TOPIC_ENUM },
             region: { type: "string", enum: ["CABA", "PBA"], nullable: true },
             headline: { type: "string", minLength: 8, maxLength: 140 },
-            subtitle: { type: "string", minLength: 8, maxLength: 260 },
-            lede: { type: "string", minLength: 20, maxLength: 800 },
+            subtitle: { type: "string", minLength: 8, maxLength: 360 },
+            lede: { type: "string", minLength: 20, maxLength: 1200 },
             tags: {
               type: "array",
               nullable: true,
@@ -63,18 +63,18 @@ export const STORY_CLUSTER_RESPONSE_SCHEMA = {
             },
             axiomBlocks: {
               type: "array",
-              minItems: 3,
-              maxItems: 9,
+              minItems: 5,
+              maxItems: 10,
               items: {
                 type: "object",
                 properties: {
                   type: { type: "string", enum: ARTICLE_AXIOM_TYPES },
                   title: { type: "string", minLength: 3, maxLength: 80 },
-                  body: { type: "string", minLength: 16, maxLength: 600 },
+                  body: { type: "string", minLength: 16, maxLength: 900 },
                   bullets: {
                     type: "array",
-                    maxItems: 7,
-                    items: { type: "string", minLength: 3, maxLength: 240 },
+                    maxItems: 9,
+                    items: { type: "string", minLength: 3, maxLength: 320 },
                   },
                 },
                 required: ["type", "title", "body", "bullets"],

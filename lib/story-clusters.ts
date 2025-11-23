@@ -38,8 +38,8 @@ type ClusterFetchResult = { clusters: StoryCluster[]; usedFallback: boolean };
 async function fetchLiveClusters(): Promise<ClusterFetchResult> {
   try {
     const articles = await fetchLatestArticles({
-      perFeedLimit: 60,
-      maxArticles: 60,
+      perFeedLimit: 80,
+      maxArticles: 120,
       sinceMinutes: 72 * 60,
     });
 
@@ -49,7 +49,7 @@ async function fetchLiveClusters(): Promise<ClusterFetchResult> {
 
     const dedupedArticles = clusterArticles(articles)
       .flatMap((cluster) => cluster.articles.slice(0, 2))
-      .slice(0, 60);
+      .slice(0, 120);
 
     if (!dedupedArticles.length) {
       return { clusters: FALLBACK, usedFallback: true };
