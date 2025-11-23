@@ -27,6 +27,8 @@ export const TOPIC_ENUM: Topic[] = [
   "Tecnología",
   "Ciencia",
   "Educación",
+  "CABA",
+  "Buenos Aires (PBA)",
 ];
 
 export const STORY_CLUSTER_RESPONSE_SCHEMA = {
@@ -36,8 +38,8 @@ export const STORY_CLUSTER_RESPONSE_SCHEMA = {
     properties: {
       clusters: {
         type: "array",
-        minItems: 3,
-        maxItems: 5,
+        minItems: 8,
+        maxItems: 20,
         items: {
           type: "object",
           properties: {
@@ -45,10 +47,11 @@ export const STORY_CLUSTER_RESPONSE_SCHEMA = {
             topic: { type: "string", enum: TOPIC_ENUM },
             region: { type: "string", enum: ["CABA", "PBA"], nullable: true },
             headline: { type: "string", minLength: 8, maxLength: 140 },
-            subtitle: { type: "string", minLength: 8, maxLength: 180 },
-            lede: { type: "string", minLength: 20, maxLength: 420 },
+            subtitle: { type: "string", minLength: 8, maxLength: 260 },
+            lede: { type: "string", minLength: 20, maxLength: 800 },
             tags: {
               type: "array",
+              nullable: true,
               maxItems: 4,
               items: { type: "string", minLength: 2, maxLength: 40 },
             },
@@ -61,20 +64,20 @@ export const STORY_CLUSTER_RESPONSE_SCHEMA = {
             axiomBlocks: {
               type: "array",
               minItems: 3,
-              maxItems: 7,
+              maxItems: 9,
               items: {
                 type: "object",
                 properties: {
                   type: { type: "string", enum: ARTICLE_AXIOM_TYPES },
                   title: { type: "string", minLength: 3, maxLength: 80 },
-                  body: { type: "string", minLength: 16, maxLength: 360 },
+                  body: { type: "string", minLength: 16, maxLength: 600 },
                   bullets: {
                     type: "array",
-                    maxItems: 5,
-                    items: { type: "string", minLength: 3, maxLength: 160 },
+                    maxItems: 7,
+                    items: { type: "string", minLength: 3, maxLength: 240 },
                   },
                 },
-                required: ["type", "title", "body"],
+                required: ["type", "title", "body", "bullets"],
                 additionalProperties: false,
               },
             },
@@ -82,9 +85,11 @@ export const STORY_CLUSTER_RESPONSE_SCHEMA = {
           required: [
             "id",
             "topic",
+            "region",
             "headline",
             "subtitle",
             "lede",
+            "tags",
             "axiomBlocks",
             "sourceArticleIds",
           ],

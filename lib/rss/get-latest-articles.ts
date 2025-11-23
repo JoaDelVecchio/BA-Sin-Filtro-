@@ -1,6 +1,6 @@
 import pLimit from "p-limit";
 
-import { FeedArticle } from "@/lib/types";
+import { FeedArticle, Topic } from "@/lib/types";
 
 import { fetchArticleContent } from "./fetch-article-content";
 import { fetchFeedArticles } from "./fetch-feed";
@@ -54,7 +54,11 @@ export async function fetchLatestArticles(
     }
   }
 
-  return enrichWithFullContent(deduped);
+  const enriched = await enrichWithFullContent(deduped);
+  return enriched.map((article) => ({
+    ...article,
+    topic: inferTopic(article) ?? article.topic,
+  }));
 }
 
 function getTimestamp(date?: string) {
@@ -118,4 +122,64 @@ function textFromHtml(html?: string) {
     .replace(/&nbsp;/gi, " ");
   const normalized = plain.replace(/\s+/g, " ").trim();
   return normalized.length ? normalized : undefined;
+}
+
+const TOPIC_KEYWORDS: Array<{ topic: Topic; patterns: RegExp[] }> = [
+  {
+    topic: "Economía",
+    patterns: [
+      /\b(inflaci[oó]n|precios?|d[óo]lar|tarifas?|salario|subsidios?)\b/i,
+      /\b(mercado|impuestos?|aduana|comercio exterior)\b/i,
+    ],
+  },
+  {
+    topic: "Salud",
+    patterns: [/\b(salud|hospital|cl[ií]nica|covid|vacuna|epidemia)\b/i],
+  },
+  {
+    topic: "Negocios",
+    patterns: [/\b(empresa|pymes?|negocio|inversi[oó]n|startup)\b/i],
+  },
+  {
+    topic: "Tecnología",
+    patterns: [/\b(tecnolog[ií]a|innovaci[oó]n|software|app|ia|ia generativa)\b/i],
+  },
+  {
+    topic: "Ciencia",
+    patterns: [/\b(ciencia|investigaci[oó]n|universidad|conicet|laboratorio)\b/i],
+  },
+  {
+    topic: "Educación",
+    patterns: [/\b(escuela|universidad|educaci[oó]n|docentes?|clases|alumnos?)\b/i],
+  },
+  {
+    topic: "CABA",
+    patterns: [/\b(caba|ciudad de buenos aires|porteñ[oa]s?)\b/i],
+  },
+  {
+    topic: "Buenos Aires (PBA)",
+    patterns: [/\b(provincia de buenos aires|conurbano|pba|bonaerense)\b/i],
+  },
+];
+
+function inferTopic(article: FeedArticle): Topic | null {
+  const haystack = [
+    article.title,
+    article.description,
+    article.contentText,
+    article.contentHTML,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  if (!haystack) return null;
+
+  for (const entry of TOPIC_KEYWORDS) {
+    if (entry.patterns.some((pattern) => pattern.test(haystack))) {
+      return entry.topic;
+    }
+  }
+
+  return null;
 }

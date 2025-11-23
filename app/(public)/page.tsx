@@ -6,6 +6,8 @@ import { getStoryClusters } from "@/lib/story-clusters";
 import { mapClusterToGridArticle } from "@/lib/utils";
 import { GridArticle } from "@/lib/types";
 
+export const revalidate = 86400;
+
 export default async function Home() {
   const clusters = await getStoryClusters();
   const mappedArticles = clusters.map(mapClusterToGridArticle);

@@ -50,21 +50,31 @@ export async function generateStoryClustersFromArticles(
 
   const client = new OpenAI({ apiKey });
   const response = await client.responses.parse({
-    model: process.env.OPENAI_MODEL ?? "o4-mini",
+    model: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
     input: messages,
     temperature: 0.4,
-    max_output_tokens: 2048,
-    response_format: {
-      type: "json_schema",
-      json_schema: STORY_CLUSTER_RESPONSE_SCHEMA,
+    max_output_tokens: 24000,
+    text: {
+      format: {
+        type: "json_schema",
+        name: STORY_CLUSTER_RESPONSE_SCHEMA.name,
+        schema: STORY_CLUSTER_RESPONSE_SCHEMA.schema,
+        strict: true,
+      },
     },
   });
 
-  const parsedEntry = response.output
-    ?.flatMap((item) => item.content ?? [])
-    .find((content) => "parsed" in content) as { parsed: AiResponse } | undefined;
+  const parsedEntry =
+    (response as unknown as { output_parsed?: AiResponse | null })
+      ?.output_parsed ??
+    (response.output
+      ?.flatMap((item) => item.content ?? [])
+      .find((content) => "parsed" in content) as
+      | { parsed: AiResponse }
+      | undefined)?.parsed ??
+    null;
 
-  const aiClusters = parsedEntry?.parsed?.clusters ?? [];
+  const aiClusters = parsedEntry?.clusters ?? [];
   const now = new Date().toISOString();
 
   return aiClusters
@@ -86,7 +96,7 @@ function transformCluster(
   }
 
   const articleRecords = sourceArticles.map((article, index) =>
-    toArticleRecord(article, index),
+    toArticleRecord(article, index, createdAt),
   );
 
   const image = sourceArticles.find((article) => article.image)?.image ?? null;
@@ -117,7 +127,11 @@ function mapAxiom(block: AiCluster["axiomBlocks"][number]): ArticleAxiomBlock {
   };
 }
 
-function toArticleRecord(article: FeedArticle, index: number): Article {
+function toArticleRecord(
+  article: FeedArticle,
+  index: number,
+  fallbackPublishedAt: string,
+): Article {
   return {
     id: articleHash(article, index),
     source: article.source,
@@ -125,7 +139,7 @@ function toArticleRecord(article: FeedArticle, index: number): Article {
     description: article.description,
     url: article.url ?? "",
     image: article.image,
-    publishedAt: article.publishedAt ?? new Date().toISOString(),
+    publishedAt: article.publishedAt ?? fallbackPublishedAt,
     text: article.contentText ?? article.contentHTML ?? "",
   };
 }

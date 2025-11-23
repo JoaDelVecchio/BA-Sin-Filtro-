@@ -2,10 +2,10 @@ import crypto from "node:crypto";
 
 import { FeedArticle } from "@/lib/types";
 
-const MAX_ARTICLES = 24;
-const MAX_CONTENT_CHARS = 1800;
+const MAX_ARTICLES = 60;
+const MAX_CONTENT_CHARS = 20000;
 
-type MessageContent = { type: "text"; text: string };
+type MessageContent = { type: "input_text"; text: string };
 export type PromptMessage = {
   role: "system" | "user";
   content: MessageContent[];
@@ -47,10 +47,10 @@ const AXIOM_RULES = `Axiom rules:
 - Use "what-to-watch" or "whats-next" for future milestones.
 - Only use "the-other-side", "reality-check", "bottom-line" or "go-deeper" when meaningful new info exists.
 - Never repeat an axiom type within the same cluster.
-- Each axiom body is 1-3 sentences; optional 0-5 bullets.`;
+- Each axiom body is 2-4 sentences; optional 0-7 bullets.`;
 
 export function buildStoryClusterPrompt(
-  articles: FeedArticle[],
+  articles: FeedArticle[]
 ): StoryClusterPrompt {
   const trimmed = articles.slice(0, MAX_ARTICLES);
   const promptArticles = trimmed.map((article, index) => {
@@ -72,18 +72,36 @@ export function buildStoryClusterPrompt(
   const datasetJson = JSON.stringify(
     promptArticles.map(({ payload }) => payload),
     null,
-    2,
+    2
   );
 
   const userPrompt = `Hoy es ${new Date().toISOString()}.
-Analiza las notas JSON (con id, titulo, resumen, contenido y metadata) para crear entre 3 y 5 story clusters para lectores del AMBA.
-Cada cluster debe centrarse en un angulo claro y citar 1-3 ids de notas relevantes en "sourceArticleIds".
+Analiza las notas JSON (con id, titulo, resumen, contenido y metadata) para crear story clusters para lectores del AMBA.
+
+IMPORTANT: Para cada cluster, **analiza cuidadosamente el contenido** y asigna el topic más apropiado de esta lista:
+- "Política y Gobierno" - gestión pública, instituciones, decisiones políticas
+- "Economía" - inflación, tarifas, subsidios, datos macro
+- "Salud" - sistema sanitario, hospitales, políticas de salud
+- "Negocios" - empresas, PYMES, comercio
+- "Tecnología" - innovación, digitalización, startups
+- "Ciencia" - investigación, proyectos científicos
+- "Educación" - escuelas, universidades, sistema educativo
+- "CABA" - obras, servicios, gobierno porteño
+- "Buenos Aires (PBA)" - medidas provinciales, intendencias, conurbano
+
+El topic debe reflejar el TEMA PRINCIPAL del cluster, no solo la ubicación geográfica.
+Si una nota trata sobre economía EN CABA, el topic es "Economía" y region es "CABA".
+Si una nota trata sobre decisiones del gobierno DE CABA, el topic es "CABA".
+
+Genera 20 clusters (no menos, máximo permitido por el esquema) cubriendo diversos topics y ángulos. Ajusta el detalle para no pasarte de largo: sé conciso y usa solo lo esencial de cada nota.
+Cada cluster debe centrarse en un ángulo claro y citar 1-3 ids de notas relevantes en "sourceArticleIds".
+
 Requisitos:
-- Headline breve (<=10 palabras) y subtitulo de contexto.
-- Lede en 1-2 oraciones sintetizando el hecho.
-- 3 a 7 axioms siguiendo las reglas.
-- Tags opcionales con entidades (sin #) de hasta 4 items.
-- topic debe ser uno de los valores permitidos y la region solo CABA o PBA cuando el foco sea claro.
+- Headline breve y subtitulo de contexto.
+- Lede en 2-4 oraciones con contexto y datos clave.
+- 3 a 9 axioms siguiendo las reglas, cada uno con cuerpo detallado (2-4 oraciones) y bullets cuando aporten detalle (lista vacía si no hay).
+- Incluye siempre region (usa null si no aplica) y tags (lista vacía si no hay entidades).
+- region solo CABA o PBA cuando el foco geográfico sea claro.
 - Todo debe estar en español.
 
 ${AXIOM_RULES}
@@ -92,8 +110,11 @@ Dataset:
 ${datasetJson}`;
 
   const messages: PromptMessage[] = [
-    { role: "system", content: [{ type: "text", text: SYSTEM_PROMPT }] },
-    { role: "user", content: [{ type: "text", text: userPrompt }] },
+    {
+      role: "system",
+      content: [{ type: "input_text", text: SYSTEM_PROMPT }],
+    },
+    { role: "user", content: [{ type: "input_text", text: userPrompt }] },
   ];
 
   return { messages, promptArticles };

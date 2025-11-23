@@ -12,6 +12,8 @@ import TopicWatchPlay from "@/components/topic/TopicWatchPlay";
 import TopicSpotlight from "@/components/topic/TopicSpotlight";
 import TopicQuestions from "@/components/topic/TopicQuestions";
 
+export const revalidate = 86400;
+
 const FALLBACK_VISUAL_IMAGE = "/top5-placeholder.jpg";
 
 type PopularTopicPageProps = {

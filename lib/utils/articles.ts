@@ -49,7 +49,9 @@ export const mapClusterToGridArticle = (
   topic: cluster.topic,
   region: cluster.region,
   publishers: cluster.sources?.map((source) => source.source).slice(0, 3),
-  createdAt: cluster.createdAt,
+  createdAt:
+    cluster.sources?.[0]?.publishedAt ??
+    cluster.createdAt,
   lede: cluster.lede,
   caption: cluster.subtitle,
   whyItMatters: cluster.axiomBlocks?.find(

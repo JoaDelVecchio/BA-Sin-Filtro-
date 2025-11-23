@@ -6,6 +6,8 @@ import { mapClusterToGridArticle } from "@/lib/utils";
 import { MAIN_TOPICS } from "@/lib/constants";
 import { getStoryClusters } from "@/lib/story-clusters";
 
+export const revalidate = 86400;
+
 const REGION_TOPICS = [
   { slug: "keyword_caba", label: "CABA", region: "CABA" as const },
   {

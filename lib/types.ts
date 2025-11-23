@@ -76,7 +76,9 @@ export type Topic =
   | "Negocios"
   | "Tecnología"
   | "Ciencia"
-  | "Educación";
+  | "Educación"
+  | "CABA"
+  | "Buenos Aires (PBA)";
 
 export type StoryCluster = {
   id: string; // unique ID for this cluster
