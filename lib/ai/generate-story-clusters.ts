@@ -54,11 +54,11 @@ export async function generateStoryClustersFromArticles(
   const parsedEntry =
     (response as unknown as { output_parsed?: AiResponse | null })
       ?.output_parsed ??
-    (response.output
-      ?.flatMap((item) => item.content ?? [])
-      .find((content) => "parsed" in content) as
-      | { parsed: AiResponse }
-      | undefined)?.parsed ??
+    ((response as any)?.output
+      ?.flatMap((item: any) => item?.content ?? [])
+      ?.find((content: any) => "parsed" in content)?.parsed as
+      | AiResponse
+      | undefined) ??
     null;
 
   const aiClusters = parsedEntry?.clusters ?? [];
