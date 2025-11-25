@@ -12,6 +12,9 @@ const FALLBACK = MOCK_CLUSTERS;
 const MIN_CLUSTER_TARGET = 30;
 const BATCH_SIZE = 15;
 const MEMORY_TTL_MS = 24 * 60 * 60 * 1000;
+const SKIP_LIVE_FETCH =
+  process.env.SKIP_LIVE_FETCH === "1" ||
+  process.env.NEXT_PHASE === "phase-production-build";
 
 type MemoryCache = {
   clusters: StoryCluster[];
@@ -100,6 +103,10 @@ const cachedLiveClusters = unstable_cache(
 );
 
 export async function getStoryClusters(): Promise<StoryCluster[]> {
+  if (SKIP_LIVE_FETCH) {
+    return FALLBACK;
+  }
+
   const now = Date.now();
   const memoryCache = globalAny.__storyClustersCache;
   if (memoryCache && memoryCache.expiresAt > now) {
