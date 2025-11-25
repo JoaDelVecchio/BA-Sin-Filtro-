@@ -32,7 +32,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen ">
       <div className="hidden md:block">
-        <PopularNewsTabs popularNews={MOCK_POPULAR_NEWS} />
+        <PopularNewsTabs popularNews={[...MOCK_POPULAR_NEWS]} />
       </div>
       <Top5Grid top5={top5} label="Top 5 del día" />
       <ArticlesTimeline
