@@ -6,7 +6,7 @@ import {
   SignUpButton,
   UserButton,
 } from "@clerk/nextjs";
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { Menu, Search, X } from "lucide-react";
 import {
   DropdownMenu,
@@ -60,6 +60,23 @@ const Navbar = () => {
   const handleSearchBlur = () => {
     if (!query) {
       setIsSearchOpen(false);
+    }
+  };
+
+  const handleSearchSubmit = (event?: FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    const trimmed = query.trim();
+    if (!trimmed) return;
+
+    router.push(`/buscar?q=${encodeURIComponent(trimmed)}`);
+    setQuery("");
+    setIsSearchOpen(false);
+    setIsMobileMenuOpen(false);
+
+    if (isDesktop) {
+      desktopSearchInputRef.current?.blur();
+    } else {
+      mobileSearchInputRef.current?.blur();
     }
   };
 
@@ -119,7 +136,7 @@ const Navbar = () => {
 
       {isSearchOpen && (
         <div className="mt-3 md:hidden">
-          <div className="relative">
+          <form className="relative" onSubmit={handleSearchSubmit}>
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               ref={mobileSearchInputRef}
@@ -130,7 +147,7 @@ const Navbar = () => {
               onBlur={handleSearchBlur}
               className="w-full pl-10 pr-4"
             />
-          </div>
+          </form>
         </div>
       )}
 
@@ -180,16 +197,21 @@ const Navbar = () => {
               )}
             >
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                ref={desktopSearchInputRef}
-                id="desktop-global-search"
-                type="search"
-                placeholder="Buscar noticias, tópicos o autores"
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
+              <form
+                className="w-full"
+                onSubmit={handleSearchSubmit}
+              >
+                <Input
+                  ref={desktopSearchInputRef}
+                  id="desktop-global-search"
+                  type="search"
+                  placeholder="Buscar noticias, tópicos o autores"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
                 onBlur={handleSearchBlur}
                 className="w-full pl-10 pr-4"
               />
+              </form>
             </div>
           </div>
         </div>

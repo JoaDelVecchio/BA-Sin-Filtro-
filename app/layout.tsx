@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "BA SIN FILTRO",
-  description: "Noticias de buenos aires y CABA sin filtro ni sesgos.",
+  description: "Noticias sin filtro ni sesgos.",
   icons: {
     icon: [
       { url: "/BALogo.png", rel: "icon", type: "image/png" },

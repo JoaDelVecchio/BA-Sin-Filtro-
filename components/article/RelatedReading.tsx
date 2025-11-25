@@ -8,6 +8,7 @@ type RelatedReadingListProps = {
   label?: string;
   title?: string;
   className?: string;
+  showHeader?: boolean;
 };
 
 const FALLBACK_IMAGE = "/top5-placeholder.jpg";
@@ -17,6 +18,7 @@ const RelatedReadingList = ({
   label = "Explorar",
   title = "Qué leer después",
   className,
+  showHeader = true,
 }: RelatedReadingListProps) => {
   if (!items.length) {
     return null;
@@ -24,12 +26,16 @@ const RelatedReadingList = ({
 
   return (
     <section className={cn("space-y-8 pt-12", className)}>
-      <div className="text-center">
-        <div className="text-xs uppercase tracking-[0.35em] text-muted-foreground/60">
-          {label}
+      {showHeader && (
+        <div className="text-center">
+          <div className="text-xs uppercase tracking-[0.35em] text-muted-foreground/60">
+            {label}
+          </div>
+          <h2 className="mt-1 text-2xl font-semibold text-foreground">
+            {title}
+          </h2>
         </div>
-        <h2 className="mt-1 text-2xl font-semibold text-foreground">{title}</h2>
-      </div>
+      )}
       <div className="space-y-10">
         {items.map((item) => {
           const readingTime = Math.max(

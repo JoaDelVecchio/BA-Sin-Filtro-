@@ -49,20 +49,7 @@ export async function generateStoryClustersFromArticles(
   );
 
   const client = new OpenAI({ apiKey });
-  const response = await client.responses.parse({
-    model: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
-    input: messages,
-    temperature: 0.4,
-    max_output_tokens: 24000,
-    text: {
-      format: {
-        type: "json_schema",
-        name: STORY_CLUSTER_RESPONSE_SCHEMA.name,
-        schema: STORY_CLUSTER_RESPONSE_SCHEMA.schema,
-        strict: true,
-      },
-    },
-  });
+  const response = await callOpenAIWithRetry(client, messages, 1);
 
   const parsedEntry =
     (response as unknown as { output_parsed?: AiResponse | null })
@@ -80,6 +67,55 @@ export async function generateStoryClustersFromArticles(
   return aiClusters
     .map((cluster) => transformCluster(cluster, articleMap, now))
     .filter((cluster): cluster is StoryCluster => Boolean(cluster));
+}
+
+type ParsedResponse = Awaited<
+  ReturnType<OpenAI["responses"]["parse"]>
+>;
+
+async function callOpenAIWithRetry(
+  client: OpenAI,
+  messages: Awaited<ReturnType<typeof buildStoryClusterPrompt>>["messages"],
+  retries = 1,
+): Promise<ParsedResponse> {
+  let attempt = 0;
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    try {
+      return await client.responses.parse({
+        model: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
+        input: messages,
+        temperature: 0.4,
+        max_output_tokens: 24000,
+        text: {
+          format: {
+            type: "json_schema",
+            name: STORY_CLUSTER_RESPONSE_SCHEMA.name,
+            schema: STORY_CLUSTER_RESPONSE_SCHEMA.schema,
+            strict: true,
+          },
+        },
+      });
+    } catch (error) {
+      const status = (error as { status?: number }).status;
+      const headers = (error as { headers?: Headers }).headers;
+      const resetHeader =
+        headers?.get?.("x-ratelimit-reset-tokens") ??
+        headers?.get?.("retry-after");
+      const resetMs = resetHeader
+        ? Number.parseFloat(resetHeader) * 1000
+        : undefined;
+
+      if (status === 429 && attempt < retries) {
+        const waitMs = Number.isFinite(resetMs) ? resetMs : 1500;
+        await new Promise((resolve) => setTimeout(resolve, waitMs));
+        attempt += 1;
+        continue;
+      }
+
+      throw error;
+    }
+  }
 }
 
 function transformCluster(

@@ -1,6 +1,7 @@
 import ArticlePage from "@/components/article/ArticlePage";
 import { mapClusterToGridArticle } from "@/lib/utils";
 import { getStoryClusters } from "@/lib/story-clusters";
+import { ArticleDetails } from "@/lib/types";
 
 type ArticlePageProps = {
   params: { id: string };
@@ -34,7 +35,14 @@ const ArticleRoute = async ({ params }: ArticlePageProps) => {
 
   related = related.slice(0, 6);
 
-  return <ArticlePage article={article} related={related} />;
+  const articleDetails: ArticleDetails = {
+    ...article,
+    lede: article.lede ?? "",
+    axiomBlocks: article.axiomBlocks ?? [],
+    tags: article.tags ?? [],
+  };
+
+  return <ArticlePage article={articleDetails} related={related} />;
 };
 
 export default ArticleRoute;

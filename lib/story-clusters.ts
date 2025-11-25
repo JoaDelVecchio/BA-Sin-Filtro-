@@ -9,28 +9,28 @@ import { fetchLatestArticles } from "@/lib/rss/get-latest-articles";
 import { StoryCluster } from "@/lib/types";
 
 const FALLBACK = MOCK_CLUSTERS;
-const MIN_CLUSTER_TARGET = 20;
-const BATCH_SIZE = 25;
+const MIN_CLUSTER_TARGET = 30;
+const BATCH_SIZE = 15;
+const MEMORY_TTL_MS = 24 * 60 * 60 * 1000;
+
+type MemoryCache = {
+  clusters: StoryCluster[];
+  expiresAt: number;
+};
+
+const globalAny = globalThis as unknown as {
+  __storyClustersCache?: MemoryCache;
+};
 
 function mergeWithFallback(clusters: StoryCluster[]): {
   clusters: StoryCluster[];
   usedFallback: boolean;
 } {
-  if (clusters.length >= MIN_CLUSTER_TARGET) {
-    return { clusters, usedFallback: false };
+  // Only fall back when there are zero clusters; otherwise keep whatever the AI returned.
+  if (clusters.length === 0) {
+    return { clusters: FALLBACK, usedFallback: true };
   }
-
-  const seen = new Set(clusters.map((item) => item.id));
-  const padded = [...clusters];
-
-  for (const candidate of FALLBACK) {
-    if (padded.length >= MIN_CLUSTER_TARGET) break;
-    if (seen.has(candidate.id)) continue;
-    padded.push(candidate);
-    seen.add(candidate.id);
-  }
-
-  return { clusters: padded, usedFallback: true };
+  return { clusters, usedFallback: false };
 }
 
 type ClusterFetchResult = { clusters: StoryCluster[]; usedFallback: boolean };
@@ -95,10 +95,21 @@ const cachedLiveClusters = unstable_cache(
     }
     return result.clusters;
   },
-  ["story-clusters-v2"],
+  ["story-clusters-v3"],
   { revalidate: 86400, tags: ["story-clusters"] },
 );
 
 export async function getStoryClusters(): Promise<StoryCluster[]> {
-  return cachedLiveClusters();
+  const now = Date.now();
+  const memoryCache = globalAny.__storyClustersCache;
+  if (memoryCache && memoryCache.expiresAt > now) {
+    return memoryCache.clusters;
+  }
+
+  const clusters = await cachedLiveClusters();
+  globalAny.__storyClustersCache = {
+    clusters,
+    expiresAt: now + MEMORY_TTL_MS,
+  };
+  return clusters;
 }

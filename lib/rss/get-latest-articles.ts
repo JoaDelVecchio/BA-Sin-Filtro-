@@ -15,10 +15,10 @@ export type FetchLatestArticlesOptions = {
 export async function fetchLatestArticles(
   options: FetchLatestArticlesOptions = {},
 ): Promise<FeedArticle[]> {
-  const perFeedLimit = options.perFeedLimit ?? 12;
-  const maxArticles = options.maxArticles ?? 60;
+  const perFeedLimit = options.perFeedLimit ?? Number.POSITIVE_INFINITY;
+  const maxArticles = options.maxArticles ?? Number.POSITIVE_INFINITY;
   const sinceMinutes =
-    typeof options.sinceMinutes === "number" ? options.sinceMinutes : 24 * 60;
+    typeof options.sinceMinutes === "number" ? options.sinceMinutes : 7 * 24 * 60;
   const minTimestamp =
     sinceMinutes > 0 ? Date.now() - sinceMinutes * 60 * 1000 : undefined;
 
