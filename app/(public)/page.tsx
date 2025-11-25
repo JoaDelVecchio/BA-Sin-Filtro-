@@ -6,7 +6,7 @@ import { getStoryClusters } from "@/lib/story-clusters";
 import { mapClusterToGridArticle } from "@/lib/utils";
 import { GridArticle } from "@/lib/types";
 
-export const revalidate = 86400;
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const clusters = await getStoryClusters();
