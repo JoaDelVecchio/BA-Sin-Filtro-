@@ -6,7 +6,7 @@ import { revalidateTag } from "next/cache";
 export async function GET() {
   try {
     // Force revalidation before fetching so we don't serve stale cache.
-    revalidateTag("story-clusters", { unstable_only: true });
+    revalidateTag("story-clusters", "max");
     const clusters = await getStoryClusters();
     return NextResponse.json({
       ok: true,
