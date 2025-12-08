@@ -4,7 +4,7 @@ const MOCK_IMAGE_LIBRARY = {
   transport:
     "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1600&q=80",
   inflation:
-    "https://images.unsplash.com/photo-1512198867158-0c3032ee5245?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1600&q=80",
   security:
     "https://images.unsplash.com/photo-1497493292307-31c376b6e479?auto=format&fit=crop&w=1600&q=80",
   city: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1600&q=80",
@@ -19,18 +19,19 @@ const MOCK_IMAGE_LIBRARY = {
   health:
     "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=1600&q=80",
   culture:
-    "https://images.unsplash.com/photo-1472143478010-817e1205394c?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=1600&q=80",
   bikes:
     "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1600&q=80",
   cameras:
     "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=1600&q=80",
   water:
-    "https://images.unsplash.com/photo-1502303756762-a189e2ba47d6?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1600&q=80",
   finance:
     "https://images.unsplash.com/photo-1454165205744-3b78555e5572?auto=format&fit=crop&w=1600&q=80",
   autopistas:
-    "https://images.unsplash.com/photo-1500534310685-96cb597b548f?auto=format&fit=crop&w=1600&q=80",
-  park: "https://images.unsplash.com/photo-1472145246862-b24cf25c12d1?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80",
+  park:
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
 } as const;
 
 type MockImageKey = keyof typeof MOCK_IMAGE_LIBRARY;

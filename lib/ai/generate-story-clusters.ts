@@ -37,6 +37,7 @@ const DEFAULT_BIAS = { left: 33, center: 34, right: 33 } as const;
 
 export async function generateStoryClustersFromArticles(
   articles: FeedArticle[],
+  options?: { signal?: AbortSignal },
 ): Promise<StoryCluster[]> {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
@@ -49,7 +50,7 @@ export async function generateStoryClustersFromArticles(
   );
 
   const client = new OpenAI({ apiKey });
-  const response = await callOpenAIWithRetry(client, messages, 1);
+  const response = await callOpenAIWithRetry(client, messages, 1, options?.signal);
 
   const parsedEntry =
     (response as unknown as { output_parsed?: AiResponse | null })
@@ -77,6 +78,7 @@ async function callOpenAIWithRetry(
   client: OpenAI,
   messages: Awaited<ReturnType<typeof buildStoryClusterPrompt>>["messages"],
   retries = 1,
+  signal?: AbortSignal,
 ): Promise<ParsedResponse> {
   let attempt = 0;
   // eslint-disable-next-line no-constant-condition
@@ -87,6 +89,7 @@ async function callOpenAIWithRetry(
         input: messages,
         temperature: 0.4,
         max_output_tokens: 24000,
+        signal,
         text: {
           format: {
             type: "json_schema",

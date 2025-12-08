@@ -3,6 +3,8 @@ import { mapClusterToGridArticle } from "@/lib/utils";
 import { getStoryClusters } from "@/lib/story-clusters";
 import { ArticleDetails } from "@/lib/types";
 
+export const dynamic = "force-dynamic";
+
 type ArticlePageProps = {
   params: { id: string };
 };
