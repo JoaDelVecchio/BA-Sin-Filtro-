@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 
-import { getStoryClusters } from "@/lib/story-clusters";
+import { getStoryClusters, STORY_CLUSTER_CACHE_TAG } from "@/lib/story-clusters";
 import { revalidateTag } from "next/cache";
 
 export async function GET() {
   try {
     // Force revalidation before fetching so we don't serve stale cache.
-    revalidateTag("story-clusters", "max");
+    revalidateTag(STORY_CLUSTER_CACHE_TAG, "max");
     const clusters = await getStoryClusters();
     return NextResponse.json({
       ok: true,
