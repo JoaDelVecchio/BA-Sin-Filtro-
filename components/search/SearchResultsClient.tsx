@@ -61,9 +61,38 @@ const SearchResultsClient = ({ articles }: SearchResultsClientProps) => {
 
   const results = useMemo(() => {
     if (!query) return [];
-    return articles
-      .filter((article) => matchesQuery(article, query))
-      .sort((a, b) => getTime(b) - getTime(a));
+
+    const scored = articles
+      .map((article) => {
+        let score = 0;
+        const normalizedQuery = normalize(query);
+
+        if (normalize(article.headline).includes(normalizedQuery)) score += 10;
+        if (normalize(article.topic).includes(normalizedQuery)) score += 5;
+        if (normalize(article.subtitle ?? "").includes(normalizedQuery)) score += 3;
+        if (normalize(article.lede ?? "").includes(normalizedQuery)) score += 2;
+        
+        // Check content/tags for minor matches
+        const contentMatch = [
+          ...(article.tags ?? []),
+          article.caption,
+          article.whyItMatters,
+        ]
+          .filter(Boolean)
+          .some((text) => normalize(text as string).includes(normalizedQuery));
+
+        if (contentMatch) score += 1;
+
+        return { article, score };
+      })
+      .filter((item) => item.score > 0);
+
+    return scored
+      .sort((a, b) => {
+        if (b.score !== a.score) return b.score - a.score;
+        return getTime(b.article) - getTime(a.article);
+      })
+      .map((item) => item.article);
   }, [articles, query]);
 
   const resultLabel = query

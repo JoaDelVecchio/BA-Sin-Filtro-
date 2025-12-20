@@ -69,16 +69,7 @@ export type ArticleAxiomBlock = {
   bullets?: string[];
 };
 
-export type Topic =
-  | "Política y Gobierno"
-  | "Economía"
-  | "Salud"
-  | "Negocios"
-  | "Tecnología"
-  | "Ciencia"
-  | "Educación"
-  | "CABA"
-  | "Buenos Aires (PBA)";
+export type Topic = "Política" | "Economía" | "Sociedad";
 
 export type StoryCluster = {
   id: string; // unique ID for this cluster

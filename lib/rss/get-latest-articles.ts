@@ -129,36 +129,28 @@ const TOPIC_KEYWORDS: Array<{ topic: Topic; patterns: RegExp[] }> = [
     topic: "Economía",
     patterns: [
       /\b(inflaci[oó]n|precios?|d[óo]lar|tarifas?|salario|subsidios?)\b/i,
-      /\b(mercado|impuestos?|aduana|comercio exterior)\b/i,
+      /\b(mercado|impuestos?|aduana|comercio exterior|negocio|empresa|inversi[oó]n)\b/i,
+      /\b(fmi|deuda|bonos|riesgo pa[ií]s|banco central|bcra|caputo)\b/i,
     ],
   },
   {
-    topic: "Salud",
-    patterns: [/\b(salud|hospital|cl[ií]nica|covid|vacuna|epidemia)\b/i],
+    topic: "Política",
+    patterns: [
+      /\b(gobierno|presidente|ministro|diputados?|senadores?|congreso|ley|decreto)\b/i,
+      /\b(elecciones|votos?|partido|pol[ií]tica|oposici[oó]n|oficialismo|milei|kicillof|macri)\b/i,
+      /\b(caba|ciudad de buenos aires|legislatura|jefe de gobierno)\b/i, // Map major CABA politics here
+      /\b(pba|provincia de buenos aires|gobernador|legislatura bonaerense)\b/i, // Map major PBA politics here
+    ],
   },
   {
-    topic: "Negocios",
-    patterns: [/\b(empresa|pymes?|negocio|inversi[oó]n|startup)\b/i],
-  },
-  {
-    topic: "Tecnología",
-    patterns: [/\b(tecnolog[ií]a|innovaci[oó]n|software|app|ia|ia generativa)\b/i],
-  },
-  {
-    topic: "Ciencia",
-    patterns: [/\b(ciencia|investigaci[oó]n|universidad|conicet|laboratorio)\b/i],
-  },
-  {
-    topic: "Educación",
-    patterns: [/\b(escuela|universidad|educaci[oó]n|docentes?|clases|alumnos?)\b/i],
-  },
-  {
-    topic: "CABA",
-    patterns: [/\b(caba|ciudad de buenos aires|porteñ[oa]s?)\b/i],
-  },
-  {
-    topic: "Buenos Aires (PBA)",
-    patterns: [/\b(provincia de buenos aires|conurbano|pba|bonaerense)\b/i],
+    topic: "Sociedad",
+    patterns: [
+      /\b(salud|hospital|cl[ií]nica|covid|vacuna|epidemia|dengue)\b/i,
+      /\b(educaci[oó]n|escuela|universidad|uba|docentes?|paritarias?|clases)\b/i,
+      /\b(seguridad|inseguridad|policial|crimen|justicia|corte suprema)\b/i,
+      /\b(transporte|subte|trenes|colectivos|paro|huelga|cgt)\b/i,
+      /\b(ciencia|tecnolog[ií]a|conicet|investigaci[oó]n)\b/i,
+    ],
   },
 ];
 

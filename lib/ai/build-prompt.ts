@@ -2,7 +2,7 @@ import crypto from "node:crypto";
 
 import { FeedArticle } from "@/lib/types";
 
-const MAX_ARTICLES = 60;
+const MAX_ARTICLES = 80;
 const MAX_CONTENT_CHARS = 20000;
 
 type MessageContent = { type: "input_text"; text: string };
@@ -79,22 +79,18 @@ export function buildStoryClusterPrompt(
 Analiza las notas JSON (con id, titulo, resumen, contenido y metadata) para crear story clusters para lectores del AMBA.
 
 IMPORTANT: Para cada cluster, **analiza cuidadosamente el contenido** y asigna el topic más apropiado de esta lista:
-- "Política y Gobierno" - gestión pública, instituciones, decisiones políticas
-- "Economía" - inflación, tarifas, subsidios, datos macro
-- "Salud" - sistema sanitario, hospitales, políticas de salud
-- "Negocios" - empresas, PYMES, comercio
-- "Tecnología" - innovación, digitalización, startups
-- "Ciencia" - investigación, proyectos científicos
-- "Educación" - escuelas, universidades, sistema educativo
-- "CABA" - obras, servicios, gobierno porteño
-- "Buenos Aires (PBA)" - medidas provinciales, intendencias, conurbano
+    - **STRICTLY FILTER** news. Only include articles related to **Argentine politics, government regulations, the economy, or major social issues affecting the country**.
+    - **IGNORE** sports, entertainment, horoscopes, or purely local news without national relevance.
+    - **Topic Definitions**:
+      - **Política**: Government actions, decrees, congress, elections, political parties, international relations.
+      - **Economía**: Inflation, dollar, markets, taxes, business regulations, IMF, macroeconomics.
+      - **Sociedad**: Social impact of policies, healthcare/education systems, crime trends, major national events.
+    - **Deduplication**: Group articles about the same event into a single cluster, even if they come from different sources (e.g., Clarín and La Nación covering the same speech).
+    - **Region**: Infer "CABA" or "PBA" only if the news is strictly local but has national relevance. Otherwise, leave undefined.
 
-El topic debe reflejar el TEMA PRINCIPAL del cluster, no solo la ubicación geográfica.
-Si una nota trata sobre economía EN CABA, el topic es "Economía" y region es "CABA".
-Si una nota trata sobre decisiones del gobierno DE CABA, el topic es "CABA".
 No confíes en el campo "topic" provisto por cada nota: puede ser incorrecto. Asigna el topic evaluando el contenido real.
 
-Genera 20 clusters (no menos, máximo permitido por el esquema) cubriendo diversos topics y ángulos. Ajusta el detalle para no pasarte de largo: sé conciso y usa solo lo esencial de cada nota.
+Genera entre 8 y 20 clusters (máximo permitido por el esquema) cubriendo diversos topics y ángulos. Ajusta el detalle para no pasarte de largo: sé conciso y usa solo lo esencial de cada nota.
 Cada cluster debe centrarse en un ángulo claro y citar 1-3 ids de notas relevantes en "sourceArticleIds".
 
 Requisitos:

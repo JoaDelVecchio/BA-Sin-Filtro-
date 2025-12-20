@@ -77,7 +77,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       },
     ],
     image: mockImage("transport"),
-    topic: "Política y Gobierno",
+    topic: "Política",
     region: "CABA",
     bias: { left: 28, center: 50, right: 22 },
     sources: [
@@ -221,7 +221,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       },
     ],
     image: mockImage("security"),
-    topic: "Política y Gobierno",
+    topic: "Política",
     bias: { left: 25, center: 50, right: 25 },
     sources: [
       {
@@ -287,7 +287,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       },
     ],
     image: mockImage("city"),
-    topic: "Política y Gobierno",
+    topic: "Política",
     bias: { left: 30, center: 55, right: 15 },
     sources: [
       {
@@ -354,7 +354,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       },
     ],
     image: mockImage("education"),
-    topic: "Educación",
+    topic: "Sociedad",
     region: "PBA",
     bias: { left: 40, center: 45, right: 15 },
     sources: [
@@ -380,7 +380,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
         text: "Los gremios reclamaron una recomposición salarial por encima de la inflación y mejor infraestructura escolar...",
       },
     ],
-    tags: ["Provincia de Buenos Aires", "Educación", "Paritaria docente"],
+    tags: ["Provincia de Buenos Aires", "Sociedad", "Paritaria docente"],
   },
 
   // 6) Servicios & Tarifas – muy relevante para AMBA
@@ -485,7 +485,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       },
     ],
     image: mockImage("cleanup"),
-    topic: "Política y Gobierno",
+    topic: "Política",
     bias: { left: 32, center: 48, right: 20 },
     sources: [
       {
@@ -539,7 +539,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       },
     ],
     image: mockImage("technology"),
-    topic: "Ciencia",
+    topic: "Sociedad",
     region: "CABA",
     bias: { left: 25, center: 55, right: 20 },
     sources: [
@@ -555,7 +555,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
         text: "Durante la presentación, el jefe de Gobierno destacó la necesidad de capacitar en IA...",
       },
     ],
-    tags: ["Tecnología", "IA", "PYMES"],
+    tags: ["Sociedad", "IA", "PYMES"],
   },
   {
     id: "cluster_salud_mental_guardias",
@@ -594,7 +594,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       },
     ],
     image: mockImage("health"),
-    topic: "Salud",
+    topic: "Sociedad",
     region: "CABA",
     bias: { left: 40, center: 45, right: 15 },
     sources: [
@@ -609,7 +609,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
         text: "El Ministerio de Salud porteño informó que se reforzarán las guardias...",
       },
     ],
-    tags: ["Salud", "Guardias", "Contención"],
+    tags: ["Sociedad", "Guardias", "Contención"],
   },
   {
     id: "cluster_cultura_plazas_verano",
@@ -647,7 +647,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       },
     ],
     image: mockImage("culture"),
-    topic: "Política y Gobierno",
+    topic: "Política",
     bias: { left: 30, center: 50, right: 20 },
     sources: [
       {
@@ -700,7 +700,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       },
     ],
     image: mockImage("bikes"),
-    topic: "Política y Gobierno",
+    topic: "Política",
     bias: { left: 25, center: 55, right: 20 },
     sources: [
       {
@@ -753,7 +753,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       },
     ],
     image: mockImage("cameras"),
-    topic: "Política y Gobierno",
+    topic: "Política",
     bias: { left: 28, center: 50, right: 22 },
     sources: [
       {
@@ -767,7 +767,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
         text: "El gobierno porteño anunció la incorporación de tecnología de IA en la red de cámaras...",
       },
     ],
-    tags: ["Seguridad", "Tecnología"],
+    tags: ["Seguridad", "Sociedad"],
   },
   {
     id: "cluster_servicios_agua_norte",
@@ -860,7 +860,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       },
     ],
     image: mockImage("finance"),
-    topic: "Negocios",
+    topic: "Economía",
     region: "PBA",
     bias: { left: 30, center: 50, right: 20 },
     sources: [
@@ -914,7 +914,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       },
     ],
     image: mockImage("autopistas"),
-    topic: "Tecnología",
+    topic: "Sociedad",
     region: "CABA",
     bias: { left: 22, center: 58, right: 20 },
     sources: [
@@ -969,7 +969,7 @@ export const MOCK_CLUSTERS: StoryCluster[] = [
       },
     ],
     image: mockImage("park"),
-    topic: "Política y Gobierno",
+    topic: "Política",
     bias: { left: 30, center: 55, right: 15 },
     sources: [
       {
@@ -1001,11 +1001,11 @@ export const MOCK_POPULAR_NEWS: Readonly<PopularNewsTab> = [
   {
     id: "keyword_javier_milei",
     title: "Javier Milei",
-    targetTopic: "Política y Gobierno",
+    targetTopic: "Política",
   },
   {
     id: "keyword_nuevas_medidas",
     title: "Nuevas Medidas",
-    targetTopic: "Política y Gobierno",
+    targetTopic: "Política",
   },
 ];

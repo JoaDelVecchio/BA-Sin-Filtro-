@@ -29,10 +29,13 @@ const ArticlesTimeline = ({
     return Number.isFinite(time) ? time : 0;
   };
 
-  const safeArticles = [...(articles ?? [])].sort(
+  const uniqueArticles = Array.from(
+    new Map((articles ?? []).map((item) => [item.id, item])).values()
+  );
+  const safeArticles = uniqueArticles.sort(
     (a, b) => getTime(b) - getTime(a)
   );
-  const latestIds = new Set(safeArticles.slice(0, 10).map((item) => item.id));
+  const latestIds = new Set(safeArticles.map((item) => item.id));
   const [view, setView] = useState<"latest" | "popular">("latest");
   const fallbackPopular = useMemo(() => {
     const popularityScore = (article: GridArticle) =>

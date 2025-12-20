@@ -14,7 +14,7 @@ const formatTimeAgo = (dateString: string) => {
   const diffMinutes = Math.floor(diffMs / (1000 * 60));
 
   if (isNaN(diffMinutes)) return "";
-
+  if (diffMinutes < 1) return "Hace instantes";
   if (diffMinutes < 60) return `Hace ${diffMinutes} min`;
   const diffHours = Math.floor(diffMinutes / 60);
   if (diffHours < 24)

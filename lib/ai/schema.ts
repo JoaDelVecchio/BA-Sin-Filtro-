@@ -19,17 +19,11 @@ export const ARTICLE_AXIOM_TYPES: ArticleAxiomType[] = [
   "go-deeper",
 ] as const;
 
-export const TOPIC_ENUM: Topic[] = [
-  "Política y Gobierno",
+export const TOPIC_ENUM = [
+  "Política",
   "Economía",
-  "Salud",
-  "Negocios",
-  "Tecnología",
-  "Ciencia",
-  "Educación",
-  "CABA",
-  "Buenos Aires (PBA)",
-];
+  "Sociedad",
+] as const;
 
 export const STORY_CLUSTER_RESPONSE_SCHEMA = {
   name: "StoryClusterResponse",

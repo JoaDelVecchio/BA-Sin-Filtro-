@@ -407,7 +407,7 @@ export const POPULAR_TOPIC_PAGES: Readonly<
     id: "keyword_inseguridad",
     slug: "keyword_inseguridad",
     title: "Inseguridad",
-    targetTopic: "Política y Gobierno",
+    targetTopic: "Política",
     heroKicker: "Seguridad urbana",
     heroDescription:
       "Mapeamos delitos, operativos y decisiones judiciales que afectan la percepción de seguridad en los barrios del AMBA.",
@@ -540,7 +540,7 @@ export const POPULAR_TOPIC_PAGES: Readonly<
     id: "keyword_caba",
     slug: "keyword_caba",
     title: "CABA",
-    targetTopic: "Política y Gobierno",
+    targetTopic: "Política",
     heroKicker: "Gestión porteña",
     heroDescription:
       "Seguimos decisiones de la Ciudad que afectan transporte, espacio público, educación y tributos para residentes y visitantes.",
@@ -554,7 +554,7 @@ export const POPULAR_TOPIC_PAGES: Readonly<
           "Se licita un nuevo parque lineal en Barracas que conectará con Parque Patricios mediante ciclovías y veredas anchas.",
       },
       {
-        title: "Educación",
+        title: "Sociedad",
         description:
           "Las paritarias docentes se reabren con cláusula gatillo trimestral y plan de titularizaciones.",
       },
@@ -672,8 +672,8 @@ export const POPULAR_TOPIC_PAGES: Readonly<
   keyword_buenos_aires_pba: {
     id: "keyword_buenos_aires_pba",
     slug: "keyword_buenos_aires_pba",
-    title: "Buenos Aires (PBA)",
-    targetTopic: "Política y Gobierno",
+    title: "PBA",
+    targetTopic: "Política",
     heroKicker: "Provincia",
     heroDescription:
       "Seguimiento de educación, salud, seguridad y obras provinciales que pegan de lleno en el conurbano y ciudades del interior.",
@@ -682,12 +682,12 @@ export const POPULAR_TOPIC_PAGES: Readonly<
       "La Provincia busca financiamiento externo para sostener obra pública mientras negocia paritarias docentes y de salud.",
     narrative: [
       {
-        title: "Educación",
+        title: "Sociedad",
         description:
           "Se planifica un calendario escolar con jornadas extendidas y foco en matemáticas y oficios digitales.",
       },
       {
-        title: "Salud",
+        title: "Sociedad",
         description:
           "Hospitales provinciales reciben equipamiento de alta complejidad y se refuerzan guardias pediátricas.",
       },
@@ -779,7 +779,7 @@ export const POPULAR_TOPIC_PAGES: Readonly<
       },
       {
         title: "Docentes",
-        audience: "Educación",
+        audience: "Sociedad",
         description:
           "Participar en los foros de rediseño curricular asegura recursos para talleres específicos.",
       },
@@ -806,7 +806,7 @@ export const POPULAR_TOPIC_PAGES: Readonly<
     id: "keyword_javier_milei",
     slug: "keyword_javier_milei",
     title: "Javier Milei",
-    targetTopic: "Política y Gobierno",
+    targetTopic: "Política",
     heroKicker: "Gobierno nacional",
     heroDescription:
       "Cobertura de decisiones presidenciales, negociaciones con el Congreso y reacciones internacionales que marcan el rumbo del país.",
@@ -939,7 +939,7 @@ export const POPULAR_TOPIC_PAGES: Readonly<
     id: "keyword_nuevas_medidas",
     slug: "keyword_nuevas_medidas",
     title: "Nuevas Medidas",
-    targetTopic: "Política y Gobierno",
+    targetTopic: "Política",
     heroKicker: "Boletín oficial",
     heroDescription:
       "Seguimos decretos, resoluciones y disposiciones express que cambian reglas para comercios, impuestos y servicios en el AMBA.",
@@ -1072,7 +1072,7 @@ export const POPULAR_TOPIC_PAGES: Readonly<
     id: "keyword_transporte_publico",
     slug: "keyword_transporte_publico",
     title: "Transporte Público",
-    targetTopic: "Política y Gobierno",
+    targetTopic: "Política",
     heroKicker: "Movilidad",
     heroDescription:
       "Historias y datos sobre subte, trenes, colectivos y bici-infraestructura que condicionan la movilidad diaria en el AMBA.",

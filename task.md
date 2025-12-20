@@ -1,0 +1,35 @@
+# SmartNews Mimicry Project
+
+- [x] Research SmartNews features and UI/UX <!-- id: 0 -->
+- [x] Analyze current codebase against SmartNews features <!-- id: 1 -->
+- [x] Create Implementation Plan <!-- id: 2 -->
+- [x] Implement SmartNews-like Layout/UI <!-- id: 3 -->
+    - [x] Create `SmartNewsLayout` <!-- id: 3.1 -->
+    - [x] Create `NewsFeed` <!-- id: 3.2 -->
+    - [x] Create `NewsCard` <!-- id: 3.3 -->
+    - [x] Create `SmartView` <!-- id: 3.4 -->
+- [x] Implement Data Expansion (from previous plan) <!-- id: 4 -->
+    - [x] Update `schema.ts` <!-- id: 4.1 -->
+    - [x] Update `story-clusters.ts` <!-- id: 4.2 -->
+    - [x] Update `generate-story-clusters.ts` <!-- id: 4.3 -->
+- [x] Verify Changes <!-- id: 5 -->
+- [x] Expand RSS Sources <!-- id: 6 -->
+    - [x] Add Clarín, Infobae, El Cronista <!-- id: 6.1 -->
+    - [x] Verify content diversity <!-- id: 6.2 -->
+- [x] Revert UI to Original <!-- id: 7 -->
+    - [x] Restore `page.tsx` <!-- id: 7.1 -->
+    - [x] Verify original layout with new data <!-- id: 7.2 -->
+- [x] Refine Content & Categorization <!-- id: 8 -->
+    - [x] Consolidate Topics <!-- id: 8.1 -->
+    - [x] Improve AI Categorization <!-- id: 8.2 -->
+    - [x] Enhance Deduplication <!-- id: 8.3 -->
+    - [x] Increase Article Volume <!-- id: 8.4 -->
+- [x] Final Polish & Search Fix <!-- id: 9 -->
+    - [x] Cleanup Navbar Topics <!-- id: 9.1 -->
+    - [x] Global Duplicate Key Check <!-- id: 9.2 -->
+    - [x] Fix Search Relevance <!-- id: 9.3 -->
+- [x] Pivot to Politics-Only <!-- id: 10 -->
+    - [x] Update Constants & Types <!-- id: 10.1 -->
+    - [x] Refine AI Prompt & Filtering <!-- id: 10.2 -->
+    - [x] Update RSS Keyword Mapping <!-- id: 10.3 -->
+    - [x] Update UI Tabs <!-- id: 10.4 -->

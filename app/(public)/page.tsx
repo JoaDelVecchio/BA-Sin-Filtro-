@@ -7,10 +7,13 @@ import { mapClusterToGridArticle } from "@/lib/utils";
 import { GridArticle } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 86400; // Keep the 24h caching
 
 export default async function Home() {
   const clusters = await getStoryClusters();
   const mappedArticles = clusters.map(mapClusterToGridArticle);
+  
+  // Original logic: Top 5 + Timeline
   const top5 = mappedArticles.slice(0, 5);
   const timelineArticles = mappedArticles.slice(5);
 

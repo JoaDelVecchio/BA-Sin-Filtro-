@@ -16,6 +16,22 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "resizer.glanacion.com",
       },
+      {
+        protocol: "https",
+        hostname: "www.clarin.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.clarin.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.infobae.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.cronista.com",
+      },
     ],
   },
 };

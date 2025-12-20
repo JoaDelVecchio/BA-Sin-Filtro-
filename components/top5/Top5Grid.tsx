@@ -12,7 +12,10 @@ const Top5Grid = ({ top5, label }: Top5GridProps) => {
     return null;
   }
 
-  const [hero, ...rest] = top5;
+  const uniqueArticles = Array.from(
+    new Map((top5 ?? []).map((item) => [item.id, item])).values()
+  );
+  const [hero, ...rest] = uniqueArticles;
 
   return (
     <section className="section-shell mt-4 py-6">

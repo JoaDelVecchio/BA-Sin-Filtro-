@@ -15,18 +15,23 @@ const fetchLiveClusters = async (): Promise<StoryCluster[]> => {
   }
 
   try {
+    console.log(`[story-clusters] Fetching articles with limit 60...`);
     const articles = await fetchLatestArticles({
-      perFeedLimit: 60,
-      maxArticles: 60,
+      perFeedLimit: 25,
+      maxArticles: 80,
       sinceMinutes: 12 * 60,
     });
+    console.log(`[story-clusters] Fetched ${articles.length} articles`);
 
     if (!articles.length) {
       console.warn("[story-clusters] No fresh articles found, using fallback");
       return MOCK_CLUSTERS;
     }
 
+    console.log(`[story-clusters] Generating clusters via AI...`);
     const clusters = await generateStoryClustersFromArticles(articles);
+    console.log(`[story-clusters] AI generated ${clusters.length} clusters`);
+
     if (!clusters.length) {
       console.warn("[story-clusters] AI returned no clusters, using fallback");
       return MOCK_CLUSTERS;

@@ -7,10 +7,10 @@ export type MainTopic = {
 
 export const MAIN_TOPICS: MainTopic[] = [
   {
-    code: "POLITICA_GOBIERNO",
-    label: "Política y Gobierno",
+    code: "POLITICA",
+    label: "Política",
     description:
-      "Gestión pública, instituciones, seguridad y decisiones políticas que afectan al AMBA.",
+      "Gestión pública, instituciones, seguridad y decisiones políticas que afectan al país.",
   },
   {
     code: "ECONOMIA",
@@ -19,47 +19,9 @@ export const MAIN_TOPICS: MainTopic[] = [
       "Inflación, mercado laboral, tarifas, subsidios y datos macro que impactan el bolsillo.",
   },
   {
-    code: "SALUD",
-    label: "Salud",
+    code: "SOCIEDAD",
+    label: "Sociedad",
     description:
-      "Sistema sanitario, hospitales, alertas epidemiológicas y políticas de cuidado.",
-  },
-  {
-    code: "NEGOCIOS",
-    label: "Negocios",
-    description:
-      "Empresas, PYMES, crédito productivo, comercio y tendencias del mercado local.",
-  },
-  {
-    code: "TECNOLOGIA",
-    label: "Tecnología",
-    description:
-      "Innovación, digitalización de servicios, startups y adopción tecnológica regional.",
-  },
-  {
-    code: "CIENCIA",
-    label: "Ciencia",
-    description:
-      "Investigación, capacitación avanzada y proyectos científicos con impacto local.",
-  },
-  {
-    code: "EDUCACION",
-    label: "Educación",
-    description:
-      "Escuelas, universidades, paritarias docentes y reformas del sistema educativo.",
-  },
-  {
-    code: "CABA_CITY",
-    label: "CABA",
-    description:
-      "Obras, servicios y decisiones del Gobierno porteño que afectan a los 15 comunas.",
-    slug: "keyword_caba",
-  },
-  {
-    code: "BUENOS_AIRES_PBA",
-    label: "Buenos Aires (PBA)",
-    description:
-      "Medidas provinciales, intendencias y vida cotidiana en el conurbano y el interior bonaerense.",
-    slug: "keyword_buenos_aires_pba",
+      "Impacto social de medidas, salud, educación y vida cotidiana con relevancia nacional.",
   },
 ];
