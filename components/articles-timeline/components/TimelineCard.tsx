@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import Biasbar from "@/components/Biasbar";
 import PublisherBadges from "@/components/PublisherBadges";
 import { GridArticle } from "@/lib/types";
+import { estimateReadingTimeMinutes } from "@/lib/utils";
 
 const FALLBACK_IMAGE = "/top5-placeholder.jpg";
 
@@ -26,6 +27,7 @@ const formatTimeAgo = (dateString: string) => {
 const TimelineCard = ({ article }: { article: GridArticle }) => {
   const image = article.image ?? FALLBACK_IMAGE;
   const timeAgo = formatTimeAgo(article.createdAt);
+  const readingTime = estimateReadingTimeMinutes(article, { min: 2, max: 8 });
 
   return (
     <article className="relative mx-auto flex w-full max-w-3xl flex-col gap-6 py-8 first:pt-0 last:pb-0 before:pointer-events-none before:absolute before:left-0 before:right-0 before:top-0 before:h-px before:bg-border/70 before:content-[''] after:pointer-events-none after:absolute after:left-0 after:right-0 after:top-2 after:h-px after:bg-border/40 after:content-[''] first:before:hidden first:after:hidden md:py-12">
@@ -78,7 +80,7 @@ const TimelineCard = ({ article }: { article: GridArticle }) => {
           className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary/60 px-4 py-2.5 text-sm font-medium text-primary transition hover:bg-primary/5 sm:px-5 sm:py-3 sm:text-base"
         >
           <span>Leer en profundidad</span>
-          <span>~4 min</span>
+          <span>~{readingTime} min</span>
           <ArrowRight className="h-4 w-4" />
         </Link>
       </div>

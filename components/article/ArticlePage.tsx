@@ -12,7 +12,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { calculateArticleWordCount } from "@/lib/utils";
+import { estimateReadingTimeMinutes } from "@/lib/utils";
 import {
   ArticleAxiomBlock,
   ArticleAxiomType,
@@ -49,8 +49,7 @@ type ArticlePageProps = {
 };
 
 const ArticlePage = ({ article, related }: ArticlePageProps) => {
-  const wordCount = calculateArticleWordCount(article);
-  const readingTime = Math.max(4, Math.round(wordCount / 200) || 4);
+  const readingTime = estimateReadingTimeMinutes(article, { min: 2, max: 12 });
   const formattedDate = new Date(article.createdAt).toLocaleString("es-AR", {
     dateStyle: "long",
     timeStyle: "short",
@@ -117,7 +116,7 @@ const ArticlePage = ({ article, related }: ArticlePageProps) => {
           <div className="w-full">
             <DropdownMenu>
               <DropdownMenuTrigger className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary/60 px-5 py-3 text-sm font-medium text-primary transition hover:bg-primary/5">
-                Ver fuentes originales
+                Ver fuente original
               </DropdownMenuTrigger>
               <DropdownMenuContent align="center" className="min-w-[250px]">
                 {article.sources.map((source) => (

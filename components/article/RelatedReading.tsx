@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { GridArticle } from "@/lib/types";
-import { calculateArticleWordCount, cn } from "@/lib/utils";
+import { cn, estimateReadingTimeMinutes } from "@/lib/utils";
 
 type RelatedReadingListProps = {
   items: GridArticle[];
@@ -38,10 +38,10 @@ const RelatedReadingList = ({
       )}
       <div className="space-y-10">
         {items.map((item) => {
-          const readingTime = Math.max(
-            1,
-            Math.round(calculateArticleWordCount(item) / 200) || 1
-          );
+          const readingTime = estimateReadingTimeMinutes(item, {
+            min: 1,
+            max: 8,
+          });
           const publishedLabel = new Date(item.createdAt).toLocaleDateString(
             "es-AR",
             {

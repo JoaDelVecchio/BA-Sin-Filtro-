@@ -15,6 +15,18 @@ const ArticlesTimeline = ({
   popularArticles,
   variant = "default",
 }: ArticlesTimelineProps) => {
+  const getArticleKey = (article: GridArticle) => {
+    const sourceUrl = article.primarySourceUrl ?? article.sources?.[0]?.url;
+    if (sourceUrl) return sourceUrl;
+    const headlineKey = article.headline.trim().toLowerCase();
+    return headlineKey || article.id;
+  };
+
+  const dedupeArticles = (items: GridArticle[]) =>
+    Array.from(
+      new Map(items.map((item) => [getArticleKey(item), item])).values()
+    );
+
   const getTime = (article: GridArticle) => {
     const sourceTimes =
       article.sources
@@ -29,13 +41,10 @@ const ArticlesTimeline = ({
     return Number.isFinite(time) ? time : 0;
   };
 
-  const uniqueArticles = Array.from(
-    new Map((articles ?? []).map((item) => [item.id, item])).values()
-  );
-  const safeArticles = uniqueArticles.sort(
+  const safeArticles = dedupeArticles(articles ?? []).sort(
     (a, b) => getTime(b) - getTime(a)
   );
-  const latestIds = new Set(safeArticles.map((item) => item.id));
+  const latestKeys = new Set(safeArticles.map((item) => getArticleKey(item)));
   const [view, setView] = useState<"latest" | "popular">("latest");
   const fallbackPopular = useMemo(() => {
     const popularityScore = (article: GridArticle) =>
@@ -47,10 +56,12 @@ const ArticlesTimeline = ({
       return getTime(b) - getTime(a);
     });
   }, [safeArticles]);
-  const availablePopular = (popularArticles?.length
-    ? popularArticles
-    : fallbackPopular
-  ).filter((article) => !latestIds.has(article.id));
+  const popularPool = popularArticles?.length
+    ? dedupeArticles(popularArticles)
+    : fallbackPopular;
+  const availablePopular = popularPool.filter(
+    (article) => !latestKeys.has(getArticleKey(article))
+  );
   const displayedArticles =
     view === "latest" ? safeArticles : availablePopular;
 
